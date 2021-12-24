@@ -1,9 +1,13 @@
 local me = {}
 
-me.name = "bzmod"
+me.name = "bzcarbon"
 
-function me.mod_setting()
-  return me.get_setting("bzmod-setting") == "yes"
+function me.use_fullerenes()
+  return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
+end
+
+function me.use_carbon_black()
+  return me.get_setting("bzcarbon-enable-carbon-black") == "yes"
 end
 
 function me.get_setting(name)

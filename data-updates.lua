@@ -1,5 +1,6 @@
-require("lead-recipe-updates")
-require("lead-matter")
-require("omni")
+require("carbon-recipe-updates")
 require("map-gen-preset-updates")
-require("strange-matter")
+
+-- require("carbon-matter")
+-- require("omni")
+-- require("strange-matter")
