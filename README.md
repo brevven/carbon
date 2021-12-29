@@ -13,7 +13,7 @@ See changelog.txt
 
 ## Thanks to 
 - [snouz](https://github.com/snouz) (logo inspiration, ore graphics templates)
-- [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC license, see link)
+- [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC BY-SA 3.0 license, see link)
 
 ### Localization
 
@@ -39,21 +39,19 @@ I try to stick to the vanilla factorio spirit, with a slight edge towards more r
 
 ----
 
-
-**CAVEAT** This mod is still an alpha version. Large balance changes, breaking changes, and many other changes may happen until it is in beta. This is my most ambitious "resource" mod to date, so it may take a little time to settle.
+**CAVEAT** This is still an alpha version. Large balance changes, breaking changes, and many others may happen until it is in beta. This is my most ambitious "resource" mod to date, so it may take a little time to settle.
 
 ----
 
-
-Adds elemental carbon items to the game, including flake graphite, graphite, diamonds, graphene, and optionally fullerenes, nanotubes, and carbon black. Modifies several recipes to use these new intermediates.
+Adds elemental carbon items to the game, including flake graphite, graphite, diamonds, graphene, and optionally fullerenes, nanotubes, and carbon black. It also adds a crucible intermediate. 
 
 If you enjoy vanilla Factorio, Krastorio 2, or Space Exploration, and would like to add a new resource, this mod might be what you're looking for. 
 
-If you use this alongside the other [Very BZ mods](https://mods.factorio.com/mod/bzvery), the game will become quite a bit more complex. While still less than Angelbob/Pyanodon, it's a big step up from vanilla.
+If you use this alongside the other [Very BZ mods](https://mods.factorio.com/mod/bzvery), the game will become quite a bit more complex. While still far less than Angelbob or Pyanodon, it's a big step up from vanilla.
 
-If you want a vanilla-esque game with a few tweaks, try with just this mod, or a simpler one like [Titanium](https://mods.factorio.com/mod/bztitanium) or [Lead](https://mods.factorio.com/mod/bzlead).
+If you want a vanilla-esque game with a just few tweaks, try with just this mod, or a simpler one like [Titanium](https://mods.factorio.com/mod/bztitanium) or [Lead](https://mods.factorio.com/mod/bzlead).
 
-----
+### Details
 
 Flake graphite is a mineable resource that is processed into graphite. Graphite can be used in certain recipes, and can be further processed into diamonds and graphene. Optionally (default on), graphite can be processed into fullerenes and then nanotubes. Also optionally (default off), carbon black is available as a byproduct of oil processing, used to make plastic.
 
@@ -67,21 +65,18 @@ Planned but not yet supported: RSO (see faq), Omnimatter, FE+, 5Dim's, Simple Co
 
 Many other mods are compatible, but not yet fully supported. Compatibility suggestions always appreciated.
 
-
 ---- 
 Special thanks to 
 
 - The community, for all the suggestions, feedback, and bug reports!
 - [snouz](https://mods.factorio.com/user/snouz) (recolored ore graphics, thumbnail style)
-- [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC license, see link)
+- [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC BY-SA 3.0 license, see link)
 
 ----
 
 ### Detailed list of changes (incomplete)
 
 #### Vanilla
-
-
 - Electronic circuit (graphite replaces some copper)
 - Battery (graphite added)
 - Lubricant (some oil changed to graphite)
@@ -96,13 +91,11 @@ Special thanks to
 - Rocket control unit (graphene added)
 - Satellite (graphene added)
 
-If fullerenes and nanotubes enabled
-
+##### If fullerenes and nanotubes enabled
 - Capsules (fullerenes)
 - Alternate recipe for LDS (nanotubes)
 
-If carbon black enabled
-
+##### If carbon black enabled
 - Carbon black byproduct of oil processing
 - Plastic (coal changed to carbon black)
 
@@ -115,14 +108,13 @@ If carbon black enabled
 - Matter research data (graphene)
 - Advanced solar panel (graphene)
 
-If fullerenes and nanotubes enabled
+##### If fullerenes and nanotubes enabled
 
 - Viruses (fullerenes)
 - Biomass (fullerenes)
 - Alternate imersite recipes (nanotubes)
 
 #### Space Exploration
-
 - Material testing pack (graphite)
 - Particle accelerator/collider (graphite)
 - Secure canister (graphite)
@@ -131,7 +123,7 @@ If fullerenes and nanotubes enabled
 - Various data (various, with improved outputs)
 - Nanomaterial (graphene)
 
-If fullerenes and nanotubes enabled
+##### If fullerenes and nanotubes enabled
 
 - Vitalic reagent (fullerenes)
 - Medpack 2
