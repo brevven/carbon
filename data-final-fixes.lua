@@ -28,7 +28,7 @@ for i, entity in pairs(data.raw["assembling-machine"]) do
 end 
 
 -- furnace recipe rework, remove crucible ingredients
-for i, furnace in pairs(furnaces) do
+for i, furnace in pairs(util.me.furnaces) do
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
     util.remove_ingredient(furnace, ingredient)
   end

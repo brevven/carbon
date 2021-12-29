@@ -10,6 +10,10 @@ function me.use_carbon_black()
   return me.get_setting("bzcarbon-enable-carbon-black") == "yes"
 end
 
+function me.use_rough_diamond()
+  return mods["rso-mod"] or me.get_setting("bzcarbon-enable-rough-diamond") == "yes"
+end
+
 function me.get_setting(name)
   if settings.startup[name] == nil then
     return nil

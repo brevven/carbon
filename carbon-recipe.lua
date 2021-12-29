@@ -46,7 +46,6 @@ data:extend({
         } or
         {
           enabled = false,
-          --energy_required = 128/45,
           energy_required = 0.5,
           ingredients = {{"flake-graphite", 1}},
           result = "graphite"
@@ -54,7 +53,6 @@ data:extend({
     expensive =
     {
       enabled = false,
-      --energy_required = 256/45,
       energy_required = 1,
       ingredients = {{"flake-graphite", 2}},
       result = "graphite"
@@ -64,7 +62,6 @@ data:extend({
     type = "technology",
     name = "graphite-processing",
     icon_size = 128,
-    -- icon = "__bzcarbon__/graphics/technology/graphite-processing.png",
     icon = "__bzcarbon__/graphics/icons/graphite.png",
     effects =
     {
@@ -128,9 +125,49 @@ data:extend({
       result = "diamond"
     }
   },
+  util.me.use_rough_diamond() and {
+    type = "recipe",
+    name = "diamond-processing",
+    category = "advanced-crafting",
+    subgroup = "raw-material",
+    order = "d[diamond]",
+    icons = (mods["Krastorio2"] and
+        {
+          { icon = "__bzcarbon__/graphics/icons/diamond.png", icon_size = 128},
+          { icon = "__bzcarbon__/graphics/icons/rough-diamond.png", icon_size = 64, scale=0.25, shift= {-8, -8}},
+        } or  {{ icon = "__bzcarbon__/graphics/icons/diamond.png", icon_size = 128}}),
+    normal = (mods["Krastorio2"] and
+        {
+          enabled = false,
+          energy_required = 20,
+          ingredients = {{"rough-diamond", 1}},
+          results = {
+            {type="item", name= "diamond", amount=1, probability=0.8},
+            {type="item", name= "stone", amount=1, probability=0.2}
+          },
+        } or
+        {
+          enabled = false,
+          energy_required = 20,
+          ingredients = {{"rough-diamond", 1}},
+          results = {
+            {type="item", name= "diamond", amount=1, probability=0.8},
+            {type="item", name= "stone", amount=1, probability=0.2}
+          },
+        }),
+    expensive =
+    {
+      enabled = false,
+      energy_required = 40,
+      ingredients = {{"rough-diamond", 1}},
+      result = "diamond"
+    }
+  } or nil,
+})
+data:extend({
   {
     type = "technology",
-    name = "synthetic-diamond-processing",
+    name = "diamond-processing",
     icon_size = 128,
     icon = "__bzcarbon__/graphics/icons/diamond.png",
     effects =
@@ -139,6 +176,10 @@ data:extend({
         type = "unlock-recipe",
         recipe = "synthetic-diamond"
       },
+      util.me.use_rough_diamond() and {
+        type = "unlock-recipe",
+        recipe = "diamond-processing"
+      } or nil,
     },
     unit =
     {
@@ -154,7 +195,8 @@ data:extend({
     prerequisites = {"chemical-science-pack"},
     order = "b-b"
   },
-
+})
+data:extend({
 -- graphene
   {
     type = "item",

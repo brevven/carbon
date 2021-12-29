@@ -39,7 +39,7 @@ I try to stick to the vanilla factorio spirit, with a slight edge towards more r
 
 ----
 
-**CAVEAT** This is still an alpha version. Large balance changes, breaking changes, and many others may happen until it is in beta. This is my most ambitious "resource" mod to date, so it may take a little time to settle.
+**CAVEAT** This is still an alpha version. Large balance changes, breaking changes, and many others may happen until it is in beta. There may be deadlocks, I'll fix them as I find them. This is my most ambitious "resource" mod to date, so it may take a little time to settle. As always, feedback and suggestions are most welcome.
 
 ----
 

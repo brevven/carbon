@@ -20,4 +20,11 @@ data:extend({
 		default_value = "no",
     allowed_values = {"no", "yes"},
 	},
+  {
+		type = "string-setting",
+		name = "bzcarbon-enable-rough-diamond",
+		setting_type = "startup",
+		default_value = mods["rso-mod"] and "yes" or "no",
+    allowed_values = {"no", "yes"},
+	},
 })
