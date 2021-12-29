@@ -2,7 +2,6 @@ require("carbon-recipe-final-stacking")
 require("carbon-recipe-final-k2")
 require("carbon-recipe-final-se")
 require("carbon-recipe-final-rrr")
-
 require("carbon-recipe-modules") -- Should be last import
 
 local util = require("__bzcarbon__.data-util");
@@ -27,3 +26,11 @@ end
 for i, entity in pairs(data.raw["assembling-machine"]) do
   diamondsInElectricSmelter(entity)
 end 
+
+-- furnace recipe rework, remove crucible ingredients
+for i, furnace in pairs(furnaces) do
+  for j, ingredient in pairs(util.me.crucible_ingredients)  do
+    util.remove_ingredient(furnace, ingredient)
+  end
+end
+

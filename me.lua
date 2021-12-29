@@ -24,4 +24,17 @@ if me.get_setting(me.name.."-recipe-bypass") then
   end
 end
 
+me.crucible_ingredients = {"tungsten-plate", "zirconia", "stone-brick", "silica"}
+me.furnaces =  {
+  "electric-furnace",
+  "electric-foundry",     -- BZ
+  "industrial-furnace",   -- AAI
+  "kr-advanced-furnace",  -- K2
+  "electric-furnace-mk2", -- FE+
+  "electric-furnace-mk3", -- FE+
+  "mega-furnace",         -- Mega furnace
+  "advanced-electric-furnace-rampant-industrial",
+}
+
+
 return me

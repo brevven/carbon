@@ -3,7 +3,7 @@ local util = require("util")
 if mods.Krastorio2 then
   if bzutil.me.use_fullerenes() then
   -- Add extra nanotube recipes.
-  --  This could be moved to data-updates in future if necessary
+  -- This could be moved to data-updates in future if necessary
     data:extend({
       {
         type = "recipe",

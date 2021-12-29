@@ -1,5 +1,3 @@
--- Graphite etc
-
 local util = require("__bzcarbon__.data-util");
 
 local graphite_category = "advanced-crafting"
@@ -446,4 +444,28 @@ data:extend({
 })
 end
 
-
+if mods.bzzirconium or mods.bztungsten then
+  data:extend({
+  {
+    type = "item",
+    name = "crucible",
+    icon = "__bzcarbon__/graphics/icons/crucible.png", icon_size = 128,
+    subgroup = "intermediate-product",
+    order = "g[crucible]",
+    stack_size = 50,
+  },
+  {
+    type = "recipe",
+    name = "crucible",
+    category = "crafting",
+    order = "d[graphite]",
+    enabled = false,
+    energy_required = 3,
+    ingredients = {
+      {type="item", name="graphite", amount=5},
+    },
+    result = "crucible",
+    result_count = 1,
+  },
+  })
+end

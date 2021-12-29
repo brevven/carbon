@@ -12,6 +12,15 @@ util.add_prerequisite("power-armor-mk2", "graphene")
 util.add_prerequisite("rocket-control-unit", "graphene")
 
 
+-- furnace recipe rework w/ crucible, more in data-final-fixes
+util.add_effect("advanced-material-processing-2", {type="unlock-recipe", recipe="crucible"})
+for i, ingredient in pairs(util.me.crucible_ingredients) do
+  util.add_ingredient("crucible", ingredient, 5)
+end
+for i, furnace in pairs(util.me.furnaces) do
+  util.add_ingredient(furnace, "crucible", 1)
+end
+
 -- fullerenes & nanotubes
 if util.me.use_fullerenes() then
   util.add_prerequisite("graphene", "fullerenes")
@@ -53,11 +62,7 @@ end
 util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
 util.add_ingredient("battery", "graphite", 1)
 util.add_ingredient("pump", "graphite", 2)
-if mods.bzzirconium then 
--- TODO CRUCIBLE RECIPE HERE
-else
-  util.add_ingredient("electric-furnace", "graphite", 5)
-end
+
 
 util.add_ingredient("speed-module-2", "diamond", 4)
 util.add_ingredient("effectivity-module-2", "diamond", 4)
