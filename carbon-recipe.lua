@@ -265,7 +265,7 @@ function lds_recipe()
   if mods.bztitanium then
     if mods.bzzirconium then
       return {
-        {type="item", name="titanium-plate", amount=2},
+        {type="item", name=util.titanium_plate, amount=2},
         {type="item", name="nanotubes", amount=2},
         {type="item", name="plastic-bar", amount=2},
         {type="item", name="zirconia", amount=2},
@@ -273,7 +273,7 @@ function lds_recipe()
       }
     end
     return {
-      {type="item", name="titanium-plate", amount=2},
+      {type="item", name=util.titanium_plate, amount=2},
       {type="item", name="nanotubes", amount=5},
       {type="item", name="plastic-bar", amount=5},
       {type="item", name="diamond", amount=1},

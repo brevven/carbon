@@ -8,6 +8,15 @@ local util = {}
 util.me = me
 util.get_setting = util.me.get_setting
 
+util.titanium_plate = ""
+util.titanium_processing = ""
+
+if mods["FactorioExtended-Plus-Core"] then
+  util.titanium_plate = "titanium-alloy"
+else
+  util.titanium_plate = "titanium-plate"
+end
+
 function util.fe_plus(sub)
   if mods["FactorioExtended-Plus-"..sub] then
     return true
@@ -432,6 +441,12 @@ function add_to_product(recipe, product, amount)
         return
       end
     end
+  end
+end
+
+function util.add_minable_result(t, name, result)
+  if data.raw[t] and data.raw[t][name] and data.raw[t][name].minable and data.raw[t][name].minable.results then
+    table.insert(data.raw[t][name].minable.results, result)
   end
 end
 

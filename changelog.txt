@@ -1,6 +1,23 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 2021-12-31
+  Changes:
+    - Diamonds no longer used in centrifuge
+    - Diamonds now used in laser turrets
+    - Module 2s require 1 diamond now.
+    - If tier 5 or 4 modules exist, use more diamonds there instead of tier 2
+    - Some minor SE recipe updates
+    - Other minor compatibility tweaks
+  Fixes:
+    - Now loads with FE+ (loose compatibility)
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 2021-12-31
+  Fixes:
+    - Works with Deadlock's Stacked Mining now.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.1
-Date: 2021-11-29
+Date: 2021-12-30
   Features:
     - Alpha version (things might change, possibly a lot)
     - Adds Flake Graphite, Graphite, Diamonds, Graphene

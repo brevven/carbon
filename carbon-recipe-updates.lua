@@ -64,12 +64,22 @@ util.add_ingredient("battery", "graphite", 1)
 util.add_ingredient("pump", "graphite", 2)
 
 
-util.add_ingredient("speed-module-2", "diamond", 4)
-util.add_ingredient("effectivity-module-2", "diamond", 4)
-util.add_ingredient("productivity-module-2", "diamond", 4)
+if data.raw.recipe["speed-module-5"] then
+  util.add_ingredient("speed-module-5", "diamond", 5)
+  util.add_ingredient("effectivity-module-5", "diamond", 5)
+  util.add_ingredient("productivity-module-5", "diamond", 5)
+elseif data.raw.recipe["speed-module-4"] then
+  util.add_ingredient("speed-module-4", "diamond", 6)
+  util.add_ingredient("effectivity-module-4", "diamond", 6)
+  util.add_ingredient("productivity-module-4", "diamond", 6)
+else
+  util.add_ingredient("speed-module-2", "diamond", 1)
+  util.add_ingredient("effectivity-module-2", "diamond", 1)
+  util.add_ingredient("productivity-module-2", "diamond", 1)
+end
 util.add_ingredient("assembling-machine-3", "diamond", 4)
 util.add_ingredient("low-density-structure", "diamond", 1)
-util.add_ingredient("centrifuge", "diamond", 10)
+util.add_ingredient("laser-turret", "diamond", 1)
 
 if mods.Krastorio2 then
   util.replace_some_ingredient("steel-plate", "iron-plate", 2, "graphite", 4)
@@ -144,6 +154,7 @@ util.add_ingredient("se-space-particle-accelerator", "graphite", 10)
 util.add_ingredient("se-space-particle-collider", "graphite", 10)
 util.add_ingredient("se-canister", "graphite", 1)
 util.add_ingredient("se-naquium-ingot", "graphite", 1)
+util.add_ingredient("se-antimatter-reactor", "graphite", 500)
 util.replace_some_ingredient("se-naquium-powder", "se-vitalic-acid", 2, "graphene", 2)
 
 util.add_ingredient("se-quantum-processor", "graphene", 1)
@@ -155,6 +166,8 @@ util.add_ingredient("se-space-genetics-facility", "graphene", 20)
 util.add_ingredient("se-space-growth-facility", "graphene", 4)
 util.add_ingredient("se-nanomaterial", "graphene", 1)
 util.add_ingredient("se-void-probe", "graphene", 100)
+util.add_ingredient("se-adaptive-armour-equipment-4", "graphene", 20)
+util.add_ingredient("se-thuster-suit-2", "graphene", 50)
 
 util.add_ingredient("se-space-radiator-2", "diamond", 16)
 util.add_ingredient("se-rigidity-data", "diamond", 1)
@@ -228,3 +241,7 @@ util.add_ingredient("quarry-mk3", "diamond", 10)
 
 -- FastFurnaces
 util.add_ingredient("reika-fast-electric-mining-drill", "diamond", 1)
+
+
+-- Power Armor Mk3
+util.add_ingredient("pamk3-pamk3", "graphene", 60)
