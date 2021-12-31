@@ -28,7 +28,7 @@ data:extend({
       hardness = 1,
       mining_particle = "graphite-particle",
       mining_time = 1,
-      fluid_amount = "1",
+      fluid_amount = 1,
       required_fluid = "steam",
       result = "flake-graphite"
     },
