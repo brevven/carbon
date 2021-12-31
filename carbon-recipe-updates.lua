@@ -27,13 +27,17 @@ if util.me.use_fullerenes() then
   util.add_prerequisite("military-3", "fullerenes")
   util.replace_some_ingredient("poison-capsule", "coal", 9, "fullerenes", 90)
   util.replace_some_ingredient("slowdown-capsule", "coal", 4, "fullerenes", 40)
+
   -- K2
   util.add_ingredient("kr-biter-virus", "fullerenes", 100)
   util.add_ingredient("kr-creep-virus", "fullerenes", 100)
   util.replace_some_ingredient("kr-biomass-growing", "petroleum-gas", 25, "fullerenes", 25)
+
   -- SE
   util.add_ingredient("se-vitalic-reagent", "fullerenes", 4)
   util.add_ingredient("se-medpack-2", "fullerenes", 100)
+  util.add_ingredient("se-nutrient-gel", "fullerene", 5)
+  util.add_ingredient("se-nutrient-gel-coal", "fullerene", 5)
 end
 
 
@@ -161,7 +165,8 @@ util.add_ingredient("se-quantum-processor", "graphene", 1)
 util.add_ingredient("se-space-solar-panel-2", "graphene", 4)
 util.add_ingredient("se-biochemical-resistance-data", "graphene", 1)
 util.add_ingredient("se-tensile-strength-data", "graphene", 1)
-util.add_ingredient("se-space-biochemical-facility", "graphene", 4)
+util.add_ingredient("se-space-biochemical-laboratory", "graphene", 4)
+util.add_ingredient("se-space-decontamination-facility", "graphene", 10)
 util.add_ingredient("se-space-genetics-facility", "graphene", 20)
 util.add_ingredient("se-space-growth-facility", "graphene", 4)
 util.add_ingredient("se-nanomaterial", "graphene", 1)
