@@ -3,10 +3,10 @@ local util = require("__bzcarbon__.data-util");
 -- TECHS
 util.add_prerequisite("steel-processing", "graphite-processing")
 
-util.add_prerequisite("low-density-structure", "synthetic-diamond-processing")
-util.add_prerequisite("advanced-electronics-2", "synthetic-diamond-processing")
-util.add_prerequisite("production-science-pack", "synthetic-diamond-processing")
-util.add_prerequisite("uranium-processing", "synthetic-diamond-processing")
+util.add_prerequisite("low-density-structure", "diamond-processing")
+util.add_prerequisite("advanced-electronics-2", "diamond-processing")
+util.add_prerequisite("production-science-pack", "diamond-processing")
+util.add_prerequisite("laser-turret", "diamond-processing")
 
 util.add_prerequisite("power-armor-mk2", "graphene")
 util.add_prerequisite("rocket-control-unit", "graphene")
