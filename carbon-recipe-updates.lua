@@ -36,8 +36,8 @@ if util.me.use_fullerenes() then
   -- SE
   util.add_ingredient("se-vitalic-reagent", "fullerenes", 4)
   util.add_ingredient("se-medpack-2", "fullerenes", 100)
-  util.add_ingredient("se-nutrient-gel", "fullerene", 5)
-  util.add_ingredient("se-nutrient-gel-coal", "fullerene", 5)
+  util.add_ingredient("se-nutrient-gel", "fullerenes", 5)
+  util.add_ingredient("se-nutrient-gel-coal", "fullerenes", 5)
 end
 
 
@@ -63,7 +63,6 @@ if util.me.use_carbon_black() then
 end
 
 
-util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
 util.add_ingredient("battery", "graphite", 1)
 util.add_ingredient("pump", "graphite", 2)
 
@@ -83,6 +82,7 @@ else
 end
 util.add_ingredient("assembling-machine-3", "diamond", 4)
 util.add_ingredient("low-density-structure", "diamond", 1)
+util.add_ingredient("se-low-density-structure-beryllium", "diamond", 1)
 util.add_ingredient("laser-turret", "diamond", 1)
 
 if mods.Krastorio2 then
@@ -93,8 +93,14 @@ elseif mods.bzfoundry then
   util.replace_some_ingredient("tungsten-carbide", "tungsten-plate", 1, "graphite", 1)
 end
 
-util.multiply_recipe("lubricant", 2)
+if not mods.Krastorio2 then
+  util.multiply_recipe("lubricant", 2)
+end
 util.replace_some_ingredient("lubricant", "heavy-oil", 10, "graphite", 1)
+
+-- SE Lubricant
+util.multiply_recipe("se-cryonite-lubricant", 2)
+util.replace_some_ingredient("se-cryonite-lubricant", "se-cryonite-slush", 10, "graphite", 1)
 
 util.add_ingredient("nuclear-reactor", "graphite", 500)
 

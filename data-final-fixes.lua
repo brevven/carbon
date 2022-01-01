@@ -6,6 +6,13 @@ require("carbon-recipe-modules") -- Should be last import
 
 local util = require("__bzcarbon__.data-util");
 
+
+-- Green circuits in final fixes due to K2 shenanigans 
+util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
+-- AAI alternate green circuit
+util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 1, "graphite", 1)
+
+
 -- Only electric smelters can make Diamonds
 function diamondsInElectricSmelter(entity)
   if entity.energy_source.type == "electric" then

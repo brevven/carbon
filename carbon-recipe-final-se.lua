@@ -24,6 +24,10 @@ if bzutil.me.use_fullerenes() then
       result = "se-aeroframe-scaffold",
       result_count = 2,
     },
+  })
+  bzutil.add_effect("se-aeroframe-scaffold", {type="unlock-recipe", recipe="aeroframe-scaffold-nanotubes"})
+
+  data:extend({
     {
       type = "recipe",
       name = "nanomaterial-nanotubes",
@@ -46,7 +50,6 @@ if bzutil.me.use_fullerenes() then
     }
   })
   bzutil.add_to_product("nanomaterial-nanotubes", "se-nanomaterial", 16)
-  bzutil.add_effect("nanotubes", {type="unlock-recipe", recipe="aeroframe-scaffold-nanotubes"})
   bzutil.add_effect("se-nanomaterial", {type="unlock-recipe", recipe="nanomaterial-nanotubes"})
 
   -- core mining balancing
