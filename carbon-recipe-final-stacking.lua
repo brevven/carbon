@@ -20,7 +20,7 @@ end
 if deadlock_crating then
   deadlock_crating.add_crate("flake-graphite", "deadlock-crating-2")
   deadlock_crating.add_crate("graphite", "deadlock-crating-2")
-  deadlock_crating.add_crate("diamonds", "deadlock-crating-2")
+  deadlock_crating.add_crate("diamond", "deadlock-crating-2")
   deadlock_crating.add_crate("graphene", "deadlock-crating-2")
   if util.me.use_fullerenes() then
     deadlock_crating.add_crate("fullerenes", "deadlock-crating-2")
