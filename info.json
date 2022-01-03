@@ -1,6 +1,6 @@
 {
     "name": "bzcarbon",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "factorio_version": "1.1",
     "title": "Graphite & Diamonds",
     "author": "Brevven",
@@ -14,6 +14,6 @@
       "? deadlock-beltboxes-loaders",
       "? DeadlockCrating"
     ],
-    "description": "Adds elemental carbon items to the game, including graphite, diamonds, graphene, and optionally fullerenes, nanotubes, etc.\n\nCompatible with Krastorio 2, Space Exploration, and more. Part of BZ Mods"
+    "description": "Adds elemental carbon items to the game, including graphite, diamonds, graphene, and optionally fullerenes, nanotubes, etc.\n\nCompatible with Krastorio 2, Space Exploration, and more. A standalone piece of BZ Mods"
 }
 

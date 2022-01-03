@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+Date: 2022-01-03
+  Changes:
+    - Tungsten sets basic rocket-engine-nozzle recipe, this mod updates it with graphite
+    - More minor compatibility
+---------------------------------------------------------------------------------------------------
 Version: 0.0.5
 Date: 2022-01-02
   Fixes:
@@ -11,7 +17,6 @@ Date: 2022-01-01
     - SE: More facility recipes, Nutrient gel, LDS diamonds, alt lube, unlocks
     - K2 green circuit fix
     - AAI green circuit fix
-
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.3
 Date: 2021-12-31
