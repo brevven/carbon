@@ -63,6 +63,10 @@ if util.me.use_carbon_black() then
 end
 
 
+util.add_ingredient("rocket-engine-nozzle", "graphite", 1)
+util.add_to_product("rocket-engine-nozzle", "rocket-engine-nozzle", 1)
+util.add_time("rocket-engine-nozzle", 5)
+
 util.add_ingredient("battery", "graphite", 1)
 util.add_ingredient("pump", "graphite", 2)
 
