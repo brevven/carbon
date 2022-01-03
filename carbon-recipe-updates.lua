@@ -161,6 +161,7 @@ util.set_tech_recipe("kr-battery-mk3-equipment",
 
 -- AAI Industry
 util.add_ingredient("area-mining-drill", "diamond", 8)
+util.add_ingredient("vehicle-miner-mk4", "diamond", 4)
 
 -- Space Exploration
 util.add_ingredient("se-material-testing-pack", "graphite", 1)
