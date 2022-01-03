@@ -258,6 +258,8 @@ util.add_ingredient("quarry-mk3", "diamond", 10)
 -- FastFurnaces
 util.add_ingredient("reika-fast-electric-mining-drill", "diamond", 1)
 
-
 -- Power Armor Mk3
 util.add_ingredient("pamk3-pamk3", "graphene", 60)
+
+-- Orbital ion cannon
+util.add_ingredient("orbital-ion-cannon", "graphene", 100)
