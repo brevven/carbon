@@ -63,13 +63,7 @@ data:extend({
     name = "graphite-processing",
     icon_size = 128,
     icon = "__bzcarbon__/graphics/icons/graphite.png",
-    effects =
-    {
-      {
-        type = "unlock-recipe",
-        recipe = "graphite"
-      },
-    },
+    effects = {},
     unit =
     {
       count = 30,
@@ -83,8 +77,29 @@ data:extend({
     order = "b-b"
   },
 
+})
+
+if mods["space-exploration"] and not mods.Krastorio2 then
+data:extend({
+  {
+    type = "recipe",
+    name = "graphite-se",
+    category = "advanced-crafting",
+    order = "d[graphite]",
+    enabled = false,
+    energy_required = 0.5,
+    ingredients = {{"flake-graphite", 2}},
+    result = "graphite"
+  }
+})
+util.add_effect("graphite-processing", { type = "unlock-recipe", recipe = "graphite-se" })
+util.add_effect("se-pulveriser", { type = "unlock-recipe", recipe = "graphite" })
+else
+util.add_effect("graphite-processing", { type = "unlock-recipe", recipe = "graphite" })
+end
 
 -- diamonds
+data:extend({
   {
     type = "item",
     name = "diamond",
