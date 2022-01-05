@@ -1,6 +1,7 @@
 local me = {}
 
 me.name = "bzcarbon"
+me.list = {}
 
 function me.use_fullerenes()
   return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
@@ -25,6 +26,12 @@ me.bypass = {}
 if me.get_setting(me.name.."-recipe-bypass") then 
   for recipe in string.gmatch(me.get_setting(me.name.."-recipe-bypass"), '[^",%s]+') do
     me.bypass[recipe] = true
+  end
+end
+
+function me.add_modified(name) 
+  if me.get_setting(me.name.."-list") then 
+    table.insert(me.list, name)
   end
 end
 

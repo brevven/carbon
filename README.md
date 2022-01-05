@@ -14,6 +14,7 @@ See changelog.txt
 ## Thanks to 
 - [snouz](https://github.com/snouz) (logo inspiration, ore graphics templates)
 - [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC BY-SA 3.0 license, see link)
+- [dodo.the.last](https://mods.factorio.com/mod/big-data-string) (borrowed code for list feature)
 
 ### Localization
 

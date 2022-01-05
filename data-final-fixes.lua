@@ -4,7 +4,7 @@ require("carbon-recipe-final-se")
 require("carbon-recipe-final-rrr")
 require("carbon-recipe-modules") -- Should be last import
 
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 
 -- Green circuits in final fixes due to K2 shenanigans 
@@ -41,3 +41,6 @@ for i, furnace in pairs(util.me.furnaces) do
   end
 end
 
+
+-- Must be last
+util.create_list()

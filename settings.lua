@@ -27,4 +27,10 @@ data:extend({
 		default_value = mods["rso-mod"] and "yes" or "no",
     allowed_values = {"no", "yes"},
 	},
+  {
+		type = "bool-setting",
+		name = "bzcarbon-list",
+		setting_type = "startup",
+    default_value = false,
+	},
 })
