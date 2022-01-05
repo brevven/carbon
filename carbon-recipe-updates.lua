@@ -97,6 +97,8 @@ util.add_ingredient("laser-turret", "diamond", 1)
 if mods.Krastorio2 then
   util.replace_some_ingredient("steel-plate", "iron-plate", 2, "graphite", 4)
   util.add_ingredient("tungsten-carbide", "graphite", 4)
+  util.replace_some_ingredient("kr-s-c-steel-beam", "iron-plate", 4, "graphite", 8)
+  util.replace_some_ingredient("kr-s-c-steel-gear-wheel", "iron-plate", 2, "graphite", 4)
 elseif mods.bzfoundry then
   util.replace_some_ingredient("steel-plate", "iron-plate", 1, "graphite", 1)
   util.replace_some_ingredient("tungsten-carbide", "tungsten-plate", 1, "graphite", 1)
