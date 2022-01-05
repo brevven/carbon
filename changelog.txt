@@ -1,8 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.9
+Date: 2022-01-04
+  Changes:
+    - K2: Advanced crafting steel recipes
+  Features:
+    - Strange matter compatibility
+  Fixes:
+    - Locale string
+---------------------------------------------------------------------------------------------------
 Version: 0.0.8
 Date: 2022-01-04
   Changes:
     - Minor tech tree tweaks
+  Features:
+    - K2: Matter conversion
+    - SE: Delivery capsule recipes
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.7
 Date: 2022-01-04
