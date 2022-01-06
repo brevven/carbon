@@ -472,11 +472,21 @@ function add_to_product(recipe, product, amount)
   end
 end
 
+-- Adds a result to a mineable type
 function util.add_minable_result(t, name, result)
-  if data.raw[t] and data.raw[t][name] and data.raw[t][name].minable and data.raw[t][name].minable.results then
-    table.insert(data.raw[t][name].minable.results, result)
+  if data.raw[t] and data.raw[t][name] and data.raw[t][name].minable then
+    if data.raw[t][name].minable.result and not data.raw[t][name].minable.results then
+      data.raw[t][name].minable.results = {
+        {data.raw[t][name].minable.result ,data.raw[t][name].minable.count}}
+      data.raw[t][name].minable.result = nil
+      data.raw[t][name].minable.result_count = nil
+    end
+    if data.raw[t][name].minable.results then
+      table.insert(data.raw[t][name].minable.results, result)
+    end
   end
 end
+
 
 local function insert(nodes, node, value)
     table.insert(node, value) -- store as parameter
