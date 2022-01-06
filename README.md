@@ -18,6 +18,7 @@ See changelog.txt
 
 ### Localization
 
+- [S3BA](https://github.com/S3BA-pl) (pl)
 
 
 ### FAQ and gameplay. 
