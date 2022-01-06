@@ -3,6 +3,7 @@ Version: 0.0.11
 Date: 2022-01-06
   Changes:
     - Tweak icons for visibility, especially graphene
+    - pl l10n, thanks to S3BA
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.10
 Date: 2022-01-05
