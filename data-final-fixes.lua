@@ -8,9 +8,12 @@ local util = require("data-util");
 
 
 -- Green circuits in final fixes due to K2 shenanigans 
-util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
--- AAI alternate green circuit
-util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 1, "graphite", 1)
+
+if not mods.MDbobelectronics then
+  util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
+  -- AAI alternate green circuit
+  util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 1, "graphite", 1)
+end
 
 
 -- Only electric smelters can make Diamonds
