@@ -13,6 +13,9 @@ if not mods.MDbobelectronics then
   util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
   -- AAI alternate green circuit
   util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 1, "graphite", 1)
+else
+  util.replace_ingredient("basic-electronic-component", "coal", "graphite")
+  util.replace_ingredient("basic-electronic-component", "coke", "graphite")
 end
 
 
