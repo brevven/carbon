@@ -76,7 +76,6 @@ data:extend({
     prerequisites = {"automation"},
     order = "b-b"
   },
-
 })
 
 if mods["space-exploration"] and not mods.Krastorio2 then

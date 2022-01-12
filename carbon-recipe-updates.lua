@@ -11,8 +11,8 @@ util.add_prerequisite("laser-turret", "diamond-processing")
 util.add_prerequisite("power-armor-mk2", "graphene")
 util.add_prerequisite("rocket-control-unit", "graphene")
 
+util.add_prerequisite("electronics", "graphite-processing")
 if mods.Krastorio2 then
-  util.add_prerequisite("electronics", "graphite-processing")
   util.add_prerequisite("graphite-processing", "kr-crusher")
 end
 

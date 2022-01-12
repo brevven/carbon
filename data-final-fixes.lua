@@ -41,6 +41,22 @@ for i, furnace in pairs(util.me.furnaces) do
   end
 end
 
+if not mods.Krastorio2 and not mods["aai-industry"] then
+  util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
+  util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
+  util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable")
+  util.replace_ingredient("assembling-machine-1", "electronic-circuit", "copper-plate")
+  util.replace_ingredient("radar", "electronic-circuit", "copper-plate")
+
+  util.add_effect("electronics", { type = "unlock-recipe", recipe = "electronic-circuit" })
+  util.add_effect("electronics", { type = "unlock-recipe", recipe = "inserter" })
+  util.add_effect("electronics", { type = "unlock-recipe", recipe = "long-handed-inserter" })
+  util.remove_recipe_effect("automation", "long-handed-inserter")
+  util.set_enabled("electronic-circuit", false)
+  util.set_enabled("inserter", false)
+end
+util.set_enabled("electric-mining-drill", true)
+
 
 -- Must be last
 util.create_list()
