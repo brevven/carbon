@@ -8,7 +8,6 @@ local util = require("data-util");
 
 
 -- Green circuits in final fixes due to K2 shenanigans 
-
 if not mods.MDbobelectronics then
   util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
   -- AAI alternate green circuit
@@ -16,6 +15,20 @@ if not mods.MDbobelectronics then
 else
   util.replace_ingredient("basic-electronic-component", "coal", "graphite")
   util.replace_ingredient("basic-electronic-component", "coke", "graphite")
+end
+
+if data.raw.recipe["low-density-structure"] and 
+  not data.raw.recipe["low-density-structure"].icon and
+  not data.raw.recipe["low-density-structure"].icons
+  then
+  util.set_subgroup("low-density-structure", data.raw.item["low-density-structure"].subgroup)
+  util.set_icons("low-density-structure", {
+    { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+  })
+  util.set_subgroup("se-low-density-structure-beryllium", data.raw.item["low-density-structure"].subgroup)
+  util.set_icons("se-low-density-structure-beryllium", {
+    { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+  })
 end
 
 
@@ -47,6 +60,7 @@ for i, furnace in pairs(util.me.furnaces) do
   end
 end
 
+-- Vanilla burner phase tweaks -- green circuits after electronics
 if not mods.Krastorio2 and not mods["aai-industry"] then
   util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
   util.replace_ingredient("lab", "electronic-circuit", "copper-cable")

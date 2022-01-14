@@ -33,4 +33,11 @@ data:extend({
 		setting_type = "startup",
     default_value = false,
 	},
+  {
+		type = "string-setting",
+		name = "bzcarbon-reuse",
+		setting_type = "startup",
+		default_value = "no",
+    allowed_values = {"no", "yes"},
+	},
 })

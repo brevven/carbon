@@ -403,12 +403,12 @@ data:extend({
       { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
     },
     category = "advanced-crafting",
+    subgroup = data.raw.item["low-density-structure"].subgroup,
     order = "o[low-density-structure-nanotubes]",
     enabled = false,
     energy_required = 20,
     ingredients = lds_recipe(),
-    result = "low-density-structure",
-    result_count = 1,
+    results = {{"low-density-structure", 1}},
   },
   {
     type = "technology",
@@ -461,8 +461,7 @@ data:extend({
     type = "item",
     name = "carbon-black",
     icon = "__bzcarbon__/graphics/icons/carbon-black.png",
-    icon_size = 64,
-    icon_mipmaps = 3,
+    icon_size = 64, icon_mipmaps = 3,
     subgroup = "intermediate-product",
     order = "g[graphite-carbon-black]",
     stack_size = util.get_stack_size(100),
@@ -470,6 +469,8 @@ data:extend({
   {
     type = "recipe",
     name = "carbon-black",
+    icon = "__bzcarbon__/graphics/icons/carbon-black.png",
+    icon_size = 64, icon_mipmaps = 3,
     category = "chemistry",
     order = "d[graphite-carbon-black]",
     enabled = false,
@@ -477,8 +478,9 @@ data:extend({
     ingredients = {
       {type="item", name="coal", amount=1},
     },
-    result = "carbon-black",
-    result_count = 1,
+    results = {
+      {type="item", name= "carbon-black", amount=1},
+    }
   },
   {
     type = "recipe",
@@ -500,6 +502,7 @@ data:extend({
 })
 end
 
+-- crucible
 data:extend({
 {
   type = "item",

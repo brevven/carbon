@@ -7,6 +7,11 @@ function me.use_fullerenes()
   return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
 end
 
+function me.reuse()
+  return me.get_setting("bzcarbon-reuse") == "yes"
+end
+
+
 function me.use_carbon_black()
   return me.get_setting("bzcarbon-enable-carbon-black") == "yes"
 end
