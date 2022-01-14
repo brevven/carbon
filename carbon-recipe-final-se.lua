@@ -1,8 +1,8 @@
-local util = require("util")
-local bzutil = require("__bzcarbon__.data-util");
+local futil = require("util")
+local util = require("__bzcarbon__.data-util");
 
 if mods["space-exploration"] then
-if bzutil.me.use_fullerenes() then
+if util.me.use_fullerenes() then
   -- Add an extra nanotube aeroframe scaffold recipe. 
   -- This could be moved to data-updates in future if necessary
   data:extend({
@@ -19,13 +19,13 @@ if bzutil.me.use_fullerenes() then
       energy_required = 2,
       ingredients = {
         {"nanotubes", 2},
-        table.unpack(util.table.deepcopy(data.raw.recipe["se-aeroframe-scaffold"].ingredients)),
+        table.unpack(futil.table.deepcopy(data.raw.recipe["se-aeroframe-scaffold"].ingredients)),
       },
       result = "se-aeroframe-scaffold",
       result_count = 2,
     },
   })
-  bzutil.add_effect("se-aeroframe-scaffold", {type="unlock-recipe", recipe="aeroframe-scaffold-nanotubes"})
+  util.add_effect("se-aeroframe-scaffold", {type="unlock-recipe", recipe="aeroframe-scaffold-nanotubes"})
 
   data:extend({
     {
@@ -42,17 +42,17 @@ if bzutil.me.use_fullerenes() then
       energy_required = data.raw.recipe["se-nanomaterial"].energy_required,
       ingredients = {
         {"nanotubes", 2},
-        table.unpack(util.table.deepcopy(data.raw.recipe["se-nanomaterial"].ingredients)),
+        table.unpack(futil.table.deepcopy(data.raw.recipe["se-nanomaterial"].ingredients)),
       },
       results = {
-        table.unpack(util.table.deepcopy(data.raw.recipe["se-nanomaterial"].results)),
+        table.unpack(futil.table.deepcopy(data.raw.recipe["se-nanomaterial"].results)),
       }
     }
   })
-  bzutil.add_to_product("nanomaterial-nanotubes", "se-nanomaterial", 16)
-  bzutil.add_effect("se-nanomaterial", {type="unlock-recipe", recipe="nanomaterial-nanotubes"})
+  util.add_to_product("nanomaterial-nanotubes", "se-nanomaterial", 16)
+  util.add_effect("se-nanomaterial", {type="unlock-recipe", recipe="nanomaterial-nanotubes"})
 
   -- core mining balancing
-  bzutil.add_to_product("se-core-fragment-omni", "graphite", -3)
+  util.add_to_product("se-core-fragment-omni", "graphite", -3)
   end
 end

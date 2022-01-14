@@ -275,41 +275,6 @@ data:extend({
 
 -- fullerenes
 if util.me.use_fullerenes() then
-function lds_recipe() 
-  if mods.bztitanium then
-    if mods.bzzirconium then
-      return {
-        {type="item", name=util.titanium_plate, amount=2},
-        {type="item", name="nanotubes", amount=2},
-        {type="item", name="plastic-bar", amount=2},
-        {type="item", name="zirconia", amount=2},
-        {type="item", name="diamond", amount=1},
-      }
-    end
-    return {
-      {type="item", name=util.titanium_plate, amount=2},
-      {type="item", name="nanotubes", amount=5},
-      {type="item", name="plastic-bar", amount=5},
-      {type="item", name="diamond", amount=1},
-    }
-  elseif mods.bzzirconium then
-    return {
-      {type="item", name="zirconia", amount=5},
-      {type="item", name="copper-plate", amount=5},
-      {type="item", name="nanotubes", amount=5},
-      {type="item", name="plastic-bar", amount=2},
-      {type="item", name="diamond", amount=1},
-    }
-  else
-    return {
-      {type="item", name="copper-plate", amount=10},
-      {type="item", name="nanotubes", amount=5},
-      {type="item", name="plastic-bar", amount=5},
-      {type="item", name="diamond", amount=1},
-    }
-  end
-end
-
 data:extend({
   {
     type = "item",
@@ -394,21 +359,6 @@ data:extend({
       {type="fluid", name="sulfuric-acid", amount=9, catalyst_amount=9},
       mods.Krastorio2 and {type="fluid", name="dirty-water", amount=1, catalyst_amount=1} or nil,
     },
-  },
-  {
-    type = "recipe",
-    name = "low-density-structure-nanotubes",
-    icons = {
-      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
-      { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
-    },
-    category = "advanced-crafting",
-    subgroup = data.raw.item["low-density-structure"].subgroup,
-    order = "o[low-density-structure-nanotubes]",
-    enabled = false,
-    energy_required = 20,
-    ingredients = lds_recipe(),
-    results = {{"low-density-structure", 1}},
   },
   {
     type = "technology",
