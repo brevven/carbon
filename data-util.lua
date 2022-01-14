@@ -176,8 +176,15 @@ function util.add_product(recipe_name, product)
 end
 
 function add_product(recipe, product)
-  if recipe ~= nil and recipe.results ~= nil then
-    table.insert(recipe.results, product)
+  if recipe ~= nil then
+    if not recipe.normal then
+      if recipe.results == nil then
+        recipe.results = {{recipe.result, recipe.result_count and recipe.result_count or 1}}
+      end
+      recipe.result = nil
+      recipe.result_count = nil
+      table.insert(recipe.results, product)
+    end
   end
 end
 
@@ -454,6 +461,17 @@ function util.set_subgroup(recipe_name, subgroup)
   if data.raw.recipe[recipe_name] then
     me.add_modified(recipe_name)
     data.raw.recipe[recipe_name].subgroup = subgroup
+  end
+end
+
+-- Set recipe icons
+function util.set_icons(recipe_name, icons)
+  if me.bypass[recipe_name] then return end
+  if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    data.raw.recipe[recipe_name].icons = icons
+    data.raw.recipe[recipe_name].icon = nil
+    data.raw.recipe[recipe_name].icon_size = nil
   end
 end
 
