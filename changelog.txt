@@ -3,6 +3,7 @@ Version: 0.0.14
 Date: 2022-01-12
   Changes:
     - Safe compatibility check for Bob's Electronics SE KR thanks to MdRuz
+    - Crucibles work with Deadlock stacking/crating
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.13
 Date: 2022-01-12
