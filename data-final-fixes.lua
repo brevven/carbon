@@ -30,6 +30,10 @@ if data.raw.recipe["low-density-structure"] and
   util.set_icons("se-low-density-structure-beryllium", {
     { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
   })
+  util.set_subgroup("low-density-structure-RS", data.raw.item["low-density-structure"].subgroup)
+  util.set_icons("low-density-structure-RS", {
+    { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+  })
 end
 
 if util.me.use_fullerenes() then

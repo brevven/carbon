@@ -2,7 +2,8 @@
 Version: 0.0.17
 Date: 2022-01-15
   Fixes:
-    - LDS recipe string
+    - LDS recipe string fixes with new option
+    - Schall RS fixes with new option
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.16
 Date: 2022-01-14
