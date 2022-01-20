@@ -12,10 +12,6 @@ util.add_prerequisite("power-armor-mk2", "graphene")
 util.add_prerequisite("rocket-control-unit", "graphene")
 
 util.add_prerequisite("electronics", "graphite-processing")
-if mods.Krastorio2 then
-  util.add_prerequisite("graphite-processing", "kr-crusher")
-end
-
 
 -- furnace recipe rework w/ crucible, more in data-final-fixes
 util.add_effect("advanced-material-processing-2", {type="unlock-recipe", recipe="crucible"})

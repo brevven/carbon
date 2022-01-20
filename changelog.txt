@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.18
+Date: 2022-01-17
+  Changes:
+    - Minor modded tech tree tweaks
+  Fixes:
+    - Fix Schall Recipe Scaling issue with diamonds in furnaces
+    - Attempted to fix an issue when low density structure has no expensive recipe
+---------------------------------------------------------------------------------------------------
 Version: 0.0.17
 Date: 2022-01-15
   Fixes:
