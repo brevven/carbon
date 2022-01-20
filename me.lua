@@ -20,6 +20,10 @@ function me.use_rough_diamond()
   return mods["rso-mod"] or me.get_setting("bzcarbon-enable-rough-diamond") == "yes"
 end
 
+function me.use_flake_graphite()
+  return mods["rso-mod"] or me.get_setting("bzcarbon-enable-flake-graphite") == "yes"
+end
+
 function me.get_setting(name)
   if settings.startup[name] == nil then
     return nil
@@ -50,6 +54,16 @@ me.furnaces =  {
   "electric-furnace-mk3", -- FE+
   "mega-furnace",         -- Mega furnace
   "advanced-electric-furnace-rampant-industrial",
+  "5d-electric-furnace-02",
+  "5d-electric-furnace-03",
+  "5d-electric-furnace-04",
+  "5d-electric-furnace-05",
+  "5d-electric-furnace-06",
+  "5d-electric-furnace-07",
+  "5d-electric-furnace-08",
+  "5d-electric-furnace-09",
+  "5d-electric-furnace-10",
+  "5d-industrial-furnace",
 }
 
 

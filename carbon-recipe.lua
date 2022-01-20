@@ -97,6 +97,21 @@ else
 util.add_effect("graphite-processing", { type = "unlock-recipe", recipe = "graphite" })
 end
 
+if mods["5dim_resources"] then
+data:extend({
+  {
+    type = "recipe",
+    name = "graphite-5d",
+    category = "mashering",
+    order = "d[graphite]",
+    enabled = true,
+    energy_required = 0.5,
+    ingredients = {{"flake-graphite", 1}},
+    results = {{"graphite", 2}},
+  }
+})
+end
+
 -- diamonds
 data:extend({
   {
