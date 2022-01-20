@@ -271,3 +271,10 @@ util.add_ingredient("pamk3-pamk3", "graphene", 60)
 
 -- Orbital ion cannon
 util.add_ingredient("orbital-ion-cannon", "graphene", 100)
+
+-- FE+
+util.add_ingredient("pump-mk2", "graphite", 4)
+util.add_ingredient("offshore-pump-mk2", "graphite", 2)
+util.add_ingredient("pumpjack-mk2", "graphite", 2)
+util.add_ingredient("fusion-reactor-mk2-equipment", "graphene", 2)
+
