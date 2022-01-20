@@ -3,6 +3,7 @@ local noise = require('noise');
 
 local util = require("__bzcarbon__.data-util");
 
+if util.me.use_flake_graphite() then
 data:extend({
 	{
     type = "autoplace-control",
@@ -83,3 +84,4 @@ data:extend({
       stack_size = util.get_stack_size(50)
   },
 })
+end

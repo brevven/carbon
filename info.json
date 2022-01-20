@@ -10,6 +10,7 @@
       "base >= 1.1.0",
       "? bztitanium",
       "? bzzirconium",
+      "? bzfoundry",
       "? space-exploration",
       "? aai-industry",
       "? Krastorio2",

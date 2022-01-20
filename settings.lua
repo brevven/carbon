@@ -24,7 +24,16 @@ data:extend({
 		type = "string-setting",
 		name = "bzcarbon-enable-rough-diamond",
 		setting_type = "startup",
+    hidden = not not mods["rso-mod"],
 		default_value = mods["rso-mod"] and "yes" or "no",
+    allowed_values = {"no", "yes"},
+	},
+  {
+		type = "string-setting",
+		name = "bzcarbon-enable-flake-graphite",
+		setting_type = "startup",
+    hidden = not not mods["rso-mod"],
+		default_value = "yes",
     allowed_values = {"no", "yes"},
 	},
   {

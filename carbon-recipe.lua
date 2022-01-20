@@ -78,12 +78,56 @@ data:extend({
   },
 })
 
+-- If no graphite ore, make it from coal or coke
+if not util.me.use_flake_graphite() then
+  if data.raw.item["coke"] then
+    data:extend({
+      {
+        type = "recipe",
+        name = "graphite",
+        icon = "__bzcarbon__/graphics/icons/graphite.png", icon_size=128,
+        category = mods.bzfoundry and "founding" or "advanced-crafting",
+        order = "d[graphite]",
+        enabled = false,
+        energy_required = 0.5,
+        ingredients = {{"coke", 1}},
+        results = {{"graphite", 2}},
+      }
+    })
+  else
+    data:extend({
+      {
+        type = "recipe",
+        name = "graphite",
+        icon = "__bzcarbon__/graphics/icons/graphite.png", icon_size=128,
+        category = mods.bzfoundry and "founding" or "advanced-crafting",
+        subgroup = data.raw.item.graphite.subgroup,
+        order = "d[graphite]",
+        enabled = false,
+        energy_required = 0.5,
+        ingredients = {{"coal", 1}},
+        results = {{"graphite", 1}, {type="item", name="stone", amount=1, probability=0.05}},
+      }
+    })
+  end
+  util.add_prerequisite("graphite-processing", "foundry")
+
+  -- Increase richness of coal a bit
+  local noise = require('noise');
+  data.raw.resource["coal"].autoplace.richness_expression = 
+      data.raw.resource["coal"].autoplace.richness_expression * noise.to_noise_expression(1.5)
+end
+
+
+
 
 if mods.Krastorio2 then
   util.add_prerequisite("graphite-processing", "kr-crusher")
 else
   util.add_prerequisite("graphite-processing", "automation")
 end
+
+
 
 if mods["space-exploration"] and not mods.Krastorio2 then
 data:extend({

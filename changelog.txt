@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.20
+Date: 2022-01-19
+  Features:
+    - New setting to remove flake graphite
+  Changes:
+    - Minor tech tree tweaks
+    - Repair pack recipe tweak
+    - Minor 5d compatibility improvements
+    - Minor FE+ compatibility improvements
+---------------------------------------------------------------------------------------------------
 Version: 0.0.19
 Date: 2022-01-18
   Fixes:
