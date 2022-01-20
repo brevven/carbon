@@ -73,10 +73,17 @@ data:extend({
           },
       time = 10,
     },
-    prerequisites = {"automation"},
+    prerequisites = {},
     order = "b-b"
   },
 })
+
+
+if mods.Krastorio2 then
+  util.add_prerequisite("graphite-processing", "kr-crusher")
+else
+  util.add_prerequisite("graphite-processing", "automation")
+end
 
 if mods["space-exploration"] and not mods.Krastorio2 then
 data:extend({
