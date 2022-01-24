@@ -73,7 +73,7 @@ for i, furnace in pairs(util.me.furnaces) do
 end
 
 -- Vanilla burner phase tweaks -- green circuits after electronics
-if not mods.Krastorio2 and not mods["aai-industry"] then
+if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
   util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
   util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable")
