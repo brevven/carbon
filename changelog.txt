@@ -1,7 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.0.22
-Date: 2022-01-25
+Version: 0.1.0
+Date: 2022-01-27
+  Changes:
+    - This is feeling more like beta than alpha now.
   Fixes:
+    - SE rough-diamond ore should be properly rare.
     - SE without flake graphite should now work
 ---------------------------------------------------------------------------------------------------
 Version: 0.0.21

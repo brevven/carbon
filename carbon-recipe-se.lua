@@ -1,5 +1,15 @@
 local util = require("__bzcarbon__.data-util");
 if mods["space-exploration"] then
+
+if util.me.use_rough_diamond() then
+  se_resources["diamond"] = {
+    order = "b-z",
+    has_starting_area_placement = false,
+    base_density = 0.5,
+    base_spots_per_km2 = 0.5,
+  }
+end
+
 if util.me.use_flake_graphite() then
   se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
 end
