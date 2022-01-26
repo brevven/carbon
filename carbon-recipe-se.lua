@@ -1,6 +1,8 @@
 local util = require("__bzcarbon__.data-util");
 if mods["space-exploration"] then
-se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
+if util.me.use_flake_graphite() then
+  se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
+end
 se_delivery_cannon_recipes["graphite"] = {name= "graphite"}
 se_delivery_cannon_recipes["diamond"] = {name= "diamond"}
 if util.me.use_rough_diamond() then
