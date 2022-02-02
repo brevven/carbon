@@ -44,7 +44,13 @@ function me.add_modified(name)
   end
 end
 
-me.crucible_ingredients = {"tungsten-plate", "zirconia", "stone-brick", "silica"}
+me.crucible_ingredients = {"tungsten-plate", "zirconia", "silica"}
+if (mods and mods.bzaluminum) or (game and game.active_mods and game.active_mods.bzaluminum) then
+  table.insert(me.crucible_ingredients, "alumina")
+else
+  table.insert(me.crucible_ingredients, "stone-brick")
+end
+
 me.furnaces =  {
   "electric-furnace",
   "electric-foundry",     -- BZ

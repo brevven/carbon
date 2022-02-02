@@ -1,8 +1,17 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2022-01-30
+  Changes:
+    - More minor tech tree tweaks
+    - More compatibility tweaks
+---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 2022-01-29
   Changes:
     - SE ballistic shielding data recipe
+    - Minor rough diamond icon tweak
+    - Minor description tweaks
+    - Minor tech tree tweaks
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 2022-01-27

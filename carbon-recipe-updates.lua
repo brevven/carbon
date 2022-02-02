@@ -20,6 +20,9 @@ for i, ingredient in pairs(util.me.crucible_ingredients) do
 end
 for i, furnace in pairs(util.me.furnaces) do
   util.add_ingredient(furnace, "crucible", 1)
+  for j, ingredient in pairs(util.me.crucible_ingredients)  do
+    util.remove_ingredient(furnace, ingredient)
+  end
 end
 
 -- fullerenes & nanotubes
@@ -59,7 +62,7 @@ if util.me.use_carbon_black() then
   end
 
   util.add_effect("plastics", {type="unlock-recipe", recipe="carbon-black"})
-  util.add_effect("plastics", {type="unlock-recipe", recipe="graphite-carbon-black"})
+  util.add_effect("oil-processing", {type="unlock-recipe", recipe="graphite-carbon-black"})
 
 end
 

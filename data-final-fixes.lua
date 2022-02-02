@@ -65,7 +65,7 @@ for i, entity in pairs(data.raw["assembling-machine"]) do
   diamondsInElectricSmelter(entity)
 end 
 
--- furnace recipe rework, remove crucible ingredients
+-- furnace recipe rework, remove crucible ingredients one more time
 for i, furnace in pairs(util.me.furnaces) do
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
     util.remove_ingredient(furnace, ingredient)
