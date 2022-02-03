@@ -13,6 +13,11 @@ util.add_prerequisite("rocket-control-unit", "graphene")
 
 util.add_prerequisite("electronics", "graphite-processing")
 
+if mods.Krastorio2 then
+  util.add_prerequisite("graphite-processing", "automation-science-pack")
+  util.add_prerequisite("graphite-processing", "basic-fluid-handling")
+end
+
 -- furnace recipe rework w/ crucible, more in data-final-fixes
 util.add_effect("advanced-material-processing-2", {type="unlock-recipe", recipe="crucible"})
 for i, ingredient in pairs(util.me.crucible_ingredients) do
