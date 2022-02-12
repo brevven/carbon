@@ -19,6 +19,7 @@ See changelog.txt
 ### Localization
 
 - [S3BA](https://github.com/S3BA-pl) (pl)
+- [Sakuro](https://github.com/sakuro) (ja)
 
 
 ### FAQ and gameplay. 
