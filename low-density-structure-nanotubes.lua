@@ -48,6 +48,6 @@ if util.me.use_fullerenes() then
   end
 
   if util.me.reuse() then
-    util.add_product("low-density-structure-nanotubes", {type="item", name="diamond", amount=1, probability = 0.5})
+    util.add_product("low-density-structure-nanotubes", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
   end
 end
