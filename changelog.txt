@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2022-05-30
+  Changes:
+    - AAI: Improve AAI tech tree when Graphite enabled: steam power after basic fluid handling.
+    - K2: Do not unlock electric mining drill with automation core.
+    - K2: Fullerenes no longer required for slowdown capsules, due to earlier unlock in K2.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.7
 Date: 2022-04-25
   Fixes:

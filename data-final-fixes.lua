@@ -95,11 +95,16 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
 end
 
 if not mods["aai-industry"] then
-  if mods.Krastorio2 then
-    util.add_effect("kr-automation-core", { type = "unlock-recipe", recipe = "electric-mining-drill" })
-  else
+  if not mods.Krastorio2 then
     util.set_enabled("electric-mining-drill", true)
   end
+end
+
+
+if mods["aai-industry"] then
+  -- AAI Industry now unlocks steam much later. Move it to an earlier sensible location in the tech tree.
+  util.set_prerequisite("steam-power", {"basic-fluid-handling"})
+  util.set_tech_recipe("steam-power", {{"automation-science-pack", 1}})
 end
 
 

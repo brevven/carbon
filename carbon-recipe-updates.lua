@@ -35,7 +35,9 @@ if util.me.use_fullerenes() then
   util.add_prerequisite("graphene", "fullerenes")
   util.add_prerequisite("military-3", "fullerenes")
   util.replace_some_ingredient("poison-capsule", "coal", 9, "fullerenes", 90)
-  util.replace_some_ingredient("slowdown-capsule", "coal", 4, "fullerenes", 40)
+  if not mods.Krastorio2 then
+    util.replace_some_ingredient("slowdown-capsule", "coal", 4, "fullerenes", 40)
+  end
 
   -- K2
   util.add_ingredient("kr-biter-virus", "fullerenes", 100)
