@@ -24,6 +24,10 @@ function me.use_flake_graphite()
   return mods["rso-mod"] or me.get_setting("bzcarbon-enable-flake-graphite") == "yes"
 end
 
+function me.foundry_enable()
+  return not me.get_setting("bzfoundry-minimal")
+end
+
 function me.get_setting(name)
   if settings.startup[name] == nil then
     return nil

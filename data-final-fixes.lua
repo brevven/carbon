@@ -93,7 +93,14 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   util.set_enabled("inserter", false)
   util.add_prerequisite("logistic-science-pack", "electronics")
 end
-util.set_enabled("electric-mining-drill", true)
+
+if not mods["aai-industry"] then
+  if mods.Krastorio2 then
+    util.add_effect("kr-automation-core", { type = "unlock-recipe", recipe = "electric-mining-drill" })
+  else
+    util.set_enabled("electric-mining-drill", true)
+  end
+end
 
 
 -- Must be last
