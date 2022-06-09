@@ -21,6 +21,7 @@ See changelog.txt
 - [S3BA](https://github.com/S3BA-pl) (pl)
 - [Sakuro](https://github.com/sakuro) (ja)
 - [x2605](https://github.com/x2605) (ko)
+- [NathaU](https://github.com/NathaU) (de)
 
 
 ### FAQ and gameplay. 
