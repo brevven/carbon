@@ -16,6 +16,8 @@ recipes = {
   "imersium-gear-wheel-nanotubes",
   "aeroframe-scaffold-nanotubes",
   "nanomaterial-nanotubes",
+
+  "diamond-synthesis-vulcanite",
   -- NOTE: Carbon black recipes do not allow prod modules
 }
 
