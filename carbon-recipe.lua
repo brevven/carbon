@@ -542,3 +542,21 @@ data:extend({
   result_count = 1,
 },
 })
+
+-- Space exploration subgroups
+if mods["space-exploration"] and string.sub(mods["space-exploration"], 1, 3) == "0.6" then
+  data:extend({
+  {
+    type = "item-subgroup",
+    name = "carbon",
+    group = "resources",
+    order = "a-h-z-0",
+  }
+  })
+  util.set_item_subgroup("graphite", "carbon")
+  util.set_item_subgroup("diamond", "carbon")
+  util.set_item_subgroup("graphene", "carbon")
+  util.set_item_subgroup("carbon-black", "carbon")
+  util.set_item_subgroup("fullerenes", "carbon")
+  util.set_item_subgroup("nanotubes", "carbon")
+end
