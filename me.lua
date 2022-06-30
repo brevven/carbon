@@ -59,6 +59,7 @@ me.furnaces =  {
   "electric-furnace",
   "electric-foundry",     -- BZ
   "industrial-furnace",   -- AAI
+  "se-casting-machine",   -- SE
   "kr-advanced-furnace",  -- K2
   "electric-furnace-mk2", -- FE+
   "electric-furnace-mk3", -- FE+
