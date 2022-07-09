@@ -107,6 +107,9 @@ if mods["aai-industry"] then
   util.set_tech_recipe("steam-power", {{"automation-science-pack", 1}})
 end
 
+if mods["vtk-deepcore-mining"] then
+end
+
 
 -- Must be last
 util.create_list()
