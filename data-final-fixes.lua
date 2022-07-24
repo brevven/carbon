@@ -102,7 +102,7 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   -- Keep repair pack raw ingredients the same:
   util.remove_ingredient("repair-pack", "electronic-circuit")
   util.add_ingredient("repair-pack", "copper-cable", 6)
-  util.add_to_ingredient("repair-pack", "iron-gear-wheel", 1)
+  util.set_ingredient("repair-pack", "iron-gear-wheel", 3)
 
   util.add_effect("electronics", { type = "unlock-recipe", recipe = "electronic-circuit" })
   util.add_effect("electronics", { type = "unlock-recipe", recipe = "inserter" })
