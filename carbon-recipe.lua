@@ -272,7 +272,7 @@ data:extend({
           },
       time = 15,
     },
-    prerequisites = {"chemical-science-pack"},
+    prerequisites = {"advanced-material-processing-2"},
     order = "b-b"
   },
 })

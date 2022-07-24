@@ -5,7 +5,6 @@ util.add_prerequisite("steel-processing", "graphite-processing")
 
 util.add_prerequisite("low-density-structure", "diamond-processing")
 util.add_prerequisite("advanced-electronics-2", "diamond-processing")
-util.add_prerequisite("production-science-pack", "diamond-processing")
 util.add_prerequisite("laser", "diamond-processing")
 
 util.add_prerequisite("power-armor-mk2", "graphene")
