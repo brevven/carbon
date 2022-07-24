@@ -7,6 +7,7 @@ recipes = {
 
   "graphene",
   "heavy-water-graphene",
+  "enriched-graphite",
 
   "fullerenes",
   "nanotubes",
