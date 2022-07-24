@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.7
+Date: 2022-07-23
+  Changes:
+    - Made compatible with Fluidless_Mining_and_Ore_Washing by allowing fluid recipes in aseembling
+      machine 1 when enabled. May change if a better solution is found later.
+---------------------------------------------------------------------------------------------------
 Version: 0.3.6
 Date: 2022-07-22
   Fixes:
