@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.5
+Date: 2022-07-20
+  Features:
+    - K2: Add an enriched graphite recipe with improved graphite ratio and corresponding tech.
+  Changes:
+    - Fix basic splitter recipe to be pre-electronics friendly.
+      If this breaks your mall, use bypass recipe setting.
+    - Tech tree tweak: laser (instead of laser-turret) depends on diamond processing
+---------------------------------------------------------------------------------------------------
 Version: 0.3.4
 Date: 2022-07-14
   Changes:
