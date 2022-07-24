@@ -97,6 +97,7 @@ if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
   util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable")
   util.replace_ingredient("assembling-machine-1", "electronic-circuit", "copper-plate")
   util.replace_ingredient("radar", "electronic-circuit", "copper-plate")
+  util.replace_ingredient("splitter", "electronic-circuit", "copper-cable", 20)
 
   -- Keep repair pack raw ingredients the same:
   util.remove_ingredient("repair-pack", "electronic-circuit")
