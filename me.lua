@@ -3,6 +3,10 @@ local me = {}
 me.name = "bzcarbon"
 me.list = {}
 
+function me.use_fiber()
+  return me.get_setting("bzcarbon-enable-carbon-fiber") == "yes"
+end
+
 function me.use_fullerenes()
   return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
 end
