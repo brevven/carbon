@@ -262,6 +262,7 @@ end
 -- Add a given quantity of product to a given recipe. 
 -- Only works for recipes with multiple products
 function util.add_product(recipe_name, product)
+  if me.bypass[recipe_name] then return end
   if data.raw.recipe[recipe_name] and (data.raw.item[product[1]] or data.raw.item[product.name]) then
     add_product(data.raw.recipe[recipe_name], product)
     add_product(data.raw.recipe[recipe_name].normal, product)
@@ -555,6 +556,7 @@ function remove_product(recipe, old)
 end
 
 function util.set_main_product(recipe_name, product)
+  if me.bypass[recipe_name] then return end
   if data.raw.recipe[recipe_name] then
     set_main_product(data.raw.recipe[recipe_name], product)
     set_main_product(data.raw.recipe[recipe_name].normal, product)
@@ -570,6 +572,7 @@ end
 
 -- Replace one product with another in a recipe
 function util.replace_product(recipe_name, old, new)
+  if me.bypass[recipe_name] then return end
   if data.raw.recipe[recipe_name] then
     replace_product(data.raw.recipe[recipe_name], old, new)
     replace_product(data.raw.recipe[recipe_name].normal, old, new)
@@ -755,6 +758,7 @@ function add_to_ingredient(recipe, it, amount)
 end
 
 function util.add_to_product(recipe, product, amount)
+  if me.bypass[recipe] then return end
   if data.raw.recipe[recipe] then
     add_to_product(data.raw.recipe[recipe], product, amount)
     add_to_product(data.raw.recipe[recipe].normal, product, amount)
