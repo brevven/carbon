@@ -1,4 +1,4 @@
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 if mods["space-exploration"] then
 
 if util.me.use_rough_diamond() then

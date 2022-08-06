@@ -1,5 +1,5 @@
 -- Enable prod modules for all recipes
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 recipes = {
   "graphite",

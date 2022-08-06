@@ -1,7 +1,7 @@
 local resource_autoplace = require('resource-autoplace');
 local noise = require('noise');
 
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 if util.me.use_flake_graphite() then
 data:extend({

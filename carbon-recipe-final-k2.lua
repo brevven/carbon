@@ -1,4 +1,4 @@
-local bzutil = require("__bzcarbon__.data-util");
+local bzutil = require("data-util");
 local util = require("util")
 if mods.Krastorio2 then
   if bzutil.me.use_fullerenes() then

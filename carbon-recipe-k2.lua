@@ -1,4 +1,4 @@
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 if mods.Krastorio2 then
 

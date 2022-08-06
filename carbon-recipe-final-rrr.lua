@@ -1,4 +1,4 @@
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 if util.me.use_flake_graphite() and mods["Rich-Rocks-Requiem"] then
   if data.raw.recipe["rrr-stone-processing"] then

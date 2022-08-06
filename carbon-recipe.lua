@@ -1,4 +1,4 @@
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 local graphite_category = "advanced-crafting"
 if mods["space-exploration"] then

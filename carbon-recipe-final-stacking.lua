@@ -1,6 +1,6 @@
 -- Deadlock stacking recipes
 
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 if deadlock then
   deadlock.add_stack("flake-graphite",  "__bzcarbon__/graphics/icons/stacked/flake-graphite-stacked.png", "deadlock-stacking-1", 64)

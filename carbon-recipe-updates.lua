@@ -1,4 +1,4 @@
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 -- TECHS
 util.add_prerequisite("steel-processing", "graphite-processing")

@@ -1,5 +1,5 @@
 local futil = require("util")
-local util = require("__bzcarbon__.data-util");
+local util = require("data-util");
 
 if mods["space-exploration"] then
   -- core mining balancing
