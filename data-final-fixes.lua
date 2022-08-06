@@ -3,27 +3,10 @@ require("carbon-recipe-final-k2")
 require("carbon-recipe-final-se")
 require("carbon-recipe-final-rrr")
 require("low-density-structure-nanotubes")
+require("compatibility/vtkdeepcoremining")
 require("carbon-recipe-modules") -- Should be last import, need in both updates and final-fixes
 
 local util = require("data-util");
-
-if util.me.use_rough_diamond() then
-  local amt = 0
-  if data.raw.recipe["vtk-deepcore-mining-ore-chunk-refining"] then
-    for i, product in pairs(data.raw.recipe["vtk-deepcore-mining-ore-chunk-refining"].results) do
-      if product.name == "vtk-deepcore-mining-rough-diamond-chunk" then
-        amt = product.amount - 1
-      end
-      if product[1] == "vtk-deepcore-mining-rough-diamond-chunk" then
-        amt = product[2]
-      end
-    end
-    util.add_to_product("vtk-deepcore-mining-ore-chunk-refining",
-                        "vtk-deepcore-mining-rough-diamond-chunk", 0-amt)
-    util.add_to_product("vtk-deepcore-mining-ore-chunk-refining",
-                        "vtk-deepcore-mining-flake-graphite-chunk", amt)
-  end
-end
 
 
 -- Green circuits in final fixes due to K2 shenanigans 

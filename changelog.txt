@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.10
+Date: 2022-08-06
+  Fixes:
+    - Steam is now properly required in vtk deepcore mining
+    - Bypass setting fixed for added products
+---------------------------------------------------------------------------------------------------
+Version: 0.3.9
+Date: 2022-08-03
+  Fixes:
+    - Balance no-uranium vtk deepcore mining recipe.
+    - Add some missing vtk deepcore mining strings
+---------------------------------------------------------------------------------------------------
 Version: 0.3.8
 Date: 2022-08-02
   Changes:
