@@ -4,6 +4,7 @@ me.name = "bzcarbon"
 me.list = {}
 
 function me.use_fullerenes()
+  if me.get_setting("bz-all-intermediates") then return true end
   return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
 end
 
@@ -13,6 +14,7 @@ end
 
 
 function me.use_carbon_black()
+  if me.get_setting("bz-all-intermediates") then return true end
   return me.get_setting("bzcarbon-enable-carbon-black") == "yes"
 end
 
