@@ -1,8 +1,8 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.11
+Version: 0.4.0
 Date: 2022-08-07
   Changes:
-    - Very minor lua optimization
+    - All mods that have early recipes requiring electronic circuits should be more compatible now.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.10
 Date: 2022-08-06

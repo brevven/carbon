@@ -109,9 +109,9 @@ if mods["aai-industry"] then
   util.set_tech_recipe("steam-power", {{"automation-science-pack", 1}})
 end
 
-if mods["vtk-deepcore-mining"] then
+if not mods.bzaluminum then
+  util.replace_ingredients_prior_to("electronics", "electronic-circuit", "copper-cable", 2)
 end
-
 
 -- Must be last
 util.create_list()
