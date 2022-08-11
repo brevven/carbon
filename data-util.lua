@@ -905,13 +905,35 @@ function util.create_list()
   end
 end
 
+function util.remove_prior_unlocks(tech, recipe)
+  if data.raw.technology[tech].prerequisites then
+    for i, prerequisite in pairs(data.raw.technology[tech].prerequisites) do
+      remove_prior_unlocks(prerequisite, recipe)
+    end
+  end
+end
+
+function remove_prior_unlocks(tech, recipe)
+  local technology = data.raw.technology[tech]
+  if technology then
+    util.remove_recipe_effect(tech, recipe)
+    if technology.prerequisites then
+      for i, prerequisite in pairs(technology.prerequisites) do
+        -- log("BZZZ removing prior unlocks, checking " .. prerequisite)
+        remove_prior_unlocks(prerequisite, recipe)
+      end
+    end
+  end
+end
+
 function util.replace_ingredients_prior_to(tech, old, new, multiplier)
   if not data.raw.technology[tech] then
     log("Not replacing ingredient "..old.." with "..new.." because tech "..tech.." was not found")
     return
   end
+  util.remove_prior_unlocks(tech, old)
   for i, recipe in pairs(data.raw.recipe) do
-    if recipe.enabled then
+    if recipe.enabled and recipe.enabled ~= 'false' then
       util.replace_ingredient(recipe.name, old, new, multiplier, true)
     end
   end
@@ -928,7 +950,7 @@ function replace_ingredients_prior_to(tech, old, new, multiplier)
     if technology.effects then
       for i, effect in pairs(technology.effects) do
         if effect.type == "unlock-recipe" then
-          -- log("BZZZ replacing " .. effect.recipe)
+          -- log("BZZZ replacing " .. old .. " with " .. new .." in " .. effect.recipe)
           util.replace_ingredient(effect.recipe, old, new, multiplier, true)
         end
       end
@@ -941,5 +963,6 @@ function replace_ingredients_prior_to(tech, old, new, multiplier)
     end
   end
 end
+
 
 return util
