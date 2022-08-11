@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.1
+Date: 2022-08-08
+  Changes:
+    - Compatibility with updates to Tungsten mod
+  Fixes:
+    - SE + K2: Enriched graphite recipe in correct subgroup.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2022-08-07
   Changes:
