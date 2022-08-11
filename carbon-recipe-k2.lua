@@ -4,6 +4,11 @@ if mods.Krastorio2 then
 
 -- HCL graphite processing
 if util.me.use_flake_graphite() then
+local gsubgroup = "raw-material"
+if mods["space-exploration"] and string.sub(mods["space-exploration"], 1, 3) == "0.6" and
+data.raw["item-subgroup"]["carbon"] then
+  gsubgroup = "carbon"
+end
 data:extend({
   {
     type = "recipe",
@@ -14,7 +19,7 @@ data:extend({
           { icon = util.k2assets().."/icons/fluids/hydrogen-chloride.png", icon_size = 64, scale=0.25,  icon_mipmaps = 3, shift= {-8, -8}},
         },
     category = "chemistry",
-    subgroup = "raw-material",
+    subgroup = gsubgroup,
     order = "g[graphite]",
     enabled = false,
     energy_required = 6,
