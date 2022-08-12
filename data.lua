@@ -10,5 +10,11 @@ require("carbon-recipe-se")
 
 local util = require("data-util");
 
+if mods["aai-vehicles-miner"] then
+  -- steam required for graphite mining
+  data.raw.fluid.steam.auto_barrel = true
+end
+
+
 -- Must be last
 util.create_list()
