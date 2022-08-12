@@ -947,7 +947,7 @@ function util.replace_ingredients_prior_to(tech, old, new, multiplier)
       and (not recipe.hidden or recipe.hidden == 'true') -- probably don't want to change hidden recipes
       and string.sub(recipe.name, 1, 3) ~= 'se-' -- have to exlude SE in general :(
     then
-      log("BZZZ due to 'enabled' replacing " .. old .. " with " .. new .." in " .. recipe.name)
+      -- log("BZZZ due to 'enabled' replacing " .. old .. " with " .. new .." in " .. recipe.name)
       util.replace_ingredient(recipe.name, old, new, multiplier, true)
     end
   end
@@ -964,14 +964,14 @@ function replace_ingredients_prior_to(tech, old, new, multiplier)
     if technology.effects then
       for i, effect in pairs(technology.effects) do
         if effect.type == "unlock-recipe" then
-          log("BZZZ replacing " .. old .. " with " .. new .." in " .. effect.recipe)
+          -- log("BZZZ replacing " .. old .. " with " .. new .." in " .. effect.recipe)
           util.replace_ingredient(effect.recipe, old, new, multiplier, true)
         end
       end
     end
     if technology.prerequisites then
       for i, prerequisite in pairs(technology.prerequisites) do
-        log("BZZZ checking " .. prerequisite)
+        -- log("BZZZ checking " .. prerequisite)
         replace_ingredients_prior_to(prerequisite, old, new, multiplier)
       end
     end
