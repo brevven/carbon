@@ -10,13 +10,19 @@ if util.me.use_rough_diamond() then
   }
 end
 
-if util.me.use_flake_graphite() then
-  se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
-end
 se_delivery_cannon_recipes["graphite"] = {name= "graphite"}
 se_delivery_cannon_recipes["diamond"] = {name= "diamond"}
+if util.me.use_flake_graphite() then
+  se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
+  if mods["space-exploration"] > "0.6" then
+    util.se_matter({ore="flake-graphite", energy_required=1, quant_out=10, stream_out=60})
+  end
+end
 if util.me.use_rough_diamond() then
   se_delivery_cannon_recipes["rough-diamond"] = {name= "rough-diamond"}
+  if mods["space-exploration"] > "0.6" then
+    util.se_matter({ore="rough-diamond", energy_required=15, quant_out=1, stream_out=55})
+  end
 end
 
 data:extend({
