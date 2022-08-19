@@ -110,6 +110,8 @@ if mods["aai-industry"] then
   util.set_tech_recipe("steam-power", {{"automation-science-pack", 1}})
 end
 
+util.add_prerequisite("nanobots", "electronics")
+
 if not mods.bzaluminum then
   util.replace_ingredients_prior_to("electronics", "electronic-circuit", "copper-cable", 2)
 end
