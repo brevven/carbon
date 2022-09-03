@@ -2,8 +2,7 @@ local futil = require("util")
 local util = require("data-util");
 
 if mods["space-exploration"] then
-  -- core mining balancing
-  util.add_to_product("se-core-fragment-omni", "flake-graphite", -3)
+  -- core mining balancing graphite at full, diamond removed
   util.remove_product("se-core-fragment-omni", "rough-diamond")
 
   if util.me.use_fullerenes() then

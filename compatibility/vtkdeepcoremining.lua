@@ -1,6 +1,7 @@
 local util = require("data-util");
 
 if mods["vtk-deep-core-mining"] then
+  -- fewer diamonds, more graphite in the ore chunk refining recipes
   if util.me.use_rough_diamond() then
     local amt = 0
     if data.raw.recipe["vtk-deepcore-mining-ore-chunk-refining"] then
@@ -15,7 +16,7 @@ if mods["vtk-deep-core-mining"] then
       util.add_to_product("vtk-deepcore-mining-ore-chunk-refining",
                           "vtk-deepcore-mining-rough-diamond-chunk", 0-amt)
       util.add_to_product("vtk-deepcore-mining-ore-chunk-refining",
-                          "vtk-deepcore-mining-flake-graphite-chunk", amt)
+                          "vtk-deepcore-mining-flake-graphite-chunk", amt+6)
     end
     amt = 0
     if data.raw.recipe["vtk-deepcore-mining-ore-chunk-refining-no-uranium"] then
@@ -30,9 +31,17 @@ if mods["vtk-deep-core-mining"] then
       util.add_to_product("vtk-deepcore-mining-ore-chunk-refining-no-uranium",
                           "vtk-deepcore-mining-rough-diamond-chunk", 0-amt)
       util.add_to_product("vtk-deepcore-mining-ore-chunk-refining-no-uranium",
-                          "vtk-deepcore-mining-flake-graphite-chunk", amt)
+                          "vtk-deepcore-mining-flake-graphite-chunk", amt+6)
     end
   end
+
+  -- fewer diamonds, more graphite from focused processing
+  util.set_product_amount("vtk-deepcore-mining-ore-chunk-refining-diamond-focus", "vtk-deepcore-mining-rough-diamond-chunk", 2)
+  util.add_to_product("vtk-deepcore-mining-ore-chunk-refining-graphite-focus", "vtk-deepcore-mining-flake-graphite-chunk", 15)
+
+  -- balance input amount for sorting
+  util.set_vtk_dcm_ingredients()
+  
 
 
   -- deepcore mining was not adding required fluid, add if it doesn't have
