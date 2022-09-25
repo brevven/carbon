@@ -102,6 +102,23 @@ util.add_ingredient("se-low-density-structure-beryllium", "diamond", 1)
 if util.me.reuse() then
   util.add_product("low-density-structure", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
   util.add_product("se-low-density-structure-beryllium", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
+  if data.raw.recipe["low-density-structure"] and 
+    not data.raw.recipe["low-density-structure"].icon and
+    not data.raw.recipe["low-density-structure"].icons
+    then
+    util.set_subgroup("low-density-structure", data.raw.item["low-density-structure"].subgroup)
+    util.set_icons("low-density-structure", {
+      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+    })
+    util.set_subgroup("se-low-density-structure-beryllium", data.raw.item["low-density-structure"].subgroup)
+    util.set_icons("se-low-density-structure-beryllium", {
+      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+    })
+    util.set_subgroup("low-density-structure-RS", data.raw.item["low-density-structure"].subgroup)
+    util.set_icons("low-density-structure-RS", {
+      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+    })
+  end
 end
 
 if mods.Krastorio2 then
