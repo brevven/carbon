@@ -1,0 +1,8 @@
+{
+  "recipe": [
+    ["imersium-gear-wheel-nanotubes", "kr-s-c-imersium-gear-wheel-nanotubes"],
+    ["imersium-beam-nanotubes", "kr-s-c-imersium-beam-nanotubes"],
+    ["aeroframe-scaffold-nanotubes", "se-aeroframe-scaffold-nanotubes"],
+    ["nanomaterial-nanotubes", "se-nanomaterial-nanotubes"]
+  ]
+}

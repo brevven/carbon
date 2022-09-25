@@ -1,58 +1,13 @@
 local util = require("data-util");
-local futil = require("util")
+local cutil = require("carbon-util")
 
 if mods["space-exploration"] then
   -- core mining balancing graphite at full, diamond removed
   util.remove_product("se-core-fragment-omni", "rough-diamond")
 
   if util.me.use_fullerenes() then
-    -- Add an extra nanotube aeroframe scaffold recipe. 
-    -- This could be moved to data-updates in future if necessary
-    data:extend({
-      {
-        type = "recipe",
-        name = "aeroframe-scaffold-nanotubes",
-        icons = {
-          { icon = data.raw.item["se-aeroframe-scaffold"].icon, icon_size = data.raw.item["se-aeroframe-scaffold"].icon_size},
-          { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
-        },
-        category = "crafting",
-        order = data.raw.item["se-aeroframe-scaffold"].order.."z",
-        enabled = false,
-        energy_required = 2,
-        ingredients = {
-          {"nanotubes", 2},
-          table.unpack(futil.table.deepcopy(data.raw.recipe["se-aeroframe-scaffold"].ingredients)),
-        },
-        result = "se-aeroframe-scaffold",
-        result_count = 2,
-      },
-    })
-    util.add_unlock("se-aeroframe-scaffold", "aeroframe-scaffold-nanotubes")
-
-    data:extend({
-      {
-        type = "recipe",
-        name = "nanomaterial-nanotubes",
-        icons = {
-          { icon = data.raw.item["se-nanomaterial"].icon, icon_size = data.raw.item["se-nanomaterial"].icon_size},
-          { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
-        },
-        category = data.raw.recipe["se-nanomaterial"].category,
-        order = data.raw.item["se-nanomaterial"].order.."z",
-        subgroup = data.raw.item["se-nanomaterial"].subgroup,
-        enabled = false,
-        energy_required = data.raw.recipe["se-nanomaterial"].energy_required,
-        ingredients = {
-          {"nanotubes", 2},
-          table.unpack(futil.table.deepcopy(data.raw.recipe["se-nanomaterial"].ingredients)),
-        },
-        results = {
-          table.unpack(futil.table.deepcopy(data.raw.recipe["se-nanomaterial"].results)),
-        }
-      }
-    })
-    util.add_to_product("nanomaterial-nanotubes", "se-nanomaterial", 16)
-    util.add_unlock("se-nanomaterial", "nanomaterial-nanotubes")
+    cutil.nanotube_recipe("se-aeroframe-scaffold", "se-aeroframe-scaffold", "se-aeroframe-scaffold")
+    local nm_name = cutil.nanotube_recipe("se-nanomaterial", "se-nanomaterial", "se-nanomaterial")
+    util.set_ingredient(nm_name, "nanotubes", 2)
   end
 end

@@ -23,6 +23,7 @@ if data.raw.recipe["low-density-structure"] and
   not data.raw.recipe["low-density-structure"].icon and
   not data.raw.recipe["low-density-structure"].icons
   then
+  -- final failsafe check, might no longer be necessary, needs testing with a lot of varied mod loadouts
   util.set_subgroup("low-density-structure", data.raw.item["low-density-structure"].subgroup)
   util.set_icons("low-density-structure", {
     { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},

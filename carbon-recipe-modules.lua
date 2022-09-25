@@ -11,16 +11,18 @@ recipes = {
 
   "fullerenes",
   "nanotubes",
-  "low-density-structure-nanotubes",
-  "imersium-plate-nanotubes",
-  "imersium-beam-nanotubes",
-  "imersium-gear-wheel-nanotubes",
-  "aeroframe-scaffold-nanotubes",
-  "nanomaterial-nanotubes",
 
   "diamond-synthesis-vulcanite",
   -- NOTE: Carbon black recipes do not allow prod modules
 }
+
+-- Add all *-nanotubes recipes that exist
+local ending = "-nanotubes"
+for i, recipe in pairs(data.raw.recipe) do
+  if recipe.name:sub(-#ending) == ending then
+    table.insert(recipes, recipe.name)
+  end
+end
 
 for i, recipe in pairs(recipes) do
   if data.raw.recipe[recipe] then
