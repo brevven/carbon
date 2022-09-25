@@ -6,6 +6,7 @@ require("diamond-particle")
 require("carbon-recipe")
 require("carbon-recipe-k2")  -- must be after carbon-recipe
 require("carbon-recipe-se")
+require("carbon-fiber")
 
 
 local util = require("data-util");

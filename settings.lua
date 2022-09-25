@@ -22,13 +22,6 @@ data:extend({
 	},
   {
 		type = "string-setting",
-		name = "bzcarbon-enable-carbon-fiber",
-		setting_type = "startup",
-		default_value = "no",
-    allowed_values = {"no", "yes"},
-	},
-  {
-		type = "string-setting",
 		name = "bzcarbon-enable-rough-diamond",
 		setting_type = "startup",
     hidden = not not mods["rso-mod"],
@@ -57,3 +50,15 @@ data:extend({
     allowed_values = {"no", "yes"},
 	},
 })
+
+if mods.bzchlorine then
+  data:extend({
+    {
+      type = "string-setting",
+      name = "bzcarbon-enable-carbon-fiber",
+      setting_type = "startup",
+      default_value = "yes",
+      allowed_values = {"no", "yes"},
+    },
+  })
+end
