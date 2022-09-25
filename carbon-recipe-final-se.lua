@@ -1,5 +1,5 @@
-local futil = require("util")
 local util = require("data-util");
+local futil = require("util")
 
 if mods["space-exploration"] then
   -- core mining balancing graphite at full, diamond removed
@@ -28,7 +28,7 @@ if mods["space-exploration"] then
         result_count = 2,
       },
     })
-    util.add_effect("se-aeroframe-scaffold", {type="unlock-recipe", recipe="aeroframe-scaffold-nanotubes"})
+    util.add_unlock("se-aeroframe-scaffold", "aeroframe-scaffold-nanotubes")
 
     data:extend({
       {
@@ -53,7 +53,6 @@ if mods["space-exploration"] then
       }
     })
     util.add_to_product("nanomaterial-nanotubes", "se-nanomaterial", 16)
-    util.add_effect("se-nanomaterial", {type="unlock-recipe", recipe="nanomaterial-nanotubes"})
-
+    util.add_unlock("se-nanomaterial", "nanomaterial-nanotubes")
   end
 end
