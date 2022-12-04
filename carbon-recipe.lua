@@ -437,10 +437,6 @@ data:extend({
         type = "unlock-recipe",
         recipe = "nanotubes",
       },
-      {
-        type = "unlock-recipe",
-        recipe = "low-density-structure-nanotubes",
-      },
     },
     unit =
     {
