@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.1
+Date: 2022-12-04
+  Fixes:
+    - Add missing locale string for new setting
+    - LDS recipe only shows once in nanotube tech now, instead of twice.
+---------------------------------------------------------------------------------------------------
 Version: 0.5.0
 Date: 2022-12-04
   Features:
