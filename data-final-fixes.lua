@@ -38,6 +38,12 @@ if data.raw.recipe["low-density-structure"] and
   })
 end
 
+if util.me.use_fiber() then
+  util.remove_ingredient("low-density-structure", "plastic-bar")
+  util.remove_ingredient("low-density-structure-nanotubes", "plastic-bar")
+  util.remove_ingredient("se-low-density-structure-beryllium", "plastic-bar")
+end
+
 
 -- Only electric smelters can make Diamonds
 function diamondsInElectricSmelter(entity)
