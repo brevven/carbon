@@ -2,6 +2,7 @@
 Version: 0.5.3
 Date: 2022-12-24
   Localization:
+    - Chinese (simplified) thanks to sunnytan53
     - ru updates thanks to Pergamum663
     - ja updates thanks to sakuro
 ---------------------------------------------------------------------------------------------------

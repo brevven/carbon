@@ -23,6 +23,7 @@ See changelog.txt
 - [x2605](https://github.com/x2605) (ko)
 - [NathaU](https://github.com/NathaU) (de)
 - [Pergamum663](https://github.com/Pergamum663) (ru)
+- [sunnytan53](https://github.com/Pergamum663) (zh-CN)
 
 
 ### FAQ and gameplay. 
