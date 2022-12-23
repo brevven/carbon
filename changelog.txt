@@ -1,7 +1,9 @@
+---------------------------------------------------------------------------------------------------
 Version: 0.5.3
 Date: 2022-12-24
   Localization:
-    - ru locale updates thanks to Pergamum663
+    - ru updates thanks to Pergamum663
+    - ja updates thanks to sakuro
 ---------------------------------------------------------------------------------------------------
 Version: 0.5.2
 Date: 2022-12-08
