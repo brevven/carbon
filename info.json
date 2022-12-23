@@ -1,6 +1,6 @@
 {
     "name": "bzcarbon",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "factorio_version": "1.1",
     "title": "Graphite & Diamonds",
     "author": "Brevven",
@@ -15,6 +15,7 @@
       "? aai-industry",
       "? Krastorio2",
       "? 248k",
+      "(?) modmashsplintersubspacelogistics",
       "? deadlock-beltboxes-loaders",
       "? DeadlockCrating"
     ],

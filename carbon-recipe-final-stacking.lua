@@ -15,6 +15,9 @@ if deadlock then
   if util.me.use_carbon_black() then
     deadlock.add_stack("carbon-black",  "__bzcarbon__/graphics/icons/stacked/carbon-black-stacked.png", "deadlock-stacking-2", 64)
   end
+  if util.me.use_rough_diamond() then
+    deadlock.add_stack("rough-diamond", "__bzcarbon__/graphics/icons/stacked/rough-diamond-stacked.png" , "deadlock-stacking-2", 64)
+  end
 end
 
 -- Deadlock crating recipes

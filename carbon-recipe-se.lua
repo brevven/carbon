@@ -13,6 +13,7 @@ end
 se_delivery_cannon_recipes["graphite"] = {name= "graphite"}
 se_delivery_cannon_recipes["diamond"] = {name= "diamond"}
 if util.me.use_flake_graphite() then
+  util.se_landfill({ore="flake-graphite"})
   se_delivery_cannon_recipes["flake-graphite"] = {name= "flake-graphite"}
   if mods["space-exploration"] > "0.6" then
     util.se_matter({ore="flake-graphite", energy_required=1, quant_out=10, stream_out=60})

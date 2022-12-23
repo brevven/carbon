@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.2
+Date: 2022-12-08
+  Changes:
+    - Enable rough diamond stacking, stacked mining.
+    - SE: Landfill from graphite
+    - Compatibility fix for ModMash Splinter Subspace Logistics
+---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 2022-12-05
   Fixes:
