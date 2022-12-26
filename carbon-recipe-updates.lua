@@ -223,15 +223,17 @@ util.add_ingredient_raw("se-ballistic-shielding-data", {type="item", name="graph
 util.add_product("se-ballistic-shielding-data", {type="item", name="graphene", amount_min=9, amount_max=10, catalyst_amount=10})
 
 util.add_ingredient("se-space-radiator-2", "diamond", 16)
+
+-- Add diamonds to some SE Data, and boost output
 util.add_ingredient("se-rigidity-data", "diamond", 1)
 util.add_to_product("se-rigidity-data", "se-rigidity-data", 1)
+util.add_to_ingredient("se-rigidity-data", "se-empty-data", 1)
 util.add_ingredient("se-hot-thermodynamics-data", "diamond", 1)
 util.add_to_product("se-hot-thermodynamics-data", "se-hot-thermodynamics-data", 1)
+util.add_to_ingredient("se-hot-thermodynamics-data", "se-empty-data", 1)
 util.add_ingredient("se-compressive-strength-data", "diamond", 1)
 util.add_to_product("se-compressive-strength-data", "se-compressive-strength-data", 1)
-
-
-
+util.add_to_ingredient("se-compressive-strength-data", "se-empty-data", 1)
 
 
 -- Realistic Reactors
