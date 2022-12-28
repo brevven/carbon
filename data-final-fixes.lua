@@ -14,9 +14,17 @@ if mods.MDbobelectronics or mods.bobelectronics then
   util.replace_ingredient("basic-electronic-components", "coal", "graphite")
   util.replace_ingredient("basic-electronic-components", "coke", "graphite")
 else
-  util.replace_some_ingredient("electronic-circuit", "copper-cable", 1, "graphite", 1)
+  amt_ec = util.get_amount("electronic-circuit")
+  if amt_ec == 1 then
+    util.multiply_recipe("electronic-circuit", 2)
+  end
+  util.replace_some_ingredient("electronic-circuit", "copper-cable", 2, "graphite", 1)
   -- AAI alternate green circuit
-  util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 1, "graphite", 1)
+  local amt_ec = util.get_amount("electronic-circuit-stone", "electronic-circuit")
+  if amt_ec == 1 then
+    util.multiply_recipe("electronic-circuit-stone", 2)
+  end
+  util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 2, "graphite", 1)
 end
 
 if data.raw.recipe["low-density-structure"] and 
