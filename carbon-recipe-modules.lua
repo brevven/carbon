@@ -1,20 +1,7 @@
 -- Enable prod modules for all recipes
 local util = require("data-util");
 
-recipes = {
-  "graphite",
-  "synthetic-diamond",
-
-  "graphene",
-  "heavy-water-graphene",
-  "enriched-graphite",
-
-  "fullerenes",
-  "nanotubes",
-
-  "diamond-synthesis-vulcanite",
-  -- NOTE: Carbon black recipes do not allow prod modules
-}
+local recipes = util.me.recipes
 
 -- Add all *-nanotubes recipes that exist
 local ending = "-nanotubes"

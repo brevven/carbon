@@ -21,5 +21,6 @@ if mods.Asteroid_Mining then
   end
 end
 
+require("compatibility/crafting-efficiency")
 -- Must be last
 util.create_list()

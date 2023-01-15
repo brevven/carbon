@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.6
+Date: 2022-12-28
+  Features:
+    - Support for Crafting Efficieny mod (note: technology icon cropping issues)
+  Changes:
+    - Carbon fiber, polyacrylonitrile, and rough diamond processing can benefit from productivity
+---------------------------------------------------------------------------------------------------
 Version: 0.5.5
 Date: 2022-12-28
   Changes:

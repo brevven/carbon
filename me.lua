@@ -3,6 +3,25 @@ local me = {}
 me.name = "bzcarbon"
 me.list = {}
 
+me.recipes = {  -- recipes that allow productivity
+  "graphite",
+  "synthetic-diamond",
+  "diamond-processing",
+
+  "graphene",
+  "heavy-water-graphene",
+  "enriched-graphite",
+
+  "fullerenes",
+  "nanotubes",
+
+  "carbon-fiber",
+  "polyacrylonitrile",
+
+  "diamond-synthesis-vulcanite",
+  -- NOTE: Carbon black recipes do not allow prod modules
+}
+
 function me.use_fiber()
   return me.get_setting("bzcarbon-enable-carbon-fiber") == "yes"
 end
