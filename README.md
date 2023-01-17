@@ -24,6 +24,7 @@ See changelog.txt
 - [NathaU](https://github.com/NathaU) (de)
 - [Pergamum663](https://github.com/Pergamum663) (ru)
 - [sunnytan53](https://github.com/Pergamum663) (zh-CN)
+- [CV514](https://github.com/CV514) (ru)
 
 
 ### FAQ and gameplay. 
