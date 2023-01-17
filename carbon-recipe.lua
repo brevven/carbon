@@ -407,6 +407,7 @@ data:extend({
   {
     type = "recipe",
     name = "nanotubes",
+    main_product = "nanotubes",
     icon = "__bzcarbon__/graphics/icons/nanotube.png",
     icon_size = 128,
     category = "chemistry",
