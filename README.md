@@ -16,6 +16,9 @@ See changelog.txt
 - [YassineMrabet](https://commons.wikimedia.org/wiki/File:Fullerene.png) (initial fullerene image, CC BY-SA 3.0 license, see link)
 - [dodo.the.last](https://mods.factorio.com/mod/big-data-string) (borrowed code for list feature)
 
+### Compatibility
+- [nihilistzsche](https://github.com/nihilistzsche)
+
 ### Localization
 
 - [S3BA](https://github.com/S3BA-pl) (pl)
