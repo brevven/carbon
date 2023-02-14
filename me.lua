@@ -19,6 +19,7 @@ me.recipes = {  -- recipes that allow productivity
   "polyacrylonitrile",
 
   "diamond-synthesis-vulcanite",
+  "carbon-black",
   -- NOTE: Carbon black recipes do not allow prod modules
 }
 
