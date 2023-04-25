@@ -17,12 +17,14 @@ else
   amt_ec = util.get_amount("electronic-circuit")
   if amt_ec == 1 then
     util.multiply_recipe("electronic-circuit", 2)
+    util.set_recipe_time("electronic-circuit-stone", 0.5) -- faster but more complex
   end
   util.replace_some_ingredient("electronic-circuit", "copper-cable", 2, "graphite", 1)
   -- AAI alternate green circuit
   local amt_ec = util.get_amount("electronic-circuit-stone", "electronic-circuit")
   if amt_ec == 1 then
     util.multiply_recipe("electronic-circuit-stone", 2)
+    util.set_recipe_time("electronic-circuit-stone", 0.5) -- faster but more complex
   end
   util.replace_some_ingredient("electronic-circuit-stone", "copper-cable", 2, "graphite", 1)
 end
