@@ -13,7 +13,7 @@ local util = require("data-util");
 if mods.MDbobelectronics or mods.bobelectronics then
   util.replace_ingredient("basic-electronic-components", "coal", "graphite")
   util.replace_ingredient("basic-electronic-components", "coke", "graphite")
-else
+elseif not mods.pyhightech then
   amt_ec = util.get_amount("electronic-circuit")
   if amt_ec == 1 then
     util.multiply_recipe("electronic-circuit", 2)
@@ -92,7 +92,7 @@ end
 util.remove_ingredient("electric-furnace", "cuw") -- support new tungsten
 
 -- Vanilla burner phase tweaks -- green circuits after electronics
-if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
+if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum and not mods.pyhightech then
   util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
   util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
   util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable")

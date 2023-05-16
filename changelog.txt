@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.6.0
+Date: 2023-04-25
+  Features:
+    - (Beta) Basic compatibility with Pyanodons: Requires High Tech and Raw Ores at least
+      Graphite ore patches yield flake graphite and must be processed into graphite
+      Adds crucible ingredient to some recipes.
+      If py fusion energy mod used, if enabled, diamond ore patches yield kimberlite rocks which
+      then use Py production chain.
+      This mod's nanotubes, fullerenes, carbon blac, and carbon fiber are not enabled,
+      as py chains already exist.
+---------------------------------------------------------------------------------------------------
 Version: 0.5.7
 Date: 2023-02-12
   Changes:

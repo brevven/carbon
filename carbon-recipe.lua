@@ -1,11 +1,18 @@
 local util = require("data-util");
 
 local graphite_category = "advanced-crafting"
+local pyhelp = ""
 if mods["space-exploration"] then
   graphite_category = "pulverising"
 end
 if mods.Krastorio2 then
   graphite_category = "crushing"
+end
+
+local pyfix0 = "-grade-0"
+if mods.pyhightech then
+  graphite_category = "crusher"
+  pyhelp = "-crushing"
 end
 
 data:extend({
@@ -15,7 +22,7 @@ data:extend({
 data:extend({
   {
     type = "item",
-    name = "graphite",
+    name = "graphite"..pyfix0,
     icon = "__bzcarbon__/graphics/icons/graphite.png",
     icon_size = 128,
     pictures = {
@@ -29,7 +36,7 @@ data:extend({
   },
   {
     type = "recipe",
-    name = "graphite",
+    name = "graphite"..pyhelp,
     category = graphite_category,
     order = "d[graphite]",
     icons = (mods["Krastorio2"] and
@@ -47,7 +54,7 @@ data:extend({
         {
           enabled = false,
           energy_required = 0.5,
-          ingredients = {{"flake-graphite", 1}},
+          ingredients = mods.pyhightech and {{"flake-graphite", 8}} or {{"flake-graphite", 1}},
           result = "graphite"
         }),
     expensive =
@@ -164,6 +171,7 @@ data:extend({
 end
 
 -- diamonds
+if not mods.pyfusionenergy then
 data:extend({
   {
     type = "item",
@@ -276,6 +284,7 @@ data:extend({
     order = "b-b"
   },
 })
+end
 data:extend({
 -- graphene
   {
@@ -519,7 +528,7 @@ end
 data:extend({
 {
   type = "item",
-  name = "crucible",
+  name = util.me.crucible,
   icon = "__bzcarbon__/graphics/icons/crucible.png", icon_size = 128,
   subgroup = "intermediate-product",
   order = "g[crucible]",
@@ -527,7 +536,7 @@ data:extend({
 },
 {
   type = "recipe",
-  name = "crucible",
+  name = util.me.crucible,
   category = "crafting",
   order = "d[graphite]",
   enabled = false,
@@ -535,7 +544,7 @@ data:extend({
   ingredients = {
     {type="item", name="graphite", amount=5},
   },
-  result = "crucible",
+  result = util.me.crucible,
   result_count = 1,
 },
 })
@@ -557,3 +566,4 @@ if mods["space-exploration"] and string.sub(mods["space-exploration"], 1, 3) == 
   util.set_item_subgroup("fullerenes", "carbon")
   util.set_item_subgroup("nanotubes", "carbon")
 end
+

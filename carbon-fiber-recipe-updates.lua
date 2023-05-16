@@ -1,6 +1,6 @@
 local util = require("data-util");
 
-if util.me.use_fiber() then
+if util.me.use_fiber() and not mods.pyhightech then
   util.replace_ingredient("low-density-structure", "plastic-bar", "carbon-fiber")
   util.replace_ingredient("se-low-density-structure-beryllium", "plastic-bar", "carbon-fiber")
   util.replace_ingredient("combat-shotgun", "wood", "carbon-fiber")

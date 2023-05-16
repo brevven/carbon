@@ -28,7 +28,7 @@ data:extend({
     {
       mining_particle = "diamond-particle",
       mining_time = 15,
-      result = "rough-diamond"
+      result = mods.pyfusionenergy and "kimberlite-rock" or "rough-diamond"
     },
     collision_box = {{ -0.1, -0.1}, {0.1, 0.1}},
     selection_box = {{ -0.5, -0.5}, {0.5, 0.5}},

@@ -1,6 +1,6 @@
+require("map-gen-preset-updates")
 require("carbon-recipe-updates")
 require("carbon-fiber-recipe-updates")
-require("map-gen-preset-updates")
 require("carbon-matter")
 require("strange-matter")
 require("compatibility/248k")
@@ -10,6 +10,10 @@ require("carbon-recipe-modules") -- Should be last import, need in both updates 
 -- require("omni")
 
 local util = require("data-util");
+
+if mods.pyhightech then
+  util.set_product_amount("graphite", "graphite", 1)
+end
 
 if mods.Asteroid_Mining then
   require("__Asteroid_Mining__.scripts.addmodule")

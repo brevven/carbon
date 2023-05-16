@@ -22,13 +22,19 @@ me.recipes = {  -- recipes that allow productivity
   -- NOTE: Carbon black recipes do not allow prod modules
 }
 
+function me.py()
+  return mods and (mods.pyhightech or mods.pyrawores or mods.pyfusionenergy)
+end
+
+
 function me.use_fiber()
-  return me.get_setting("bzcarbon-enable-carbon-fiber") == "yes"
+  if me.get_setting("bz-all-intermediates") then return true end
+  return me.get_setting("bzcarbon-enable-carbon-fiber") == "yes" and not me.py()
 end
 
 function me.use_fullerenes()
   if me.get_setting("bz-all-intermediates") then return true end
-  return me.get_setting("bzcarbon-enable-fullerenes") == "yes"
+  return me.get_setting("bzcarbon-enable-fullerenes") == "yes" and not me.py()
 end
 
 function me.reuse()
@@ -38,7 +44,7 @@ end
 
 function me.use_carbon_black()
   if me.get_setting("bz-all-intermediates") then return true end
-  return me.get_setting("bzcarbon-enable-carbon-black") == "yes"
+  return me.get_setting("bzcarbon-enable-carbon-black") == "yes" and not me.py()
 end
 
 function me.use_rough_diamond()
@@ -73,7 +79,13 @@ function me.add_modified(name)
   end
 end
 
+me.crucible = "crucible"
 me.crucible_ingredients = {"tungsten-plate", "zirconia", "silica"}
+if me.py() then
+  me.crucible = "industrial-crucible" 
+  me.crucible_ingredients = {"tungsten-plate", "zirconia", "silica", "ceramic"}
+end
+
 if (mods and mods.bzaluminum) or (game and game.active_mods and game.active_mods.bzaluminum) then
   table.insert(me.crucible_ingredients, "alumina")
 else
@@ -100,6 +112,14 @@ me.furnaces =  {
   "5d-electric-furnace-09",
   "5d-electric-furnace-10",
   "5d-industrial-furnace",
+
+  -- py
+  "advanced-foundry-mk02",
+  "smelter-mk02",
+  "hpf-mk02", -- high pressure furnace
+  "eaf-mk01", -- electric arc furnace
+  "bof-mk01", -- basic oxygen furnace
+  "sinter-unit",
 }
 
 

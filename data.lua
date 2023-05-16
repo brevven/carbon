@@ -7,6 +7,7 @@ require("carbon-recipe")
 require("carbon-recipe-k2")  -- must be after carbon-recipe
 require("carbon-recipe-se")
 require("carbon-fiber")
+require("compatibility/pyrecipe")
 
 
 local util = require("data-util");

@@ -1,36 +1,40 @@
 local util = require("data-util");
 
 -- TECHS
-util.add_prerequisite("steel-processing", "graphite-processing")
+if mods.pyhightech then
+else
+  util.add_prerequisite("steel-processing", "graphite-processing")
 
-util.add_prerequisite("low-density-structure", "diamond-processing")
-util.add_prerequisite("advanced-electronics-2", "diamond-processing")
-util.add_prerequisite("laser", "diamond-processing")
+  util.add_prerequisite("low-density-structure", "diamond-processing")
+  util.add_prerequisite("advanced-electronics-2", "diamond-processing")
+  util.add_prerequisite("laser", "diamond-processing")
 
-util.add_prerequisite("power-armor-mk2", "graphene")
-util.add_prerequisite("rocket-control-unit", "graphene")
+  util.add_prerequisite("power-armor-mk2", "graphene")
+  util.add_prerequisite("rocket-control-unit", "graphene")
 
-util.add_prerequisite("electronics", "graphite-processing")
+  util.add_prerequisite("electronics", "graphite-processing")
 
-if mods.Krastorio2 then
-  util.add_prerequisite("graphite-processing", "automation-science-pack")
-  util.add_prerequisite("graphite-processing", "basic-fluid-handling")
+  if mods.Krastorio2 then
+    util.add_prerequisite("graphite-processing", "automation-science-pack")
+    util.add_prerequisite("graphite-processing", "basic-fluid-handling")
+  end
 end
 
 -- furnace recipe rework w/ crucible, more in data-final-fixes
-util.add_effect("advanced-material-processing-2", {type="unlock-recipe", recipe="crucible"})
+local crucible_tech = mods.pyhightech and "machines-mk01" or "advanced-material-processing-2"
+util.add_unlock(crucible_tech, util.me.crucible)
 for i, ingredient in pairs(util.me.crucible_ingredients) do
-  util.add_ingredient("crucible", ingredient, 5)
+  util.add_ingredient( util.me.crucible, ingredient, 5)
 end
 for i, furnace in pairs(util.me.furnaces) do
-  util.add_ingredient(furnace, "crucible", 1)
+  util.add_ingredient(furnace, util.me.crucible, 1)
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
     util.remove_ingredient(furnace, ingredient)
   end
 end
 
 -- fullerenes & nanotubes
-if util.me.use_fullerenes() then
+if util.me.use_fullerenes() and not mods.pyhightech then
   util.add_prerequisite("graphene", "fullerenes")
   util.add_prerequisite("military-3", "fullerenes")
   util.replace_some_ingredient("poison-capsule", "coal", 9, "fullerenes", 90)
@@ -52,7 +56,7 @@ end
 
 
 -- carbon black
-if util.me.use_carbon_black() then
+if util.me.use_carbon_black() and not mods.pyhightech then
 
   -- Plastic from carbon black, carbon black from oil processing
   util.replace_ingredient("plastic-bar", "coal", "carbon-black")
@@ -77,10 +81,6 @@ util.add_ingredient("rocket-engine-nozzle", "graphite", 1)
 util.add_to_product("rocket-engine-nozzle", "rocket-engine-nozzle", 1)
 util.add_time("rocket-engine-nozzle", 5)
 
-util.add_ingredient("battery", "graphite", 1)
-util.add_ingredient("pump", "graphite", 2)
-
-
 if data.raw.recipe["speed-module-5"] then
   util.add_ingredient("speed-module-5", "diamond", 5)
   util.add_ingredient("effectivity-module-5", "diamond", 5)
@@ -89,35 +89,43 @@ elseif data.raw.recipe["speed-module-4"] then
   util.add_ingredient("speed-module-4", "diamond", 6)
   util.add_ingredient("effectivity-module-4", "diamond", 6)
   util.add_ingredient("productivity-module-4", "diamond", 6)
-else
+elseif not mods.pyhightech then
   util.add_ingredient("speed-module-2", "diamond", 1)
   util.add_ingredient("effectivity-module-2", "diamond", 1)
   util.add_ingredient("productivity-module-2", "diamond", 1)
 end
-util.add_ingredient("laser-turret", "diamond", 1)
-util.add_ingredient("assembling-machine-3", "diamond", 4)
 
-util.add_ingredient("low-density-structure", "diamond", 1)
-util.add_ingredient("se-low-density-structure-beryllium", "diamond", 1)
-if util.me.reuse() then
-  util.add_product("low-density-structure", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
-  util.add_product("se-low-density-structure-beryllium", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
-  if data.raw.recipe["low-density-structure"] and 
-    not data.raw.recipe["low-density-structure"].icon and
-    not data.raw.recipe["low-density-structure"].icons
-    then
-    util.set_subgroup("low-density-structure", data.raw.item["low-density-structure"].subgroup)
-    util.set_icons("low-density-structure", {
-      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
-    })
-    util.set_subgroup("se-low-density-structure-beryllium", data.raw.item["low-density-structure"].subgroup)
-    util.set_icons("se-low-density-structure-beryllium", {
-      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
-    })
-    util.set_subgroup("low-density-structure-RS", data.raw.item["low-density-structure"].subgroup)
-    util.set_icons("low-density-structure-RS", {
-      { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
-    })
+if not mods.pyhightech then
+
+  util.add_ingredient("battery", "graphite", 1)
+  util.add_ingredient("pump", "graphite", 2)
+
+
+  util.add_ingredient("laser-turret", "diamond", 1)
+  util.add_ingredient("assembling-machine-3", "diamond", 4)
+  util.add_ingredient("low-density-structure", "diamond", 1)
+  util.add_ingredient("se-low-density-structure-beryllium", "diamond", 1)
+
+  if util.me.reuse() then
+    util.add_product("low-density-structure", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
+    util.add_product("se-low-density-structure-beryllium", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
+    if data.raw.recipe["low-density-structure"] and 
+      not data.raw.recipe["low-density-structure"].icon and
+      not data.raw.recipe["low-density-structure"].icons
+      then
+      util.set_subgroup("low-density-structure", data.raw.item["low-density-structure"].subgroup)
+      util.set_icons("low-density-structure", {
+        { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+      })
+      util.set_subgroup("se-low-density-structure-beryllium", data.raw.item["low-density-structure"].subgroup)
+      util.set_icons("se-low-density-structure-beryllium", {
+        { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+      })
+      util.set_subgroup("low-density-structure-RS", data.raw.item["low-density-structure"].subgroup)
+      util.set_icons("low-density-structure-RS", {
+        { icon = "__base__/graphics/icons/low-density-structure.png", icon_size = 64, icon_mipmaps = 4},
+      })
+    end
   end
 end
 
@@ -131,10 +139,12 @@ elseif mods.bzfoundry and util.me.foundry_enable() then
   util.replace_some_ingredient("tungsten-carbide", "tungsten-plate", 1, "graphite", 1)
 end
 
-if not mods.Krastorio2 then
-  util.multiply_recipe("lubricant", 2)
+if not mods.pyhightech then
+  if not mods.Krastorio2 then
+    util.multiply_recipe("lubricant", 2)
+  end
+  util.replace_some_ingredient("lubricant", "heavy-oil", 10, "graphite", 1)
 end
-util.replace_some_ingredient("lubricant", "heavy-oil", 10, "graphite", 1)
 
 -- SE Lubricant
 util.multiply_recipe("se-cryonite-lubricant", 2)
@@ -310,3 +320,9 @@ util.add_ingredient("offshore-pump-mk2", "graphite", 2)
 util.add_ingredient("pumpjack-mk2", "graphite", 2)
 util.add_ingredient("fusion-reactor-mk2-equipment", "graphene", 2)
 
+
+------
+-- PY
+-----
+util.add_ingredient("eaf-mk01", "graphite-grade-0", 10)
+util.add_ingredient("electrolyzer-mk02", "graphite-grade-0", 10)
