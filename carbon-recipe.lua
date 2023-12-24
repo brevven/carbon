@@ -8,9 +8,9 @@ end
 if mods.Krastorio2 then
   graphite_category = "crushing"
 end
-
-local pyfix0 = "-grade-0"
+local pyfix0 = ""
 if mods.pyhightech then
+  pyfix0 = "-grade-0"
   graphite_category = "crusher"
   pyhelp = "-crushing"
 end
