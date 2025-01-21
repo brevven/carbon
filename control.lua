@@ -15,5 +15,4 @@ function on_console_chat(event)
 end
 script.on_event(defines.events.on_console_chat, on_console_chat)
 
-
-
+util.warptorio2_expansion_helper()
