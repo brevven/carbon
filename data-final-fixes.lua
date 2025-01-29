@@ -2,11 +2,27 @@ require("carbon-recipe-final-stacking")
 require("carbon-recipe-final-k2")
 require("carbon-recipe-final-se")
 require("carbon-recipe-final-rrr")
-require("low-density-structure-nanotubes")
+require("nanotubes-final")
 require("compatibility/vtkdeepcoremining")
-require("carbon-recipe-modules") -- Should be last import, need in both updates and final-fixes
 
+local futil = require("util")
 local util = require("data-util");
+
+-- supercapacitors with graphene cloned from supercapacitors with activated carbon
+if data.raw.recipe["supercapacitor"] then
+  local new_recipe = futil.table.deepcopy(data.raw.recipe["supercapacitor"])
+  new_recipe.name = new_recipe.name.."-graphene"
+  new_recipe.localised_name = {"item-name.supercapacitor"}
+  new_recipe.icons = {
+      { icon = data.raw.item["supercapacitor"].icon, icon_size = data.raw.item["supercapacitor"].icon_size},
+      { icon = "__bzcarbon__/graphics/icons/graphene.png", icon_size = 128, scale=0.125, shift= {-8, -8}, tint={1,1,1}},
+    }
+  new_recipe.icon = nil
+  new_recipe.icon_size = nil
+  data:extend({new_recipe})
+  util.replace_ingredient(new_recipe.name, "activated-carbon", "graphene", 1)
+  util.add_unlock("electromagnetic-plant", new_recipe.name)
+end
 
 
 -- Green circuits in final fixes due to K2 shenanigans 
@@ -93,33 +109,28 @@ util.remove_ingredient("electric-furnace", "cuw") -- support new tungsten
 
 -- Vanilla burner phase tweaks -- green circuits after electronics
 if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
-  util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
-  util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
-  util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable")
-  util.replace_ingredient("assembling-machine-1", "electronic-circuit", "copper-plate")
-  util.replace_ingredient("radar", "electronic-circuit", "copper-plate")
-  util.replace_ingredient("splitter", "electronic-circuit", "copper-cable", 20)
+  util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable", 6)
+
+  -- Most of this can go post 2.0
+  -- util.replace_ingredient("offshore-pump", "electronic-circuit", "copper-cable")
+  -- util.replace_ingredient("lab", "electronic-circuit", "copper-cable")
+  -- util.replace_ingredient("assembling-machine-1", "electronic-circuit", "copper-plate")
+  -- util.replace_ingredient("radar", "electronic-circuit", "copper-plate")
+  -- util.replace_ingredient("splitter", "electronic-circuit", "copper-cable", 20)
 
   -- Keep repair pack raw ingredients the same:
-  util.remove_ingredient("repair-pack", "electronic-circuit")
-  util.add_ingredient("repair-pack", "copper-cable", 6)
-  util.set_ingredient("repair-pack", "iron-gear-wheel", 3)
+  -- util.remove_ingredient("repair-pack", "electronic-circuit")
+  -- util.add_ingredient("repair-pack", "copper-cable", 6)
+  -- util.set_ingredient("repair-pack", "iron-gear-wheel", 3)
 
-  util.add_effect("electronics", { type = "unlock-recipe", recipe = "electronic-circuit" })
-  util.add_effect("electronics", { type = "unlock-recipe", recipe = "inserter" })
-  util.add_effect("electronics", { type = "unlock-recipe", recipe = "long-handed-inserter" })
-  util.remove_recipe_effect("automation", "long-handed-inserter")
-  util.set_enabled("electronic-circuit", false)
-  util.set_enabled("inserter", false)
-  util.add_prerequisite("logistic-science-pack", "electronics")
+  -- util.add_effect("electronics", { type = "unlock-recipe", recipe = "electronic-circuit" })
+  -- util.add_effect("electronics", { type = "unlock-recipe", recipe = "inserter" })
+  -- util.add_effect("electronics", { type = "unlock-recipe", recipe = "long-handed-inserter" })
+  -- util.remove_recipe_effect("automation", "long-handed-inserter")
+  -- util.set_enabled("electronic-circuit", false)
+  -- util.set_enabled("inserter", false)
+  -- util.add_prerequisite("logistic-science-pack", "electronics")
 end
-
-if not mods["aai-industry"] then
-  if not mods.Krastorio2 then
-    util.set_enabled("electric-mining-drill", true)
-  end
-end
-
 
 if mods["aai-industry"] then
   -- AAI Industry now unlocks steam much later. Move it to an earlier sensible location in the tech tree.
@@ -137,7 +148,6 @@ if mods.modmashsplintersubspacelogistics then
   for i, item in pairs({"graphite", "diamond"}) do
     if data.raw.item["super-container-for-"..item] then
       for i, icon in pairs(data.raw.item["super-container-for-"..item].icons) do
-        log(serpent.dump(icon))
         if string.find(icon.icon, item) then
           icon.size = 128
           icon.scale = icon.scale / 2
@@ -164,7 +174,6 @@ if mods.modmashsplintersubspacelogistics then
       end
     end
     for i, technology in pairs(data.raw.technology) do
-      log(technology.name)
       if string.find(technology.name, "containment") then
         if technology.icons then
           for j, icon in pairs(technology.icons) do
@@ -179,6 +188,9 @@ if mods.modmashsplintersubspacelogistics then
     end
   end
 end
+util.redo_recycling()
+util.size_recycler_output()
+util.use_fluid_mining_final()
 
 -- Must be last
 util.create_list()

@@ -2,6 +2,7 @@
 -- This file will be overwritten in mod zipfiles, edit bzlib/data-util.lua
 -- WARNING WARNING WARNING
 
+local futil = require("util")
 local me = require("me")
 local util = {}
 
@@ -10,6 +11,10 @@ util.get_setting = util.me.get_setting
 
 util.titanium_plate = ""
 util.titanium_processing = ""
+
+util.A = {{"automation-science-pack", 1}}
+util.AL = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}
+util.ALC = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}, {"chemical-science-pack", 1}}
 
 if mods["FactorioExtended-Plus-Core"] then
   util.titanium_plate = "titanium-alloy"
@@ -21,6 +26,28 @@ if mods["pyrawores"] then
   util.titanium_processing = "titanium-mk01"
 else
   util.titanium_processing = "titanium-processing"
+end
+
+util.vacuum_icon = { icon="__base__/graphics/icons/fluid/steam.png", tint={r=.1, g=.1, b=.5, a=.5} }
+util.vacuum_icon_small = { icon="__base__/graphics/icons/fluid/steam.png", tint={r=.1, g=.1, b=.5, a=.5}, scale=0.25, shift={-8,-8}, }
+util.vacuum_vis = {r=.1, g=.1, b=.5}
+
+function util.item(item, quantity, probability)
+  if not quantity then
+    quantity = 1
+  end
+  if probability then
+    return {type="item", name=item, amount=quantity, probability=probability}
+  else
+    return {type="item", name=item, amount=quantity}
+  end
+end
+
+function util.fluid(fluid, quantity)
+  if not quantity then
+    quantity = 10
+  end
+  return {type="fluid", name=fluid, amount=quantity}
 end
 
 function util.se6()
@@ -89,6 +116,301 @@ function util.contains(table, sought)
     end
   end
   return false
+end
+
+-- copies a recipe, giving the copy a new name
+function util.copy_recipe(recipe_name, new_recipe_name)
+  if data.raw.recipe[recipe_name] then
+    new_recipe = futil.table.deepcopy(data.raw.recipe[recipe_name])
+    new_recipe.name = new_recipe_name
+    data:extend({new_recipe})
+  end
+end
+
+-- Add the gleba rock. If it exists, still add resource to mine from it
+function util.add_gleba_rock(resource, amount_min, amount_max)
+  if (not data.raw.planet.gleba or
+      not data.raw.planet.gleba.map_gen_settings or -- attempted compatibility fixes
+      not data.raw.planet.gleba.map_gen_settings.autoplace_settings or
+      not data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity or
+      not data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings
+  ) then return end
+  if not data.raw["simple-entity"]["gleba-rock"] then
+    local autoplace_utils = require("autoplace_utils")
+    local hit_effects = require ("__base__.prototypes.entity.hit-effects")
+    local sounds = require ("__base__.prototypes.entity.sounds")
+    local decorative_trigger_effects = require("__base__.prototypes.decorative.decorative-trigger-effects")
+    data.raw.planet.gleba.map_gen_settings.autoplace_settings.entity.settings["gleba-rock"] = {}
+    data:extend({
+    {
+      type = "simple-entity",
+      name = "gleba-rock",
+      localised_name = {"entity-name.big-rock"},
+      flags = {"placeable-neutral", "placeable-off-grid"},
+      icon = "__base__/graphics/icons/big-sand-rock.png",
+      subgroup = "grass",
+      order = "b[decorative]-l[rock]-a[big]",
+      deconstruction_alternative = "big-rock",
+      collision_box = {{-0.75, -0.75}, {0.75, 0.75}},
+      selection_box = {{-1.0, -1.0}, {1.0, 0.75}},
+      damaged_trigger_effect = hit_effects.rock(),
+      render_layer = "object",
+      max_health = 500,
+      autoplace = {
+        control = "gleba_plants",
+        order = "z[gleba]-a[rock]-b[big]",
+        probability_expression = "max(main_probability, invasion_tall_probability)",
+        richness_expression = "random_penalty_at(3, 1)",
+        tile_restriction = {
+          "highland-yellow-rock", 
+          "highland-dark-rock", 
+          "highland-dark-rock-2", 
+        },
+        local_expressions = {
+          main_box = "gleba_select(gleba_moisture, 0, 0.25, 0.01, -10, 1) - 1",
+          main_probability = "min(0.08, 0.15 * (main_box + gleba_plants_noise_b - 0.45) * control:gleba_plants:size)", -- bigger patches, denser
+          invasion_tall_box = "gleba_select(gleba_moisture, 0, 0.35, 0.01, -10, 1) - 1",
+          invasion_tall_probability = "min(0.05, 0.15 * (invasion_tall_box + gleba_plants_noise_b - 0.4) * control:gleba_plants:size)", -- smaller patches, sparser
+        }
+      },
+
+      dying_trigger_effect = decorative_trigger_effects.big_rock(),
+      minable =
+      {
+        mining_particle = "stone-particle",
+        mining_time = 2,
+        results = {
+          {type = "item", name = "stone", amount_min = 5, amount_max = 10},
+        }
+      },
+      resistances =
+      {
+        {
+          type = "fire",
+          percent = 100
+        }
+      },
+      map_color = {129, 105, 78},
+      count_as_rock_for_filtered_deconstruction = true,
+      mined_sound = sounds.deconstruct_bricks(1.0),
+      impact_category = "stone",
+      pictures =
+      {
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-01.png",
+          width = 209,
+          height = 138,
+          shift = {0.304688, -0.4},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-02.png",
+          width = 165,
+          height = 129,
+          shift = {0.0, 0.0390625},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-03.png",
+          width = 151,
+          height = 139,
+          shift = {0.151562, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-04.png",
+          width = 216,
+          height = 110,
+          shift = {0.390625, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-05.png",
+          width = 154,
+          height = 147,
+          shift = {0.328125, 0.0703125},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-06.png",
+          width = 154,
+          height = 132,
+          shift = {0.16875, -0.1},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-07.png",
+          width = 193,
+          height = 130,
+          shift = {0.3, -0.2},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-08.png",
+          width = 136,
+          height = 117,
+          shift = {0.0, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-09.png",
+          width = 157,
+          height = 115,
+          shift = {0.1, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-10.png",
+          width = 198,
+          height = 153,
+          shift = {0.325, -0.1},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-11.png",
+          width = 190,
+          height = 115,
+          shift = {0.453125, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-12.png",
+          width = 229,
+          height = 126,
+          shift = {0.539062, -0.015625},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-13.png",
+          width = 151,
+          height = 125,
+          shift = {0.0703125, 0.179688},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-14.png",
+          width = 137,
+          height = 117,
+          shift = {0.160938, 0.0},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-15.png",
+          width = 201,
+          height = 141,
+          shift = {0.242188, -0.195312},
+          scale = 0.5
+        },
+        {
+          filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-16.png",
+          width = 209,
+          height = 154,
+          shift = {0.351562, -0.1},
+          scale = 0.5
+        }
+      }
+    },
+    })
+    local probability = data.raw["simple-entity"]["gleba-rock"].autoplace.probability_expression  
+    -- A lot more common near starting point when aps gleba
+    local factor = (mods["any-planet-start"] and me.get_setting("aps-planet") == "gleba" and 20) or 1
+    data.raw["simple-entity"]["gleba-rock"].autoplace.probability_expression = probability..[[*
+    if(distance_from_nearest_point{x = x, y = y, points = starting_positions} < 200, ]]..factor..[[,
+       if(distance_from_nearest_point{x = x, y = y, points = starting_positions} < 700,
+          100/(distance_from_nearest_point{x = x, y = y, points = starting_positions} - 100), 0.17))
+    ]]
+
+  end
+  if data.raw.item[resource] then
+    amount_min = (amount_min or 10) * ((mods["any-planet-start"] and me.get_setting("aps-planet") == "gleba" and 4) or 1)
+    amount_max = (amount_max or 20) * ((mods["any-planet-start"] and me.get_setting("aps-planet") == "gleba" and 4) or 1)
+    util.add_minable_result(
+        "simple-entity", "gleba-rock",
+        {type="item", name=resource, amount_min=amount_min, amount_max=amount_max})
+  end
+end
+
+-- Replace 'uranium-mining' tech with 'fluid-mining', defaulting to same costs
+function util.add_fluid_mining()
+  if data.raw.technology["fluid-mining"] then return end
+  data:extend({
+  {
+    type = "technology",
+    name = "fluid-mining",
+    icon = "__"..util.me.name.."__/graphics/technology/fluid-mining.png",
+    icon_size = 256,
+    effects =
+    {
+      {
+        type = "mining-with-fluid",
+        modifier = true
+      }
+    },
+    prerequisites = {"chemical-science-pack", "concrete"},
+    unit =
+    {
+      count = 100,
+      ingredients =
+      {
+        {"automation-science-pack", 1},
+        {"logistic-science-pack", 1},
+        {"chemical-science-pack", 1}
+      },
+      time = 30,
+    }
+  }
+  })
+end
+
+-- Final fix to make sure nothing uses "uranium-mining"
+function util.use_fluid_mining_final()
+  for i, tech in pairs(data.raw.technology) do 
+    if tech.prerequisites then
+      for j, pre in pairs(tech.prerequisites) do
+        if pre == "uranium-mining" then
+          util.add_prerequisite(tech.name, "fluid-mining")
+          util.remove_prerequisite(tech.name, "uranium-mining")
+          break
+        end
+      end
+    end
+  end
+  util.remove_raw("technology", "uranium-mining")
+end
+
+
+-- Add vacuum if it hasn't been added yet
+function util.add_vacuum()
+  if not data.raw.fluid.vacuum then
+    data:extend({
+      {
+        type = "fluid",
+        name = "vacuum",
+        icons = { util.vacuum_icon, },
+        visualization_color = util.vacuum_vis,
+        subgroup = "fluid",
+        order = "d[vacuum]",
+        default_temperature = 1500,
+        max_temperature = 2000,
+        gas_temperature = 0,
+        heat_capacity = "0.01kJ",
+        base_color = {0.9, 0.9, 0.9},
+        flow_color = {0.8, 0.8, 0.9},
+        auto_barrel = false,
+      },
+    })
+  end
+end
+
+-- If Hot metals mod is enabled, mark these metals as hot
+function util.add_hot_metals(metals)
+  if HotMetals and HotMetals.items then
+    for _, metal in pairs(metals) do
+      if data.raw.item[metal] or (metal.name and data.raw.item[metal.name]) then
+        table.insert(HotMetals.items, metal)
+      end
+    end
+  end
 end
 
 
@@ -298,15 +620,12 @@ function util.se_matter(params)
   end
 end
 
+-- deprecated
 -- Get the normal prototype for a recipe -- either .normal or the recipe itself
 function util.get_normal(recipe_name)
   if data.raw.recipe[recipe_name] then
     recipe = data.raw.recipe[recipe_name]
-    if recipe.normal and recipe.normal.ingredients then
-      return recipe.normal
-    elseif recipe.ingredients then
-      return recipe
-    end
+    return recipe
   end
 end
 
@@ -415,72 +734,108 @@ end
 function util.set_tech_recipe(technology_name, ingredients)
   local technology = data.raw.technology[technology_name]
   if technology then
+    if not technology.unit then
+      -- set a sane unit just in case
+      technology.unit = {time = 30, count = 50}
+    end
     technology.unit.ingredients = ingredients
+    technology.research_trigger = nil
+  end
+end
+
+-- Set technology trigger
+function util.set_tech_trigger(technology_name, trigger)
+  local technology = data.raw.technology[technology_name]
+  if technology then
+    technology.unit = nil
+    technology.research_trigger = trigger
   end
 end
 
 function util.set_enabled(recipe_name, enabled)
   if data.raw.recipe[recipe_name] then
-    if data.raw.recipe[recipe_name].normal then data.raw.recipe[recipe_name].normal.enabled = enabled end
-    if data.raw.recipe[recipe_name].expensive then data.raw.recipe[recipe_name].expensive.enabled = enabled end
-    if not data.raw.recipe[recipe_name].normal then data.raw.recipe[recipe_name].enabled = enabled end
+    data.raw.recipe[recipe_name].enabled = enabled
   end
 end
 
 function util.set_hidden(recipe_name)
   if data.raw.recipe[recipe_name] then
-    if data.raw.recipe[recipe_name].normal then data.raw.recipe[recipe_name].normal.hidden = true end
-    if data.raw.recipe[recipe_name].expensive then data.raw.recipe[recipe_name].expensive.hidden = true end
-    if not data.raw.recipe[recipe_name].normal then data.raw.recipe[recipe_name].hidden = true end
+    data.raw.recipe[recipe_name].hidden = true
   end
 end
+
+-- adds a crafting category if it doesn't exist, also optionally allowing handcrafting 
+function util.add_new_crafting_category(category, by_hand)
+  if not data.raw["recipe-category"][category] then
+    data:extend({{
+      type="recipe-category",
+      name=category,
+    }})
+  end
+  if by_hand then
+    for i, character in pairs(data.raw.character) do
+      if character.crafting_categories then
+        table.insert(character.crafting_categories, category)
+      end
+    end
+  end
+end
+
 
 -- Add a given quantity of ingredient to a given recipe
 function util.add_or_add_to_ingredient(recipe_name, ingredient, quantity, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  if data.raw.recipe[recipe_name] and data.raw.item[ingredient] then
+  if data.raw.recipe[recipe_name] and util.get_item(ingredient) then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     add_or_add_to_ingredient(data.raw.recipe[recipe_name], ingredient, quantity)
-    add_or_add_to_ingredient(data.raw.recipe[recipe_name].normal, ingredient, quantity)
-    add_or_add_to_ingredient(data.raw.recipe[recipe_name].expensive, ingredient, quantity)
   end
 end
 
 function add_or_add_to_ingredient(recipe, ingredient, quantity)
   if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == ingredient or existing.name == ingredient then
+      if existing.name == ingredient then
         add_to_ingredient(recipe, ingredient, quantity)
         return
       end
     end
-    table.insert(recipe.ingredients, {ingredient, quantity})
+    table.insert(recipe.ingredients, util.item(ingredient, quantity))
   end
+end
+
+function util.get_item(name)
+  if data.raw.item[name] then return data.raw.item[name] end
+  if data.raw.armor[name] then return data.raw.armor[name] end
+  if data.raw.fluid[name] then return data.raw.fluid[name] end
+  if data.raw.capsule[name] then return data.raw.capsule[name] end
+  if data.raw["space-platform-starter-pack"] and data.raw["space-platform-starter-pack"][name] then return data.raw["space-platform-starter-pack"][name] end
+  -- TODO add more subtypes of item here
+  return nil
 end
 
 -- Add a given quantity of ingredient to a given recipe
 function util.add_ingredient(recipe_name, ingredient, quantity, options)
   if not should_force(options) and bypass(recipe_name) then return end
   local is_fluid = not not data.raw.fluid[ingredient]
-  if data.raw.recipe[recipe_name] and (data.raw.item[ingredient] or is_fluid) then
+  if data.raw.recipe[recipe_name] and (util.get_item(ingredient) or is_fluid) then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     add_ingredient(data.raw.recipe[recipe_name], ingredient, quantity, is_fluid)
-    add_ingredient(data.raw.recipe[recipe_name].normal, ingredient, quantity, is_fluid)
-    add_ingredient(data.raw.recipe[recipe_name].expensive, ingredient, quantity, is_fluid)
   end
 end
 
 function add_ingredient(recipe, ingredient, quantity, is_fluid)
   if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == ingredient or existing.name == ingredient then
+      if existing.name == ingredient then
         return
       end
     end
     if is_fluid then
       table.insert(recipe.ingredients, {type="fluid", name=ingredient, amount=quantity})
     else
-      table.insert(recipe.ingredients, {ingredient, quantity})
+      table.insert(recipe.ingredients, {type="item", name=ingredient, amount=quantity})
     end
   end
 end
@@ -488,21 +843,17 @@ end
 -- Add a given ingredient prototype to a given recipe
 function util.add_ingredient_raw(recipe_name, ingredient, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  if data.raw.recipe[recipe_name] and (data.raw.item[ingredient.name] or data.raw.item[ingredient[1]]) then
+  if data.raw.recipe[recipe_name] and data.raw.item[ingredient.name] then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     add_ingredient_raw(data.raw.recipe[recipe_name], ingredient)
-    add_ingredient_raw(data.raw.recipe[recipe_name].normal, ingredient)
-    add_ingredient_raw(data.raw.recipe[recipe_name].expensive, ingredient)
   end
 end
 
 function add_ingredient_raw(recipe, ingredient)
   if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if (
-          (existing[1] and (existing[1] == ingredient[1] or existing[1] == ingredient.name)) or 
-          (existing.name and (existing.name == ingredient[1] or existing.name == ingredient.name))
-      ) then
+      if existing.name == ingredient.name then
         return
       end
     end
@@ -515,19 +866,15 @@ function util.set_ingredient(recipe_name, ingredient, quantity, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] and data.raw.item[ingredient] then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     set_ingredient(data.raw.recipe[recipe_name], ingredient, quantity)
-    set_ingredient(data.raw.recipe[recipe_name].normal, ingredient, quantity)
-    set_ingredient(data.raw.recipe[recipe_name].expensive, ingredient, quantity)
   end
 end
 
 function set_ingredient(recipe, ingredient, quantity)
   if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == ingredient  then
-        existing[2] = quantity
-        return
-      elseif existing.name == ingredient then
+      if existing.name == ingredient then
         existing.amount = quantity
         existing.amount_min = nil
         existing.amount_max = nil
@@ -542,43 +889,31 @@ end
 function util.add_product(recipe_name, product, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] and 
-  (data.raw.item[product[1]] or data.raw.item[product.name] or
-   data.raw.fluid[product[1]] or data.raw.fluid[product.name]
+  (data.raw.item[product.name] or data.raw.fluid[product.name]
   ) then
     add_product(data.raw.recipe[recipe_name], product)
-    add_product(data.raw.recipe[recipe_name].normal, product)
-    add_product(data.raw.recipe[recipe_name].expensive, product)
   end
 end
 
 function add_product(recipe, product)
   if recipe ~= nil then
-    if (product[1] and data.raw.item[product[1]]) or 
-    (product.name and data.raw[product.type][product.name]) then
-      if not recipe.normal then
-        if recipe.results == nil then
-          recipe.results = {{recipe.result, recipe.result_count and recipe.result_count or 1}}
-        end
-        recipe.result = nil
-        recipe.result_count = nil
-        table.insert(recipe.results, product)
+    if product.name and data.raw[product.type][product.name] then
+      if recipe.results == nil then
+        recipe.results = {{recipe.result, recipe.result_count and recipe.result_count or 1}}
       end
+      recipe.result = nil
+      recipe.result_count = nil
+      table.insert(recipe.results, product)
     end
   end
 end
 
--- Get the amount of the ingredient, will check base/normal not expensive
+-- Get the amount of the ingredient
 function util.get_ingredient_amount(recipe_name, ingredient_name)
   local recipe = data.raw.recipe[recipe_name]
   if recipe then
-    if recipe.normal and recipe.normal.ingredients then
-      for i, ingredient in pairs(recipe.normal.ingredients) do
-        if ingredient[1] == ingredient_name then return ingredient[2] end
-        if ingredient.name == ingredient_name then return ingredient.amount end
-      end
-    elseif recipe.ingredients then
+    if recipe.ingredients then
       for i, ingredient in pairs(recipe.ingredients) do
-        if ingredient[1] == ingredient_name then return ingredient[2] end
         if ingredient.name == ingredient_name then return ingredient.amount end
       end
     end
@@ -587,27 +922,23 @@ function util.get_ingredient_amount(recipe_name, ingredient_name)
   return 0
 end
 
--- Get the amount of the result, will check base/normal not expensive
+-- Get the amount of the result (currently ignores probability)
 function util.get_amount(recipe_name, product)
   if not product then product = recipe_name end
   local recipe = data.raw.recipe[recipe_name]
   if recipe then
-    if recipe.normal and recipe.normal.results then
-      for i, result in pairs(recipe.normal.results) do
-        if result[1] == product then return result[2] end
-        if result.name == product then return result.amount end
-      end
-    elseif recipe.normal and recipe.normal.result_count then
-      return recipe.normal.result_count
-    elseif recipe.results then
+    if recipe.results then
       for i, result in pairs(recipe.results) do
-        if result[1] == product then return result[2] end
-        if result.name == product then return result.amount end
+        if result.name == product then
+          if result.amount then
+            return result.amount
+          elseif result.amount_min then
+            return (result.amount_min + result.amount_max) / 2
+          end
+        end
       end
-    elseif recipe.result_count then
-      return recipe.result_count
     end
-    return 1
+    return 0
   end
   return 0
 end
@@ -617,9 +948,7 @@ function util.get_result_count(recipe_name, product)
   if not product then product = recipe_name end
   local recipe = data.raw.recipe[recipe_name]
   if recipe then
-    if recipe.normal and recipe.normal.results then
-      return #(recipe.normal.results)
-    elseif recipe.results then
+    if recipe.results then
       return #(recipe.results)
     end
     return 1
@@ -631,18 +960,17 @@ end
 --    Use amount to set an amount. If that amount is a multiplier instead of an exact amount, set multiply true.
 function util.replace_ingredient(recipe_name, old, new, amount, multiply, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  if data.raw.recipe[recipe_name] and (data.raw.item[new] or data.raw.fluid[new]) then
+  if data.raw.recipe[recipe_name] and (data.raw.item[new] or data.raw.fluid[new]) and (data.raw.item[old] or data.raw.fluid[old]) then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     replace_ingredient(data.raw.recipe[recipe_name], old, new, amount, multiply)
-    replace_ingredient(data.raw.recipe[recipe_name].normal, old, new, amount, multiply)
-    replace_ingredient(data.raw.recipe[recipe_name].expensive, old, new, amount, multiply)
   end
 end
 
 function replace_ingredient(recipe, old, new, amount, multiply)
 	if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == new or existing.name == new then
+      if existing.name == new then
         return
       end
     end
@@ -657,16 +985,6 @@ function replace_ingredient(recipe, old, new, amount, multiply)
           end
         end
       end
-			if ingredient[1] == old then 
-        ingredient[1] = new
-        if amount then
-          if multiply then
-            ingredient[2] = amount * ingredient[2]
-          else
-            ingredient[2] = amount
-          end
-        end
-      end
 		end
 	end
 end
@@ -676,9 +994,8 @@ function util.remove_ingredient(recipe_name, old, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     remove_ingredient(data.raw.recipe[recipe_name], old)
-    remove_ingredient(data.raw.recipe[recipe_name].normal, old)
-    remove_ingredient(data.raw.recipe[recipe_name].expensive, old)
   end
 end
 
@@ -686,7 +1003,7 @@ function remove_ingredient(recipe, old)
   index = -1
 	if recipe ~= nil and recipe.ingredients ~= nil then
 		for i, ingredient in pairs(recipe.ingredients) do 
-      if ingredient.name == old or ingredient[1] == old then
+      if ingredient.name == old then
         index = i
         break
       end
@@ -703,9 +1020,8 @@ function util.replace_some_product(recipe_name, old, old_amount, new, new_amount
   local is_fluid = not not data.raw.fluid[new]  -- NOTE CURRENTLY UNUSUED
   if data.raw.recipe[recipe_name] and (data.raw.item[new] or is_fluid) then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     replace_some_product(data.raw.recipe[recipe_name], old, old_amount, new, new_amount, is_fluid)
-    replace_some_product(data.raw.recipe[recipe_name].normal, old, old_amount, new, new_amount, is_fluid)
-    replace_some_product(data.raw.recipe[recipe_name].expensive, old, old_amount, new, new_amount, is_fluid)
   end
 end
 
@@ -714,18 +1030,15 @@ function replace_some_product(recipe, old, old_amount, new, new_amount)
     if recipe.result == new then return end
     if recipe.results then
       for i, existing in pairs(recipe.results) do
-        if existing[1] == new or existing.name == new then
+        if existing.name == new then
           return
         end
       end
     end
-    add_product(recipe, {new, new_amount})
+    add_product(recipe, util.item(new, new_amount))
 		for i, product in pairs(recipe.results) do 
 			if product.name == old then
         product.amount = math.max(1, product.amount - old_amount)
-      end
-			if product[1] == old then
-        product[2] = math.max(1, product[2] - old_amount)
       end
 		end
 	end
@@ -737,16 +1050,15 @@ function util.replace_some_ingredient(recipe_name, old, old_amount, new, new_amo
   local is_fluid = not not data.raw.fluid[new]
   if data.raw.recipe[recipe_name] and (data.raw.item[new] or is_fluid) then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     replace_some_ingredient(data.raw.recipe[recipe_name], old, old_amount, new, new_amount, is_fluid)
-    replace_some_ingredient(data.raw.recipe[recipe_name].normal, old, old_amount, new, new_amount, is_fluid)
-    replace_some_ingredient(data.raw.recipe[recipe_name].expensive, old, old_amount, new, new_amount, is_fluid)
   end
 end
 
 function replace_some_ingredient(recipe, old, old_amount, new, new_amount, is_fluid)
 	if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == new or existing.name == new then
+      if existing.name == new then
         return
       end
     end
@@ -754,30 +1066,45 @@ function replace_some_ingredient(recipe, old, old_amount, new, new_amount, is_fl
 			if ingredient.name == old then
         ingredient.amount = math.max(1, ingredient.amount - old_amount)
       end
-			if ingredient[1] == old then
-        ingredient[2] = math.max(1, ingredient[2] - old_amount)
-      end
 		end
     add_ingredient(recipe, new, new_amount, is_fluid)
 	end
 end
 
+-- set the probability of a product. 
+function util.set_product_probability(recipe_name, product, probability, options)
+  if not should_force(options) and bypass(recipe_name) then return end
+  if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
+    set_product_probability(data.raw.recipe[recipe_name], product, probability)
+	end
+end
+
+function set_product_probability(recipe, product, probability)
+  if recipe then
+    if recipe.results then
+      for i, result in pairs(recipe.results) do
+        if result.name == product then
+          result.probability = probability
+        end
+      end
+    end
+  end
+end
+
 -- set the amount of a product. 
 function util.set_product_amount(recipe_name, product, amount, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     set_product_amount(data.raw.recipe[recipe_name], product, amount)
-    set_product_amount(data.raw.recipe[recipe_name].normal, product, amount)
-    set_product_amount(data.raw.recipe[recipe_name].expensive, product, amount)
 	end
 end
 
 function set_product_amount(recipe, product, amount)
   if recipe then
-    if recipe.result_count then
-      recipe.result_count = amount
-    end
     if recipe.results then
       for i, result in pairs(recipe.results) do
         if result.name == product then
@@ -789,9 +1116,6 @@ function set_product_amount(recipe, product, amount)
             result.amount_max =  nil
             result.amount = amount
           end
-        end
-        if result[1] == product then
-          result[2] = amount
         end
       end
     end
@@ -805,11 +1129,10 @@ end
 -- multiply the cost, energy, and results of a recipe by a multiple
 function util.multiply_recipe(recipe_name, multiple, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     multiply_recipe(data.raw.recipe[recipe_name], multiple)
-    multiply_recipe(data.raw.recipe[recipe_name].normal, multiple)
-    multiply_recipe(data.raw.recipe[recipe_name].expensive, multiple)
 	end
 end
 
@@ -819,9 +1142,6 @@ function multiply_recipe(recipe, multiple)
       recipe.energy_required = recipe.energy_required * multiple
     else
       recipe.energy_required = 0.5 * multiple  -- 0.5 is factorio default
-    end
-    if recipe.result_count then
-      recipe.result_count = recipe.result_count * multiple
     end
     if recipe.results then
       for i, result in pairs(recipe.results) do
@@ -837,22 +1157,28 @@ function multiply_recipe(recipe, multiple)
             result.catalyst_amount = result.catalyst_amount * multiple
           end
         end
-        if result[1] then
-          result[2] = result[2] * multiple
-        end
       end
     end
-    if not recipe.results and not recipe.result_count then
-      -- implicit one item result
-      recipe.result_count = multiple
-    end
+    multiply_ingredients(recipe, multiple)
+  end
+end
+
+-- multiply the ingredient cost of a recipe
+function util.multiply_ingredients(recipe_name, multiple, options)
+  if not should_force(options) and bypass(recipe_name) then return end
+  if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
+    multiply_ingredients(data.raw.recipe[recipe_name], multiple)
+	end
+end
+
+function multiply_ingredients(recipe, multiple)
+  if recipe then
     if recipe.ingredients then
       for i, ingredient in pairs(recipe.ingredients) do
         if ingredient.name then
           ingredient.amount = ingredient.amount * multiple
-        end
-        if ingredient[1] then
-          ingredient[2] = ingredient[2] * multiple
         end
       end
     end
@@ -861,15 +1187,14 @@ end
 
 -- Returns true if a recipe has an ingredient
 function util.has_ingredient(recipe_name, ingredient)
-  return data.raw.recipe[recipe_name] and (
-        has_ingredient(data.raw.recipe[recipe_name], ingredient) or
-        has_ingredient(data.raw.recipe[recipe_name].normal, ingredient))
+  return data.raw.recipe[recipe_name] and 
+        has_ingredient(data.raw.recipe[recipe_name], ingredient)
 end
 
 function has_ingredient(recipe, ingredient)
   if recipe ~= nil and recipe.ingredients ~= nil then
     for i, existing in pairs(recipe.ingredients) do
-      if existing[1] == ingredient or existing.name == ingredient then
+      if existing.name == ingredient then
         return true
       end
     end
@@ -880,11 +1205,10 @@ end
 -- Remove a product from a recipe, WILL NOT remove the only product
 function util.remove_product(recipe_name, old, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     remove_product(data.raw.recipe[recipe_name], old)
-    remove_product(data.raw.recipe[recipe_name].normal, old)
-    remove_product(data.raw.recipe[recipe_name].expensive, old)
   end
 end
 
@@ -892,7 +1216,7 @@ function remove_product(recipe, old)
   index = -1
 	if recipe ~= nil and recipe.results ~= nil then
 		for i, result in pairs(recipe.results) do 
-      if result.name == old or result[1] == old then
+      if result.name == old then
         index = i
         break
       end
@@ -907,8 +1231,6 @@ function util.set_main_product(recipe_name, product, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] then
     set_main_product(data.raw.recipe[recipe_name], product)
-    set_main_product(data.raw.recipe[recipe_name].normal, product)
-    set_main_product(data.raw.recipe[recipe_name].expensive, product)
   end
 end
 
@@ -923,8 +1245,6 @@ function util.replace_product(recipe_name, old, new, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] then
     replace_product(data.raw.recipe[recipe_name], old, new, options)
-    replace_product(data.raw.recipe[recipe_name].normal, old, new, options)
-    replace_product(data.raw.recipe[recipe_name].expensive, old, new, options)
   end
 end
 
@@ -940,7 +1260,6 @@ function replace_product(recipe, old, new, options)
     if recipe.results then
       for i, result in pairs(recipe.results) do
         if result.name == old then result.name = new end
-        if result[1] == old then result[1] = new end
       end
     end
   end
@@ -965,11 +1284,10 @@ end
 -- Set energy required
 function util.set_recipe_time(recipe_name, time, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     set_recipe_time(data.raw.recipe[recipe_name], time)
-    set_recipe_time(data.raw.recipe[recipe_name].normal, time)
-    set_recipe_time(data.raw.recipe[recipe_name].expensive, time)
 	end
 end
 
@@ -984,11 +1302,10 @@ end
 -- Multiply energy required
 function util.multiply_time(recipe_name, factor, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     multiply_time(data.raw.recipe[recipe_name], factor)
-    multiply_time(data.raw.recipe[recipe_name].normal, factor)
-    multiply_time(data.raw.recipe[recipe_name].expensive, factor)
 	end
 end
 
@@ -1003,11 +1320,10 @@ end
 -- Add to energy required
 function util.add_time(recipe_name, amount, options)
   if not should_force(options) and bypass(recipe_name) then return end
-  me.add_modified(recipe_name)
   if data.raw.recipe[recipe_name] then
+    me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     add_time(data.raw.recipe[recipe_name], amount)
-    add_time(data.raw.recipe[recipe_name].normal, amount)
-    add_time(data.raw.recipe[recipe_name].expensive, amount)
 	end
 end
 
@@ -1019,11 +1335,19 @@ function add_time(recipe, amount)
   end
 end
 
+-- Set localised name
+function util.set_localised_name(recipe_name, localised_name)
+  if data.raw.recipe[recipe_name] then
+    data.raw.recipe[recipe_name].localised_name = localised_name
+  end
+end
+
 -- Set recipe category
 function util.set_category(recipe_name, category, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] and data.raw["recipe-category"][category] then
     me.add_modified(recipe_name)
+    prepare_redo_recycling(recipe_name)
     data.raw.recipe[recipe_name].category = category
   end
 end
@@ -1068,13 +1392,6 @@ function util.add_icon(recipe_name, icon, options)
           icon_size=data.raw.item[data.raw.recipe[recipe_name].result].icon_size,
           icon_mipmaps=data.raw.item[data.raw.recipe[recipe_name].result].icon_mipmaps,
         }}
-      elseif data.raw.recipe[recipe_name].normal and
-      data.raw.item[data.raw.recipe[recipe_name].normal.result] then
-        data.raw.recipe[recipe_name].icons = {{
-          icon=data.raw.item[data.raw.recipe[recipe_name].normal.result].icon,
-          icon_size=data.raw.item[data.raw.recipe[recipe_name].normal.result].icon_size,
-          icon_mipmaps=data.raw.item[data.raw.recipe[recipe_name].normal.result].icon_mipmaps,
-        }}
       end
       data.raw.recipe[recipe_name].icon = nil
       data.raw.recipe[recipe_name].icon_size = nil
@@ -1091,6 +1408,17 @@ function util.set_icons(recipe_name, icons, options)
     data.raw.recipe[recipe_name].icons = icons
     data.raw.recipe[recipe_name].icon = nil
     data.raw.recipe[recipe_name].icon_size = nil
+  end
+end
+
+-- Set tech icons
+function util.set_tech_icons(technology, icons, options)
+  if not should_force(options) and bypass(technology) then return end
+  if data.raw.technology[technology] then
+    me.add_modified(technology)
+    data.raw.technology[technology].icons = icons
+    data.raw.technology[technology].icon = nil
+    data.raw.technology[technology].icon_size = nil
   end
 end
 
@@ -1133,24 +1461,40 @@ function util.add_crafting_category(entity_type, entity, category)
    end
 end
 
+-- Add crafting category to all entities that have another category
+function util.add_crafting_category_if(entity_type, category, other_category)
+  if data.raw[entity_type] and data.raw["recipe-category"][category] and data.raw["recipe-category"][other_category] then
+    for _, entity in pairs(data.raw[entity_type]) do
+      local found_good = false
+      local found_bad = false
+      for _, existing in pairs(entity.crafting_categories) do
+        if existing == other_category then
+          found_good = true
+        end
+        if existing == category then
+          found_bad = true
+        end
+      end
+      if found_good and not found_bad then
+        table.insert(entity.crafting_categories, category)
+      end
+    end
+  end
+end
+
+
 function util.add_to_ingredient(recipe, ingredient, amount, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe] then
     add_to_ingredient(data.raw.recipe[recipe], ingredient, amount)
-    add_to_ingredient(data.raw.recipe[recipe].normal, ingredient, amount)
-    add_to_ingredient(data.raw.recipe[recipe].expensive, ingredient, amount)
   end
 end
 
 function add_to_ingredient(recipe, it, amount)
-	if recipe ~= nil and recipe.ingredients ~= nil then
+	if recipe and recipe.ingredients then
 		for i, ingredient in pairs(recipe.ingredients) do
 			if ingredient.name == it then
         ingredient.amount = ingredient.amount + amount
-        return
-      end
-			if ingredient[1] == it then
-        ingredient[2] = ingredient[2] + amount
         return
       end
 		end
@@ -1161,8 +1505,6 @@ function util.add_to_product(recipe_name, product, amount, options)
   if not should_force(options) and bypass(recipe_name) then return end
   if data.raw.recipe[recipe_name] then
     add_to_product(data.raw.recipe[recipe_name], product, amount)
-    add_to_product(data.raw.recipe[recipe_name].normal, product, amount)
-    add_to_product(data.raw.recipe[recipe_name].expensive, product, amount)
   end
 end
 
@@ -1177,26 +1519,37 @@ function add_to_product(recipe, product, amount)
         result.amount = result.amount + amount
         return
       end
-			if result[1] == product then
-        result[2] = result[2] + amount
-        return
-      end
     end
   end
 end
 
 -- Adds a result to a mineable type
 function util.add_minable_result(t, name, result)
-  if data.raw[t] and data.raw[t][name] and data.raw[t][name].minable then
+  if data.raw[t] and data.raw[t][name] and data.raw[t][name].minable and data.raw.item[result.name] then
     if data.raw[t][name].minable.result and not data.raw[t][name].minable.results then
       data.raw[t][name].minable.results = {
-        {data.raw[t][name].minable.result ,data.raw[t][name].minable.count}}
+        util.item(data.raw[t][name].minable.result ,data.raw[t][name].minable.count)}
       data.raw[t][name].minable.result = nil
       data.raw[t][name].minable.result_count = nil
     end
     if data.raw[t][name].minable.results then
+      for _, other in pairs(data.raw[t][name].minable.results) do
+        if other.name == result.name then return end -- don't add if already present
+      end
       table.insert(data.raw[t][name].minable.results, result)
+    else
+      data.raw[t][name].minable.results = {result}
     end
+  end
+end
+
+function util.set_surface_property(surface, condition, value)
+  if not data.raw["surface-property"][condition] then return end
+  if data.raw.surface[surface] then
+    data.raw.surface[surface].surface_properties[condition] = value
+  end
+  if data.raw.planet[surface] then
+    data.raw.planet[surface].surface_properties[condition] = value
   end
 end
 
@@ -1251,7 +1604,9 @@ function util.create_list()
         icon = "__core__/graphics/empty.png",
         icon_size = 1,
         stack_size = 1,
-        flags = {"hidden", "hide-from-bonus-gui"}
+        hidden = true,
+        hidden_in_factoriopedia = true,
+        flags = {"hide-from-bonus-gui"}
       }})
     end
 
@@ -1282,6 +1637,7 @@ end
 function remove_prior_unlocks(tech, recipe)
   local technology = data.raw.technology[tech]
   if technology then
+    log("Removing prior unlocks for ".. tech)
     util.remove_recipe_effect(tech, recipe)
     if technology.prerequisites then
       for i, prerequisite in pairs(technology.prerequisites) do
@@ -1317,6 +1673,7 @@ function util.replace_ingredients_prior_to(tech, old, new, multiplier)
 end
 
 function replace_ingredients_prior_to(tech, old, new, multiplier)
+  log("Replacing for tech "..tech)
   local technology = data.raw.technology[tech]
   if technology then
     if technology.effects then
@@ -1381,5 +1738,327 @@ function util.set_vtk_dcm_ingredients()
     util.set_ingredient("vtk-deepcore-mining-ore-chunk-refining-no-uranium", "vtk-deepcore-mining-ore-chunk", sum)
   end
 end
+
+-- Set correct number of outputs for recyclers
+function util.size_recycler_output()
+  if data.raw.recipe["scrap-recycling"] and data.raw.recipe["scrap-recycling"].results then
+    for i, entity in pairs(data.raw.furnace) do
+      if util.contains(entity.crafting_categories, "recycling-or-hand-crafting") then
+        if entity.result_inventory_size < #data.raw.recipe["scrap-recycling"].results then
+          entity.result_inventory_size = #data.raw.recipe["scrap-recycling"].results
+        end
+      end
+    end
+  else
+    local most = 0
+    for i, recipe in pairs(data.raw.recipe) do
+      if data.raw.recipe.ingredients and #data.raw.recipe.ingredients > most then
+        most = #data.raw.recipe.ingredients
+      end
+    end
+    for i, entity in pairs(data.raw.furnace) do
+      if util.contains(entity.crafting_categories, "recycling-or-hand-crafting") then
+        if entity.result_inventory_size < most then
+          entity.result_inventory_size = most
+        end
+      end
+    end
+  end
+end
+
+
+-- Save recycling metadata that is later removed by quality mod. Call near end of data.lua
+function util.prepare_recycling_helper()
+  if mods.quality then
+    for _, recipe in pairs(data.raw.recipe) do
+      recipe.auto_recycle_helper = recipe.auto_recycle
+    end
+  end
+end
+
+-- Recalculate recycling recipes, call near end of data-updates.lua, after calling
+-- util.prepare_recycling_helper from data.lua
+function util.redo_recycling()
+  if mods.quality then
+    local recycling = require("__quality__.prototypes.recycling")
+    for _, recipe in pairs(data.raw.recipe) do
+      recipe.auto_recycle = recipe.auto_recycle_helper -- keeping this outside conditional to improve fidelity across multiple mods
+      if recipe.redo_recycling then
+        recycling.generate_recycling_recipe(recipe)
+      end
+    end
+    -- Find all recycling recipes that result in armor and make sure not to output more than 1
+    for _, recipe in pairs(data.raw.recipe) do
+      if recipe.name:find("recycling") then
+        for _, product in pairs(recipe.results) do
+          if data.raw.armor[product.name] then
+            if product.amount then
+              if product.amount > .99 then 
+                product.amount = 1 
+                product.extra_count_fraction = nil
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+-- Preps the recipe to have recycling recalculated. Expects the recipe exists.
+function prepare_redo_recycling(recipe_name)
+  data.raw.recipe[recipe_name].redo_recycling = true
+end
+
+-- Change furnace output count
+function util.set_minimum_furnace_outputs(category, count)
+  for i, entity in pairs(data.raw.furnace) do
+    if entity.result_inventory_size ~= nil and entity.result_inventory_size < count and util.contains(entity.crafting_categories, category) then
+      entity.result_inventory_size = count
+    end
+  end
+end
+
+
+-- According to https://mods.factorio.com/mod/Asteroid_Mining, the
+-- following function is under this MIT license (similar license, different author):
+--
+-- Copyright (c) 2021 Silari
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of
+-- this software and associated documentation files (the "Software"), to deal in
+-- the Software without restriction, including without limitation the rights to
+-- use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+-- the Software, and to permit persons to whom the Software is furnished to do so,
+-- subject to the following conditions:
+-- 
+-- The above copyright notice and this permission notice shall be included in all
+-- copies or substantial portions of the Software.
+-- 
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+-- FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+-- COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+-- IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+-- CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+function util.addtype(name,atint,desc) --,pictures)
+  require("__Asteroid_Mining__/scripts/icons.lua") -- Has generateicons function
+
+  local allowprod = settings.startup["astmine-allowprod"].value
+  local useminer = settings.startup["astmine-enableminer"].value
+  local hiderec = not settings.startup["astmine-hiderecipes"].value
+  local recenabled = false
+
+  local chunkstacksize = 1000
+  if mods["space-exploration"] then
+      chunkstacksize = 200
+  end
+
+  --Adds given recipe to prod modules allowed list
+  function addmodules(name)
+      if useminer then -- Only add these if we're actually enabled.
+          table.insert(data.raw.module["productivity-module"].limitation, name)
+          table.insert(data.raw.module["productivity-module-2"].limitation, name)
+          table.insert(data.raw.module["productivity-module-3"].limitation, name)
+      end
+  end
+
+  --Result for processing resource specific chunks
+  local normal = { -- Gives 4000 chunks on average
+      {
+        amount_min = 3,
+        amount_max = 5,
+        probability = 1
+      }
+  }
+  local chunkamount = 1000
+
+  -- Space age makes rockets cost 1/20th as much. Give less materials, same ratio.
+  if mods["space-age"] then 
+      chunkamount = 50
+  end
+
+  --ITEM: Miner-module, which is what we send into space to get the asteroid-mixed item
+  local minermodule = {
+      icon = "__Asteroid_Mining__/graphics/mining-sat.png",
+      icon_mipmaps = 4,
+      icon_size = 64,
+      name = "miner-module",
+      localised_name = {"item-name.miner-module", "Mixed"},
+      localised_description = {"item-description.miner-module", "mixed"},
+      order = "n[miner-module]",
+      rocket_launch_products = {{
+          name="asteroid-mixed",
+          amount=chunkamount,
+          type="item"
+      }},
+      send_to_orbit_mode = "automated",
+      stack_size = 1,
+      subgroup = subminer,
+      type = "item"
+  }
+  --Make a new item with the given name+"-chunk" and recipe to turn into name
+  --eg addtype('iron-ore') makes iron-ore-chunk and recipe for iron-ore-chunk->100 iron-ore
+  --log("Making new items for " .. name)
+  --ITEM Resource chunk for this item
+      
+  local suffix = "-chunk"
+  -- Sometimes we need to override the default suffix because the item name already exists.
+  -- TODO - change this so it automatically detects name-chunk item exists and change suffix - BUT
+  --  that would cause issues if 'name' is in more than one module - eg angels/bobs overlap, bob+bzlead, etc.
+  --  Maybe add in something that tracks what 'name's have been added and skip it if it has.
+  if string.find(name,"angels-ore",1,true) then
+      suffix = "-chunk-am"
+  end
+  --log(name .. " name:suffix " .. suffix)
+  
+  local reschunk = {
+    icons = {
+      {
+        icon = "__Asteroid_Mining__/graphics/resource-chunk.png",
+        icon_mipmaps = 4,
+        icon_size = 64
+      },
+      {
+        icon = "__Asteroid_Mining__/graphics/resource-chunk-mask.png",
+        icon_mipmaps = 4,
+        icon_size = 64,
+        tint = atint
+      }
+    },
+    name = name .. suffix,
+    localised_name = {"item-name.resource-chunk", {"item-name." .. name}},
+    localised_description = {"item-description.resource-chunk", {"item-name." .. name}},
+    order = "d[asteroidchunk-" .. name .. "]",
+    stack_size = 25,
+    subgroup = subchunk,
+    type = "item"
+  }
+  
+  --RECIPE Turn resource chunk into 24 of item
+  local procreschunk = {
+    allow_decomposition = false,
+    always_show_products = true,
+    category = reccategory,
+    enabled = hiderec,
+    energy_required = 5,
+    ingredients = {
+      {
+        name=name .. suffix,
+        amount=1,
+        type="item"
+      }
+    },
+    name = name .. suffix,
+    order = "d[asteroidchunk-" .. name .. "]",
+    localised_name = {"recipe-name.resource-chunk", {"item-name." .. name}},
+    localised_description = {"recipe-description.resource-chunk", {"item-name." .. name}},
+    results = {{name=name,amount=24,type="item"}},
+    type = "recipe"
+  }
+  if desc == nil then
+      desc = ""
+  end
+  
+  --ITEM Resource specific asteroid chunk.
+  local newasteroid = {
+    icons = {
+      {
+        icon = "__Asteroid_Mining__/graphics/asteroid-chunk.png",
+        icon_mipmaps = 4,
+        icon_size = 64
+      },
+      {
+        icon = "__Asteroid_Mining__/graphics/asteroid-chunk-mask.png",
+        icon_mipmaps = 4,
+        icon_size = 64,
+        tint = atint
+      }
+    },
+    name = "asteroid-" .. name,
+    localised_name = {"item-name.asteroid-chunk", {"item-name." .. name}},
+    localised_description = {"item-description.asteroid-chunk", {"item-name." .. name}, desc},
+    order = "k[zasteroid-" .. name .. "]",
+    stack_size = chunkstacksize,
+    subgroup = subchunk,
+    type = "item"        
+  }
+  --log(serpent.block(newasteroid))
+  --We need to set the result name to the name of our resource chunk
+  mynormal = table.deepcopy(normal)
+  mynormal[1].name = name .. suffix
+  mynormal[1].type = "item"
+  --Expensive mode is gone.
+  --myexpensive = table.deepcopy(expensive)
+  --myexpensive[1].name = name .. suffix
+  
+  --RECIPE: Processing the asteroid chunks into resource chunks
+  local processasteroid = {
+    allow_decomposition = false,
+    category = reccategory,
+    name = "asteroid-" .. name,
+    localised_name = {"recipe-name.asteroid-chunk", {"item-name." .. name}},
+    localised_description = {"recipe-description.asteroid-chunk", {"item-name." .. name}},
+    order = "k[zasteroid-" .. name .. "]",
+    ingredients = {{name="asteroid-" .. name,amount=1,type="item"}},
+    results = mynormal,
+    always_show_products = true,
+    enabled = hiderec,
+    energy_required = 10,
+    --subgroup = subchunk,
+    type = "recipe"
+  }
+
+  --ITEM Miner module to get resource specific asteroids.
+  local minerres = table.deepcopy(minermodule)
+  minerres.name = "miner-module-" .. name
+  minerres.rocket_launch_products = {{
+      name="asteroid-" .. name,
+      amount=chunkamount,
+      type="item"
+  }}
+  minerres.order = "n[miner-module" .. name .. "]"
+  minerres.icons = generateicons(name,atint) --Generate icon layers using given item
+  minerres.localised_name = {"item-name.miner-module", {"item-name." .. name}}
+  minerres.localised_description = {"item-description.miner-module", {"item-name." .. name}}
+  
+  --RECIPE: Recipe to make miner module to get resource specific asteroids. Always the default category
+  local newminer = {
+      enabled = recenabled,
+      ingredients = {
+          {
+            name="electric-mining-drill",
+            amount=5,
+            type="item"
+          },
+          {
+            name="radar",
+            amount=5,
+            type="item"
+          },
+          {
+            name=name,
+            amount=5,
+            type="item"
+          }
+      },
+      name = "miner-module-" .. name,
+      results = {{name="miner-module-" .. name,amount=1,type="item"}},
+      type = "recipe"        
+  }
+  data:extend{reschunk,procreschunk,newasteroid,processasteroid}
+  if useminer then -- Disabled in 1.0 for the new generation system, once in place.
+      data:extend{minerres,newminer}
+      --This makes the miner module available when rocket silo is researched
+      table.insert(data.raw.technology["rocket-silo"].effects, {type = "unlock-recipe", recipe = "miner-module-" .. name})
+      if not hiderec then
+          table.insert(data.raw.technology["rocket-silo"].effects, {type = "unlock-recipe", recipe = "asteroid-" .. name})
+          table.insert(data.raw.technology["rocket-silo"].effects, {type = "unlock-recipe", recipe = name .. suffix})
+      end
+  end
+  if allowprod then -- Setting to enable prod module usage in asteroid processing
+      addmodules(processasteroid.name)
+  end
+end
+-- END of alternate licenscing
 
 return util

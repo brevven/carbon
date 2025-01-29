@@ -25,15 +25,6 @@ data:extend({
 	},
   {
 		type = "string-setting",
-		name = "bzcarbon-enable-rough-diamond",
-		setting_type = "startup",
-    hidden = not not mods["rso-mod"],
-		default_value = mods["rso-mod"] and "yes" or "no",
-    allowed_values = {"no", "yes"},
-    order = "d1",
-	},
-  {
-		type = "string-setting",
 		name = "bzcarbon-enable-flake-graphite",
 		setting_type = "startup",
     hidden = not not mods["rso-mod"],
@@ -58,6 +49,19 @@ data:extend({
 	},
 })
 
+if not mods["space-age"] and not mods["rso-mod"] then
+  data:extend({
+  {
+		type = "string-setting",
+		name = "bzcarbon-enable-rough-diamond",
+		setting_type = "startup",
+    hidden = not not mods["rso-mod"],
+		default_value = mods["rso-mod"] and "yes" or "no",
+    allowed_values = {"no", "yes"},
+    order = "d1",
+	},
+  })
+end
 if mods.bzchlorine then
   data:extend({
     {

@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 2025-01-21
+  Changes:
+    - Update to Factorio 2.0 and Space Age, can be added to existing games. 
+      Use /bz-regenerate to see help on regenerating ore patches (especially useful on Vulcanus)
+    - Space Age: Diamond ore patches are only on Vulcanus. Graphite is on Nauvis
+    - Updates to Space Age carbon fiber (Note: 2.0 vanilla carbon fiber is not yet available)
+    - New graphics for flake graphite, rough diamonds and some other items.
+    - Improved graphics for graphite and diamond ore patches.
+---------------------------------------------------------------------------------------------------
 Version: 0.5.9
 Date: 2024-02-17
   Fixes:

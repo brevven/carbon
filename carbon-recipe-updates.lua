@@ -21,12 +21,30 @@ end
 util.add_effect("advanced-material-processing-2", {type="unlock-recipe", recipe="crucible"})
 for i, ingredient in pairs(util.me.crucible_ingredients) do
   util.add_ingredient("crucible", ingredient, 5)
+  if data.raw.item[ingredient] then
+    util.add_to_product("crucible", "crucible", 1)
+  end
 end
 for i, furnace in pairs(util.me.furnaces) do
   util.add_ingredient(furnace, "crucible", 1)
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
     util.remove_ingredient(furnace, ingredient)
   end
+end
+
+-- space age
+if mods["space-age"] then
+  util.add_ingredient("big-mining-drill", "diamond", 10)
+  util.add_prerequisite("big-mining-drill", "diamond-processing-2")
+  util.replace_ingredient("quantum-processor", "tungsten-carbide", "diamond", 2)
+  if data.raw.fluid["vacuum"] then
+    util.add_ingredient("graphite-synthesis", "vacuum", 4)
+  end
+  util.remove_product("scrap-recycling", "solder")
+  util.add_product("scrap-recycling", util.item("rough-diamond", 1, .01))
+  util.set_product_probability("scrap-recycling", "processing-unit", 0.03)
+  util.add_ingredient("cryogenic-plant", "graphene", 20)
+  util.add_ingredient("fluoroketone", "graphene", 1)
 end
 
 -- fullerenes & nanotubes
@@ -37,6 +55,10 @@ if util.me.use_fullerenes() then
   if not mods.Krastorio2 then
     util.replace_some_ingredient("slowdown-capsule", "coal", 4, "fullerenes", 40)
   end
+  util.add_ingredient("capture-bot-rocket", "fullerenes", 10)
+  util.add_ingredient("biolab", "fullerenes", 50)
+  util.add_ingredient("overgrowth-yumako-soil", "fullerenes", 50)
+  util.add_ingredient("overgrowth-jellynut-soil", "fullerenes", 50)
 
   -- K2
   util.add_ingredient("kr-biter-virus", "fullerenes", 100)
@@ -56,10 +78,13 @@ if util.me.use_carbon_black() then
 
   -- Plastic from carbon black, carbon black from oil processing
   util.replace_ingredient("plastic-bar", "coal", "carbon-black")
-  util.add_product("basic-oil-processing", {"carbon-black", 1})
-  util.add_product("advanced-oil-processing", {"carbon-black", 1})
-  util.add_product("light-oil-cracking", {"carbon-black", 1})
-  util.add_product("heavy-oil-cracking", {"carbon-black", 1})
+  util.add_product("basic-oil-processing", util.item("carbon-black", 1))
+  util.add_product("advanced-oil-processing", util.item("carbon-black", 1))
+  util.add_product("light-oil-cracking", util.item("carbon-black", 1))
+  util.add_product("heavy-oil-cracking", util.item("carbon-black", 1))
+  -- More outlets for carbon black now, so can make it here too
+  util.add_product("simple-coal-liquefaction", util.item("carbon-black", 1))
+  util.add_product("coal-liquefaction", util.item("carbon-black", 1))
 
   --K2
   if mods.bztitanium then
@@ -91,7 +116,8 @@ elseif data.raw.recipe["speed-module-4"] then
   util.add_ingredient("productivity-module-4", "diamond", 6)
 else
   util.add_ingredient("speed-module-2", "diamond", 1)
-  util.add_ingredient("effectivity-module-2", "diamond", 1)
+  util.add_ingredient("efficiency-module-2", "diamond", 1)
+  util.add_ingredient("quality-module-2", "diamond", 1)
   util.add_ingredient("productivity-module-2", "diamond", 1)
 end
 util.add_ingredient("laser-turret", "diamond", 1)

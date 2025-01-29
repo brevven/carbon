@@ -11,6 +11,7 @@ function cutil.nanotube_recipe(recipe_name, item_name, tech)
 
   local new_recipe = futil.table.deepcopy(data.raw.recipe[recipe_name])
   new_recipe.name = recipe_name.."-nanotubes"
+  new_recipe.localised_name = {"item-name."..item_name}
   new_recipe.icons = {
       { icon = data.raw.item[item_name].icon, icon_size = data.raw.item[item_name].icon_size},
       { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},

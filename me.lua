@@ -1,6 +1,8 @@
 local me = {}
 
 me.name = "bzcarbon"
+me.resources = {} -- see end of file
+
 me.list = {}
 
 me.recipes = {  -- recipes that allow productivity
@@ -22,8 +24,13 @@ me.recipes = {  -- recipes that allow productivity
   -- NOTE: Carbon black recipes do not allow prod modules
 }
 
+function has_mod(name) 
+  if mods then return mods[name] end
+  if script.active_mods then return script.active_mods[name] end
+end
+
 function me.use_fiber()
-  return me.get_setting("bzcarbon-enable-carbon-fiber") == "yes"
+  return mods["space-age"] or me.get_setting("bzcarbon-enable-carbon-fiber") == "yes"
 end
 
 function me.use_fullerenes()
@@ -42,11 +49,11 @@ function me.use_carbon_black()
 end
 
 function me.use_rough_diamond()
-  return mods["rso-mod"] or me.get_setting("bzcarbon-enable-rough-diamond") == "yes"
+  return has_mod("rso-mod") or has_mod("space-age") or me.get_setting("bzcarbon-enable-rough-diamond") == "yes"
 end
 
 function me.use_flake_graphite()
-  return mods["rso-mod"] or me.get_setting("bzcarbon-enable-flake-graphite") == "yes"
+  return has_mod("rso-mod") or me.get_setting("bzcarbon-enable-flake-graphite") == "yes"
 end
 
 function me.foundry_enable()
@@ -73,15 +80,12 @@ function me.add_modified(name)
   end
 end
 
-me.crucible_ingredients = {"tungsten-plate", "zirconia", "silica"}
-if (mods and mods.bzaluminum) or (game and game.active_mods and game.active_mods.bzaluminum) then
-  table.insert(me.crucible_ingredients, "alumina")
-else
-  table.insert(me.crucible_ingredients, "stone-brick")
-end
+me.crucible_ingredients = {"zirconia", "silica", "alumina", "stone-brick"}
 
 me.furnaces =  {
   "electric-furnace",
+  "foundry",              -- Space Age
+  "basic-foundry",        -- BZ Tin
   "electric-foundry",     -- BZ
   "industrial-furnace",   -- AAI
   "se-casting-machine",   -- SE
@@ -102,5 +106,15 @@ me.furnaces =  {
   "5d-industrial-furnace",
 }
 
+if me.use_flake_graphite() then 
+  table.insert(me.resources, {"graphite", "nauvis"})
+end
+if me.use_rough_diamond() then 
+  if has_mod("space-age") then
+    table.insert(me.resources, {"diamond", "vulcanus"})
+  else
+    table.insert(me.resources, {"diamond", "nauvis"})
+  end
+end
 
 return me

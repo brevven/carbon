@@ -24,10 +24,14 @@ copy: link
 	mkdir -p ../$(v)
 	cp -rf * ../$(v)
 	rm -f ../$(v).zip
-	cd ..; zip -9 -r -y $(v).zip $(v) -x "*.xcf" -x "*.git*" -x "*.bak" -x "*.blend*"
+	#cd ..; zip -9 -r -y $(v).zip $(v) -x "*.xcf" -x "*.git*" -x "*.bak" -x "*.blend*"
 
 install: lint-changelog copy
-	cp -f ../$(v).zip ../../mods/
+	# Next 3 lines are dev only (uncomment zip lines and comment these)
+	rm -rf ../../mods/$(v)
+	mkdir ../../mods/$(v)
+	cp -r * ../../mods/$(v)
+	#cp -f ../$(v).zip ../../mods/
 
 lint-changelog: copy
 	python3 ../da-changelog-tools_0.0.14/changelog-checker.py --changelog ../$(v).zip
