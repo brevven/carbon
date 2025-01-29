@@ -3,10 +3,14 @@ require("carbon-recipe-final-k2")
 require("carbon-recipe-final-se")
 require("carbon-recipe-final-rrr")
 require("nanotubes-final")
-require("compatibility/vtkdeepcoremining")
+require("compatibility.vtkdeepcoremining")
+require("compatibility.any-planet-start")
 
 local futil = require("util")
 local util = require("data-util");
+
+util.add_minable_result("simple-entity", "huge-volcanic-rock", {type="item", name="flake-graphite", amount_min=10, amount_max=24})
+util.add_minable_result("simple-entity", "big-volcanic-rock", {type="item", name="rough-diamond", amount_min=5, amount_max=10})
 
 -- supercapacitors with graphene cloned from supercapacitors with activated carbon
 if data.raw.recipe["supercapacitor"] then
