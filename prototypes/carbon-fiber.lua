@@ -8,6 +8,7 @@ if mods["space-age"] then
       type = "recipe",
       name = "ammonia-from-spoilage",
       category = "organic",
+      subgroup = "agriculture-processes",
       icons = {
         {icon = "__space-age__/graphics/icons/fluid/ammonia.png", icon_size = 64},
         {icon = "__space-age__/graphics/icons/spoilage.png", icon_size = 64, scale= 0.25, shift = {-8,-8}},
@@ -62,6 +63,7 @@ if mods["space-age"] then
   util.replace_ingredient("carbon-fiber", "carbon", "polyacrylonitrile")
   util.set_item_icons("carbon-fiber", { {icon = "__bzcarbon__/graphics/icons/carbon-fiber.png", icon_size = 128,} })
   util.add_unlock("biochamber", "ammonia-from-spoilage")
+  util.add_unlock("carbon-fiber", "polyacrylonitrile")
 else
   data:extend({
     {

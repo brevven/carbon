@@ -80,7 +80,7 @@ function me.add_modified(name)
   end
 end
 
-me.crucible_ingredients = {"zirconia", "silica", "alumina", "stone-brick"}
+me.crucible_ingredients = {"zirconia", "silica", "stone-brick"}
 
 me.furnaces =  {
   "electric-furnace",

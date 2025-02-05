@@ -7,8 +7,14 @@ util.add_prerequisite("low-density-structure", "diamond-processing")
 util.add_prerequisite("advanced-electronics-2", "diamond-processing")
 util.add_prerequisite("laser", "diamond-processing")
 
-util.add_prerequisite("power-armor-mk2", "graphene")
-util.add_prerequisite("rocket-control-unit", "graphene")
+
+if not mods["space-age"] then -- more uses for graphene in vanilla
+  util.add_prerequisite("power-armor-mk2", "graphene")
+  util.add_ingredient("power-armor-mk2", "graphene", 30)
+
+  util.add_prerequisite("rocket-control-unit", "graphene")
+  util.add_ingredient("rocket-control-unit", "graphene", 1)
+end
 
 util.add_prerequisite("electronics", "graphite-processing")
 
@@ -168,8 +174,6 @@ util.replace_some_ingredient("se-cryonite-lubricant", "se-cryonite-slush", 10, "
 
 util.add_ingredient("nuclear-reactor", "graphite", 500)
 
-util.add_ingredient("power-armor-mk2", "graphene", 30)
-util.add_ingredient("rocket-control-unit", "graphene", 1)
 util.add_ingredient("satellite", "graphene", 100)
 
 -- K2
@@ -336,3 +340,5 @@ util.add_ingredient("offshore-pump-mk2", "graphite", 2)
 util.add_ingredient("pumpjack-mk2", "graphite", 2)
 util.add_ingredient("fusion-reactor-mk2-equipment", "graphene", 2)
 
+util.add_shiftite_recipe("graphite", {"alpha"}, 1)
+util.add_shiftite_recipe("diamond", {"beta", "epsilon"}, 1)

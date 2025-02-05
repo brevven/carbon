@@ -60,4 +60,6 @@ if mods["wood-industry"] then precursor = "charcoal" end
   util.add_unlock("advanced-oil-processing", "activated-carbon")
   util.add_unlock("advanced-oil-processing", "activated-carbon-black")
   util.add_ingredient("supercapacitor", "activated-carbon", 10)
+  util.add_unlock("advanced-oil-processing", "titanium-sublimation")
+  util.add_unlock("advanced-oil-processing", "zirconium-gettering")
 end

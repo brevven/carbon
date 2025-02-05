@@ -291,7 +291,7 @@ data:extend({
     order = "d[graphite]",
     enabled = false,
     allow_productivity=true,
-    energy_required = 6,
+    energy_required = 5,
     ingredients = (mods["space-age"] or mods.Krastorio2) and {
       {type="item", name="graphite", amount=1},
       {type="fluid", name="ammonia", amount=5},

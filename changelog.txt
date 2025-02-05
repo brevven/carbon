@@ -1,4 +1,30 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.3
+Date: 2025-02-04
+  Changes:
+    - Fix softlock with Muluna
+---------------------------------------------------------------------------------------------------
+Version: 2.0.3
+Date: 2025-01-31
+  Changes:
+    - Add shiftite recipes for Janus mod.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.2
+Date: 2025-01-31
+  Fixes:
+    - Fix compatibility issue with RCU Restored mod. 
+      RCUs do not require graphene in Space Age, but still do in Vanilla.
+  Changes:
+    - In space age, Power Armor mk2 no longer requires graphene. Still requires in Vanilla.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.1
+Date: 2025-01-30
+  Fixes:
+    - Space Age: With Titanium or Zirconium, unlock vacuum recipe earlier.
+    - Space Age: Fix unlock for polyacrylonitrile
+    - Space Age: Fix alternate ammonia recipe menu location
+    - Fix LDS localization
+---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2025-01-29
   Changes:

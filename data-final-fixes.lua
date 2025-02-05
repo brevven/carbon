@@ -12,6 +12,8 @@ local util = require("data-util");
 util.add_minable_result("simple-entity", "huge-volcanic-rock", {type="item", name="flake-graphite", amount_min=10, amount_max=24})
 util.add_minable_result("simple-entity", "big-volcanic-rock", {type="item", name="rough-diamond", amount_min=5, amount_max=10})
 
+util.set_localised_name("low-density-structure", {"item-name.low-density-structure"})
+
 -- supercapacitors with graphene cloned from supercapacitors with activated carbon
 if data.raw.recipe["supercapacitor"] then
   local new_recipe = futil.table.deepcopy(data.raw.recipe["supercapacitor"])
