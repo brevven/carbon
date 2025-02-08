@@ -1,6 +1,6 @@
 local util = require("data-util");
 
-local graphite_category = "advanced-crafting"
+local graphite_category = "crafting"
 if mods["space-exploration"] then
   graphite_category = "pulverising"
 end
