@@ -1,6 +1,16 @@
 local util = require("data-util");
 
 if mods["space-age"] then
+  local results = {
+    {type = "item", name = "carbonic-asteroid-chunk", amount = 1, probability = 0.1},
+    {type = "item", name = "rough-diamond", amount = 1, probability=0.5},
+  }
+  if util.me.use_flake_graphite() then
+    table.insert(results, {type = "item", name = "flake-graphite", amount = 10})
+  else
+    table.insert(results, {type = "item", name = "graphite", amount = 10})
+  end
+
   data:extend({
     {
       type = "recipe",
@@ -21,12 +31,7 @@ if mods["space-age"] then
         {type = "item", name = "carbonic-asteroid-chunk", amount = 1}
       },
       energy_required = 5,
-      results =
-      {
-        {type = "item", name = "flake-graphite", amount = 10},
-        {type = "item", name = "rough-diamond", amount = 1, probability=0.5},
-        {type = "item", name = "carbonic-asteroid-chunk", amount = 1, probability = 0.1}
-      },
+      results = results,
       allow_productivity = true,
       allow_decomposition = false
     },

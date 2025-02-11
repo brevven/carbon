@@ -2,6 +2,8 @@ local resource_autoplace = require('resource-autoplace');
 
 local util = require("data-util");
 
+if util.me.use_flake_graphite() then
+
 resource_autoplace.initialize_patch_set("graphite", true)
 data.raw.planet.nauvis.map_gen_settings.autoplace_controls["graphite"] = {}
 data.raw.planet.nauvis.map_gen_settings.autoplace_settings.entity.settings["graphite"] = {}
@@ -10,8 +12,6 @@ if mods.tenebris then
   data.raw.planet.tenebris.map_gen_settings.autoplace_settings.entity.settings["graphite"] = {}
 end
 
-
-if util.me.use_flake_graphite() then
 data:extend({
 	{
     type = "autoplace-control",

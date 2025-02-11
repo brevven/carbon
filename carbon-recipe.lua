@@ -90,7 +90,7 @@ if not util.me.use_flake_graphite() then
         type = "recipe",
         name = "graphite",
         icon = "__bzcarbon__/graphics/icons/graphite.png", icon_size=128,
-        category = mods.bzfoundry and "founding" or "advanced-crafting",
+        category = mods.bzfoundry and "founding" or "crafting",
         order = "d[graphite]",
         enabled = false,
         energy_required = 0.5,
@@ -104,7 +104,7 @@ if not util.me.use_flake_graphite() then
         type = "recipe",
         name = "graphite",
         icon = "__bzcarbon__/graphics/icons/graphite.png", icon_size=128,
-        category = mods.bzfoundry and "founding" or "advanced-crafting",
+        category = mods.bzfoundry and "founding" or "crafting",
         subgroup = data.raw.item.graphite.subgroup,
         order = "d[graphite]",
         enabled = false,
@@ -117,9 +117,7 @@ if not util.me.use_flake_graphite() then
   util.add_prerequisite("graphite-processing", "foundry")
 
   -- Increase richness of coal a bit
-  local noise = require('noise');
-  data.raw.resource["coal"].autoplace.richness_expression = 
-      data.raw.resource["coal"].autoplace.richness_expression * noise.to_noise_expression(1.5)
+  data.raw.resource["coal"].autoplace.richness_expression = data.raw.resource["coal"].autoplace.richness_expression.." * 1.5"
 end
 
 
@@ -573,7 +571,11 @@ if mods["space-exploration"] and string.sub(mods["space-exploration"], 1, 3) == 
 end
 
 -- Set early tech tree
-util.set_tech_trigger("graphite-processing", {type = "mine-entity", entity = "graphite"})
+if util.me.use_flake_graphite() then
+  util.set_tech_trigger("graphite-processing", {type = "mine-entity", entity = "graphite"})
+else
+  util.set_tech_trigger("graphite-processing", {type = "mine-entity", entity = "coal"})
+end
 util.add_prerequisite("graphite-processing", "steam-power")
 
 if mods["space-age"] then
