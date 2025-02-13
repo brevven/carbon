@@ -19,6 +19,7 @@ function cutil.nanotube_recipe(recipe_name, item_name, tech)
   new_recipe.icon = nil
   new_recipe.icon_size = nil
   new_recipe.icon_mipmaps = nil
+  new_recipe.hide_from_signal_gui = false
   data:extend({new_recipe})
   local amt = 2 * util.get_amount(recipe_name, item_name)
   util.add_ingredient(new_recipe.name, "nanotubes", amt, {force=true})

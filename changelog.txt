@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.7
+Date: 2025-02-13
+  Changes:
+    - Space Age: Show asteroid crushing recipe in signal GUI
+    - Space Age: Show alternative nanotube recipes in signal GUI
+---------------------------------------------------------------------------------------------------
 Version: 2.0.6
 Date: 2025-02-05
   Fixes:

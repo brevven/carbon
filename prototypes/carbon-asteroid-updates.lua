@@ -32,6 +32,7 @@ if mods["space-age"] then
       },
       energy_required = 5,
       results = results,
+      hide_from_signal_gui = false,
       allow_productivity = true,
       allow_decomposition = false
     },
