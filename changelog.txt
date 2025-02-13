@@ -1,7 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.7
 Date: 2025-02-13
+  Fixes:
+    - Space Age: Fix LDS recipes, plastic was not supposed to be removed.
   Changes:
+    - Space Age: Add nanotubes recipe for casting LDS.
     - Space Age: Show asteroid crushing recipe in signal GUI
     - Space Age: Show alternative nanotube recipes in signal GUI
 ---------------------------------------------------------------------------------------------------

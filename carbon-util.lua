@@ -11,11 +11,19 @@ function cutil.nanotube_recipe(recipe_name, item_name, tech)
 
   local new_recipe = futil.table.deepcopy(data.raw.recipe[recipe_name])
   new_recipe.name = recipe_name.."-nanotubes"
-  new_recipe.localised_name = {"item-name."..item_name}
-  new_recipe.icons = {
-      { icon = data.raw.item[item_name].icon, icon_size = data.raw.item[item_name].icon_size},
-      { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
-    }
+  if new_recipe.subgroup == "vulcanus-processes" then
+    new_recipe.localised_name = {"recipe-name."..recipe_name}
+    new_recipe.icons = {
+        { icon = data.raw.recipe[recipe_name].icon, icon_size = data.raw.recipe[recipe_name].icon_size},
+        { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
+      }
+  else
+    new_recipe.localised_name = {"item-name."..item_name}
+    new_recipe.icons = {
+        { icon = data.raw.item[item_name].icon, icon_size = data.raw.item[item_name].icon_size},
+        { icon = "__bzcarbon__/graphics/icons/nanotube.png", icon_size = 128, scale=0.125, shift= {-8, -8}},
+      }
+  end
   new_recipe.icon = nil
   new_recipe.icon_size = nil
   new_recipe.icon_mipmaps = nil
