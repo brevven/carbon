@@ -30,6 +30,10 @@ function cutil.nanotube_recipe(recipe_name, item_name, tech)
   new_recipe.hide_from_signal_gui = false
   data:extend({new_recipe})
   local amt = 2 * util.get_amount(recipe_name, item_name)
+  if amt == 0 and mods["hot-metals"] then
+    amt = 2 * util.get_amount(recipe_name, "hot-"..item_name)
+    util.set_product_amount(new_recipe.name, "hot-"..item_name, amt, {force=true})
+  end
   util.add_ingredient(new_recipe.name, "nanotubes", amt, {force=true})
   util.set_product_amount(new_recipe.name, item_name, amt, {force=true})
   util.add_unlock(tech, new_recipe.name)
