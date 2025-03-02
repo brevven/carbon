@@ -426,14 +426,14 @@ data:extend({
     energy_required = 20,
     ingredients = {
       {type="item", name="fullerenes", amount=1},
-      {type="item", name="iron-plate", amount=1, catalyst_amount=1},
-      {type="fluid", name="sulfuric-acid", amount=10, catalyst_amount=10},
+      {type="item", name="iron-plate", amount=1, ignored_by_stats=1, ignored_by_productivity=1},
+      {type="fluid", name="sulfuric-acid", amount=10, ignored_by_stats=10, ignored_by_productivity=10},
     },
     results = {
       {type="item", name="nanotubes", amount=1},
-      {type="item", name="iron-plate", amount=1, probability=0.95, catalyst_amount=1},
-      {type="fluid", name="sulfuric-acid", amount=9, catalyst_amount=9},
-      mods.Krastorio2 and {type="fluid", name="dirty-water", amount=1, catalyst_amount=1} or nil,
+      {type="item", name="iron-plate", amount=1, probability=0.95, ignored_by_stats=1, ignored_by_productivity=1},
+      {type="fluid", name="sulfuric-acid", amount=9, ignored_by_stats=9, ignored_by_productivity=9},
+      mods.Krastorio3 and {type="fluid", name="dirty-water", amount=1, ignored_by_stats=1, ignored_by_productivity=1} or nil,
     },
   },
   {

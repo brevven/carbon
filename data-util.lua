@@ -571,7 +571,7 @@ function util.se_matter(params)
           {"se-contaminated-scrap", 1},
           {type=item, name=sedata, amount=1, probability=.99},
           {type=item, name=sejunk, amount=1, probability=.01},
-          {type="fluid", name="se-space-coolant-hot", amount=25, catalyst_amount=25},
+          {type="fluid", name="se-space-coolant-hot", amount=25, ignored_by_stats=25, ignored_by_productivity=25},
         }
       }
     })
@@ -608,7 +608,7 @@ function util.se_matter(params)
           results = {
             {type=item, name="se-kr-matter-liberation-data", amount=1, probability=.99},
             {type=item, name=sejunk, amount=1, probability=.01},
-            {type="fluid", name="se-particle-stream", amount=params.stream_out, catalyst_amount=50},
+            {type="fluid", name="se-particle-stream", amount=params.stream_out, ignored_by_stats=50, ignored_by_productivity=50},
           }
         }
       })
@@ -1187,8 +1187,11 @@ function multiply_recipe(recipe, multiple)
             result.amount_min = result.amount_min * multiple
             result.amount_max = result.amount_max * multiple
           end
-          if result.catalyst_amount then
-            result.catalyst_amount = result.catalyst_amount * multiple
+          if result.ignored_by_stats then
+            result.ignored_by_stats = result.ignored_by_stats * multiple
+          end
+          if result.ignored_by_productivity then
+            result.ignored_by_productivity = result.ignored_by_productivity * multiple
           end
         end
       end
@@ -1483,6 +1486,12 @@ function util.set_to_founding(recipe, options)
   util.set_subgroup(recipe, "foundry-intermediate", options)
 end
 
+function util.add_asteroid_to_planet(planet, spawn_def)
+  if data.raw.planet[planet] and data.raw[spawn_def.type][spawn_def.asteroid] then
+    table.insert(data.raw.planet[planet].asteroid_spawn_definitions, spawn_def)
+  end
+end
+
 -- Add crafting category to an entity
 function util.add_crafting_category(entity_type, entity, category)
    if data.raw[entity_type][entity] and data.raw["recipe-category"][category] then
@@ -1663,12 +1672,16 @@ end
 function util.remove_prior_unlocks(tech, recipe)
   if data.raw.technology[tech].prerequisites then
     for i, prerequisite in pairs(data.raw.technology[tech].prerequisites) do
-      remove_prior_unlocks(prerequisite, recipe)
+      remove_prior_unlocks(prerequisite, recipe, 0)
     end
   end
 end
 
-function remove_prior_unlocks(tech, recipe)
+function remove_prior_unlocks(tech, recipe, depth)
+  if depth > 10000 then
+    log("Infinite recursion detected, backing out.")
+    return
+  end
   local technology = data.raw.technology[tech]
   if technology then
     log("Removing prior unlocks for ".. tech)
@@ -1677,7 +1690,7 @@ function remove_prior_unlocks(tech, recipe)
       for i, prerequisite in pairs(technology.prerequisites) do
         if string.sub(prerequisite, 1, 3) ~= 'ei_' then
           -- log("BZZZ removing prior unlocks for " .. recipe .. " from " .. tech ..", checking " .. prerequisite) -- Handy Debug :|
-          remove_prior_unlocks(prerequisite, recipe)
+          remove_prior_unlocks(prerequisite, recipe, depth+1)
         end
       end
     end
@@ -1701,12 +1714,16 @@ function util.replace_ingredients_prior_to(tech, old, new, multiplier)
   end
   if data.raw.technology[tech].prerequisites then
     for i, prerequisite in pairs(data.raw.technology[tech].prerequisites) do
-      replace_ingredients_prior_to(prerequisite, old, new, multiplier)
+      replace_ingredients_prior_to(prerequisite, old, new, multiplier, 0)
     end
   end
 end
 
-function replace_ingredients_prior_to(tech, old, new, multiplier)
+function replace_ingredients_prior_to(tech, old, new, multiplier, depth)
+  if depth > 10000 then
+    log("Infinite recursion detected, backing out.")
+    return
+  end
   log("Replacing for tech "..tech)
   local technology = data.raw.technology[tech]
   if technology then
@@ -1722,7 +1739,7 @@ function replace_ingredients_prior_to(tech, old, new, multiplier)
       for i, prerequisite in pairs(technology.prerequisites) do
         -- log("BZZZ checking " .. prerequisite) -- Handy Debug :|
         if string.sub(prerequisite, 1, 3) ~= 'ei_' then
-          replace_ingredients_prior_to(prerequisite, old, new, multiplier)
+          replace_ingredients_prior_to(prerequisite, old, new, multiplier, depth + 1)
         end
       end
     end

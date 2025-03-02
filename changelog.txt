@@ -1,6 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.9
-Date: 2025-02-20
+Date: 2025-03-03
+  Fixes:
+    - Nanotubes byproducts no longer affected by productivity
+    - Avoid possible infinite loop in certain mod loadouts, mostly when developing other mods.
   Changes:
     - Compatibility tweaks for Tungsten mod
 ---------------------------------------------------------------------------------------------------
