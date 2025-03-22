@@ -1672,16 +1672,22 @@ end
 function util.remove_prior_unlocks(tech, recipe)
   if data.raw.technology[tech].prerequisites then
     for i, prerequisite in pairs(data.raw.technology[tech].prerequisites) do
-      remove_prior_unlocks(prerequisite, recipe, 0)
+      remove_prior_unlocks(prerequisite, recipe, {})
     end
   end
 end
 
-function remove_prior_unlocks(tech, recipe, depth)
-  if depth > 10000 then
-    log("Infinite recursion detected, backing out.")
+function remove_prior_unlocks(tech, recipe, processed)
+--   log("depth "..depth)
+--   if depth > 10000 then
+--     log("Infinite recursion detected, backing out.")
+--     return
+--   end
+  if processed[tech] then
+    print("Already processed ".. tech .. " returning")
     return
   end
+  processed[tech] = true
   local technology = data.raw.technology[tech]
   if technology then
     log("Removing prior unlocks for ".. tech)
@@ -1689,8 +1695,8 @@ function remove_prior_unlocks(tech, recipe, depth)
     if technology.prerequisites then
       for i, prerequisite in pairs(technology.prerequisites) do
         if string.sub(prerequisite, 1, 3) ~= 'ei_' then
-          -- log("BZZZ removing prior unlocks for " .. recipe .. " from " .. tech ..", checking " .. prerequisite) -- Handy Debug :|
-          remove_prior_unlocks(prerequisite, recipe, depth+1)
+          log("BZZZ removing prior unlocks for " .. recipe .. " from " .. tech ..", checking " .. prerequisite) -- Handy Debug :|
+          remove_prior_unlocks(prerequisite, recipe, processed)
         end
       end
     end
@@ -1714,16 +1720,17 @@ function util.replace_ingredients_prior_to(tech, old, new, multiplier)
   end
   if data.raw.technology[tech].prerequisites then
     for i, prerequisite in pairs(data.raw.technology[tech].prerequisites) do
-      replace_ingredients_prior_to(prerequisite, old, new, multiplier, 0)
+      replace_ingredients_prior_to(prerequisite, old, new, multiplier, {})
     end
   end
 end
 
-function replace_ingredients_prior_to(tech, old, new, multiplier, depth)
-  if depth > 10000 then
-    log("Infinite recursion detected, backing out.")
+function replace_ingredients_prior_to(tech, old, new, multiplier, processed)
+  if processed[tech] then
+    print("Already processed ".. tech .. " returning")
     return
   end
+  processed[tech] = true
   log("Replacing for tech "..tech)
   local technology = data.raw.technology[tech]
   if technology then
@@ -1739,7 +1746,7 @@ function replace_ingredients_prior_to(tech, old, new, multiplier, depth)
       for i, prerequisite in pairs(technology.prerequisites) do
         -- log("BZZZ checking " .. prerequisite) -- Handy Debug :|
         if string.sub(prerequisite, 1, 3) ~= 'ei_' then
-          replace_ingredients_prior_to(prerequisite, old, new, multiplier, depth + 1)
+          replace_ingredients_prior_to(prerequisite, old, new, multiplier, processed)
         end
       end
     end
