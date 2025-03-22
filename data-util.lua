@@ -157,6 +157,7 @@ function util.add_shiftite_recipe(item, shiftites, quantity)
 end
 
 -- Add the gleba rock. If it exists, still add resource to mine from it
+local gleba_tint = {.6, .8, 1}
 function util.add_gleba_rock(resource, amount_min, amount_max)
   if (not data.raw.planet.gleba or
       not data.raw.planet.gleba.map_gen_settings or -- attempted compatibility fixes
@@ -176,7 +177,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
       name = "gleba-rock",
       localised_name = {"entity-name.big-rock"},
       flags = {"placeable-neutral", "placeable-off-grid"},
-      icon = "__base__/graphics/icons/big-sand-rock.png",
+      icons = {{icon = "__base__/graphics/icons/big-sand-rock.png", tint=gleba_tint}},
       subgroup = "grass",
       order = "b[decorative]-l[rock]-a[big]",
       deconstruction_alternative = "big-rock",
@@ -227,6 +228,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
       {
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-01.png",
+          tint = gleba_tint,
           width = 209,
           height = 138,
           shift = {0.304688, -0.4},
@@ -234,6 +236,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-02.png",
+          tint = gleba_tint,
           width = 165,
           height = 129,
           shift = {0.0, 0.0390625},
@@ -241,6 +244,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-03.png",
+          tint = gleba_tint,
           width = 151,
           height = 139,
           shift = {0.151562, 0.0},
@@ -248,6 +252,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-04.png",
+          tint = gleba_tint,
           width = 216,
           height = 110,
           shift = {0.390625, 0.0},
@@ -255,6 +260,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-05.png",
+          tint = gleba_tint,
           width = 154,
           height = 147,
           shift = {0.328125, 0.0703125},
@@ -262,6 +268,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-06.png",
+          tint = gleba_tint,
           width = 154,
           height = 132,
           shift = {0.16875, -0.1},
@@ -269,6 +276,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-07.png",
+          tint = gleba_tint,
           width = 193,
           height = 130,
           shift = {0.3, -0.2},
@@ -276,6 +284,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-08.png",
+          tint = gleba_tint,
           width = 136,
           height = 117,
           shift = {0.0, 0.0},
@@ -283,6 +292,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-09.png",
+          tint = gleba_tint,
           width = 157,
           height = 115,
           shift = {0.1, 0.0},
@@ -290,6 +300,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-10.png",
+          tint = gleba_tint,
           width = 198,
           height = 153,
           shift = {0.325, -0.1},
@@ -297,6 +308,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-11.png",
+          tint = gleba_tint,
           width = 190,
           height = 115,
           shift = {0.453125, 0.0},
@@ -304,6 +316,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-12.png",
+          tint = gleba_tint,
           width = 229,
           height = 126,
           shift = {0.539062, -0.015625},
@@ -311,6 +324,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-13.png",
+          tint = gleba_tint,
           width = 151,
           height = 125,
           shift = {0.0703125, 0.179688},
@@ -318,6 +332,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-14.png",
+          tint = gleba_tint,
           width = 137,
           height = 117,
           shift = {0.160938, 0.0},
@@ -325,6 +340,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-15.png",
+          tint = gleba_tint,
           width = 201,
           height = 141,
           shift = {0.242188, -0.195312},
@@ -332,6 +348,7 @@ function util.add_gleba_rock(resource, amount_min, amount_max)
         },
         {
           filename = "__base__/graphics/decorative/sand-rock/big-sand-rock-16.png",
+          tint = gleba_tint,
           width = 209,
           height = 154,
           shift = {0.351562, -0.1},
@@ -1678,11 +1695,6 @@ function util.remove_prior_unlocks(tech, recipe)
 end
 
 function remove_prior_unlocks(tech, recipe, processed)
---   log("depth "..depth)
---   if depth > 10000 then
---     log("Infinite recursion detected, backing out.")
---     return
---   end
   if processed[tech] then
     print("Already processed ".. tech .. " returning")
     return
@@ -1695,7 +1707,7 @@ function remove_prior_unlocks(tech, recipe, processed)
     if technology.prerequisites then
       for i, prerequisite in pairs(technology.prerequisites) do
         if string.sub(prerequisite, 1, 3) ~= 'ei_' then
-          log("BZZZ removing prior unlocks for " .. recipe .. " from " .. tech ..", checking " .. prerequisite) -- Handy Debug :|
+          -- log("BZZZ removing prior unlocks for " .. recipe .. " from " .. tech ..", checking " .. prerequisite) -- Handy Debug :|
           remove_prior_unlocks(prerequisite, recipe, processed)
         end
       end
