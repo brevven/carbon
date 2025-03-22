@@ -20,10 +20,10 @@ graphics.animation.east.layers[1].scale = graphics.animation.east.layers[1].scal
 graphics.animation.east.layers[2].scale = graphics.animation.east.layers[2].scale * 0.5
 graphics.animation.west.layers[1].scale = graphics.animation.west.layers[1].scale * 0.5
 graphics.animation.west.layers[2].scale = graphics.animation.west.layers[2].scale * 0.5
-graphics.working_visualisations.layers.north_animation.scale = graphics.working_visualisations.layers.north_animation.scale * 0.5
-graphics.working_visualisations.layers.east_animation.scale = graphics.working_visualisations.layers.east_animation.scale * 0.5
-graphics.working_visualisations.layers.south_animation.scale = graphics.working_visualisations.layers.south_animation.scale * 0.5
-graphics.working_visualisations.layers.west_animation.scale = graphics.working_visualisations.layers.west_animation.scale * 0.5
+graphics.working_visualisations[1].north_animation.scale = graphics.working_visualisations[1].north_animation.scale * 0.5
+graphics.working_visualisations[1].east_animation.scale = graphics.working_visualisations[1].east_animation.scale * 0.5
+graphics.working_visualisations[1].south_animation.scale = graphics.working_visualisations[1].south_animation.scale * 0.5
+graphics.working_visualisations[1].west_animation.scale = graphics.working_visualisations[1].west_animation.scale * 0.5
 
 graphics.integration_patch.north.shift[1] = graphics.integration_patch.north.shift[1] * 0.5
 graphics.integration_patch.north.shift[2] = graphics.integration_patch.north.shift[2] * 0.5
@@ -49,15 +49,14 @@ graphics.animation.west.layers[1].shift[1] = graphics.animation.west.layers[1].s
 graphics.animation.west.layers[1].shift[2] = graphics.animation.west.layers[1].shift[2] * 0.5
 graphics.animation.west.layers[2].shift[1] = graphics.animation.west.layers[2].shift[1] * 0.5
 graphics.animation.west.layers[2].shift[2] = graphics.animation.west.layers[2].shift[2] * 0.5
-graphics.working_visualisations.layers.north_animation.shift[1] = graphics.working_visualisations.layers.north_animation.shift[1] * 0.5
-graphics.working_visualisations.layers.north_animation.shift[2] = graphics.working_visualisations.layers.north_animation.shift[2] * 0.5
-graphics.working_visualisations.layers.south_animation.shift[1] = graphics.working_visualisations.layers.south_animation.shift[1] * 0.5
-graphics.working_visualisations.layers.south_animation.shift[2] = graphics.working_visualisations.layers.south_animation.shift[2] * 0.5
-graphics.working_visualisations.layers.east_animation.shift[1] = graphics.working_visualisations.layers.east_animation.shift[1] * 0.5
-graphics.working_visualisations.layers.east_animation.shift[2] = graphics.working_visualisations.layers.east_animation.shift[2] * 0.5
-graphics.working_visualisations.layers.west_animation.shift[1] = graphics.working_visualisations.layers.west_animation.shift[1] * 0.5
-graphics.working_visualisations.layers.west_animation.shift[2] = graphics.working_visualisations.layers.west_animation.shift[2] * 0.5
-
+graphics.working_visualisations[1].north_animation.shift[1] = graphics.working_visualisations[1].north_animation.shift[1] * 0.5
+graphics.working_visualisations[1].north_animation.shift[2] = graphics.working_visualisations[1].north_animation.shift[2] * 0.5
+graphics.working_visualisations[1].south_animation.shift[1] = graphics.working_visualisations[1].south_animation.shift[1] * 0.5
+graphics.working_visualisations[1].south_animation.shift[2] = graphics.working_visualisations[1].south_animation.shift[2] * 0.5
+graphics.working_visualisations[1].east_animation.shift[1] = graphics.working_visualisations[1].east_animation.shift[1] * 0.5
+graphics.working_visualisations[1].east_animation.shift[2] = graphics.working_visualisations[1].east_animation.shift[2] * 0.5
+graphics.working_visualisations[1].west_animation.shift[1] = graphics.working_visualisations[1].west_animation.shift[1] * 0.5
+graphics.working_visualisations[1].west_animation.shift[2] = graphics.working_visualisations[1].west_animation.shift[2] * 0.5
 
 util.add_new_crafting_category("basic-crushing", true)
 
