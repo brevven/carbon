@@ -1,8 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.14
-Date: 2025-03-23
+Date: 2025-04-08
   Changes:
-    - none
+    - Space Age: Crusher recipe requires diamonds.
+    - Carbon black recipe uses crushed coal if available
+    - Further improved compatibility with Crushing Industry recipes
+    - Space Age: Asteroid crushing recipe now affected by productivity research
+    - Space Age: Low Density Structure recipes now affected by productivity reseearch
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.13
 Date: 2025-03-22

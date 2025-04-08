@@ -7,6 +7,9 @@ util.add_prerequisite("low-density-structure", "diamond-processing")
 util.add_prerequisite("advanced-electronics-2", "diamond-processing")
 util.add_prerequisite("laser", "diamond-processing")
 
+-- update carbon black alternate recipe if possible
+util.replace_ingredient("carbon-black", "coal", "crushed-coal")
+
 
 if not mods["space-age"] then -- more uses for graphene in vanilla
   util.add_prerequisite("power-armor-mk2", "graphene")
@@ -40,6 +43,7 @@ end
 
 -- space age
 if mods["space-age"] then
+  util.add_ingredient("crusher", "diamond", 10)
   util.add_ingredient("big-mining-drill", "diamond", 10)
   util.add_prerequisite("big-mining-drill", "diamond-processing-2")
   util.replace_ingredient("quantum-processor", "tungsten-carbide", "diamond", 2)
@@ -51,6 +55,11 @@ if mods["space-age"] then
   util.set_product_probability("scrap-recycling", "processing-unit", 0.03)
   util.add_ingredient("cryogenic-plant", "graphene", 20)
   util.add_ingredient("fluoroketone", "graphene", 1)
+
+  -- Crushing industries
+  util.add_ingredient("crusher-2", "diamond", 10)
+  util.add_ingredient("big-crusher", "diamond", 10)
+  util.add_ingredient("big-electric-crusher", "diamond", 10)
 end
 
 -- fullerenes & nanotubes
