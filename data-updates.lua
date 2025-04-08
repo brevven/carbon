@@ -28,6 +28,5 @@ util.redo_recycling()
 util.add_shiftite_recipe("graphite", {"alpha"}, 1)
 util.add_shiftite_recipe("diamond", {"beta", "epsilon"}, 1)
 
-require("compatibility/crafting-efficiency")
 -- Must be last
 util.create_list()

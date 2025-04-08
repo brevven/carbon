@@ -1,13 +1,13 @@
 {
     "name": "bzcarbon",
-    "version": "2.0.12",
+    "version": "2.0.13",
     "factorio_version": "2.0",
     "title": "Graphite & Diamonds",
     "author": "Brevven",
     "contact": "",
     "homepage": "",
     "dependencies": [
-      "base >= 1.1.0",
+      "base >= 2.0.42",
       "? space-age",
       "? bztitanium",
       "? bzsilicon",

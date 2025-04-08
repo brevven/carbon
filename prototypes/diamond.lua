@@ -1,5 +1,5 @@
 local resource_autoplace = require('resource-autoplace');
-
+local item_sounds = require('__base__.prototypes.item_sounds')
 local util = require("data-util");
 
 if util.me.use_rough_diamond() then
@@ -77,6 +77,9 @@ data:extend({
         {filename="__bzcarbon__/graphics/icons/rough-diamond-3.png", size=128, scale=0.25},
         {filename="__bzcarbon__/graphics/icons/rough-diamond-4.png", size=128, scale=0.25},
       },
+      inventory_move_sound = item_sounds.resource_inventory_move,
+      pick_sound = item_sounds.resource_inventory_pickup,
+      drop_sound = item_sounds.resource_inventory_move,
       subgroup = "raw-resource",
       order = "t-c-a",
       stack_size = util.get_stack_size(50)
