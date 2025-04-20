@@ -60,6 +60,10 @@ if mods["space-age"] then
   util.add_ingredient("crusher-2", "diamond", 10)
   util.add_ingredient("big-crusher", "diamond", 10)
   util.add_ingredient("big-electric-crusher", "diamond", 10)
+
+  if mods["planet-muluna"] then
+    util.add_unlock("greenhouses", "diamond-processing")
+  end
 end
 
 -- fullerenes & nanotubes
@@ -93,6 +97,7 @@ if util.me.use_carbon_black() then
 
   -- Plastic from carbon black, carbon black from oil processing
   util.replace_ingredient("plastic-bar", "coal", "carbon-black")
+  util.replace_ingredient("plastic-bar", "crushed-coal", "carbon-black", 1)
   util.add_product("basic-oil-processing", util.item("carbon-black", 1))
   util.add_product("advanced-oil-processing", util.item("carbon-black", 1))
   util.add_product("light-oil-cracking", util.item("carbon-black", 1))
@@ -144,8 +149,8 @@ util.add_ingredient("assembling-machine-3", "diamond", 4)
 util.add_ingredient("low-density-structure", "diamond", 1)
 util.add_ingredient("se-low-density-structure-beryllium", "diamond", 1)
 if util.me.reuse() then
-  util.add_product("low-density-structure", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
-  util.add_product("se-low-density-structure-beryllium", {type="item", name="diamond", amount=1, probability = 0.5, catalyst_amount=1})
+  util.add_product("low-density-structure", {type="item", name="diamond", amount=1, probability = 0.5, ignored_by_stats=1, ignored_by_productivity=1})
+  util.add_product("se-low-density-structure-beryllium", {type="item", name="diamond", amount=1, probability = 0.5, ignored_by_stats=1, ignored_by_productivity=1})
   if data.raw.recipe["low-density-structure"] and 
     not data.raw.recipe["low-density-structure"].icon and
     not data.raw.recipe["low-density-structure"].icons
@@ -261,8 +266,8 @@ util.add_ingredient("se-void-probe", "graphene", 100)
 util.add_ingredient("se-adaptive-armour-equipment-4", "graphene", 20)
 util.add_ingredient("se-thuster-suit-2", "graphene", 50)
 
-util.add_ingredient_raw("se-ballistic-shielding-data", {type="item", name="graphene", amount=10, catalyst_amount=9})
-util.add_product("se-ballistic-shielding-data", {type="item", name="graphene", amount_min=9, amount_max=10, catalyst_amount=10})
+util.add_ingredient_raw("se-ballistic-shielding-data", {type="item", name="graphene", amount=10, ignored_by_stats=9, ignored_by_productivity=9})
+util.add_product("se-ballistic-shielding-data", {type="item", name="graphene", amount_min=9, amount_max=10, ignored_by_stats=10, ignored_by_productivity=10})
 
 util.add_ingredient("se-space-radiator-2", "diamond", 16)
 

@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.15
+Date: 2025-04-19
+  Fixes:
+    - Crushing Industry: Plastic uses carbon black instead of crushed coal
+    - Diamonds returned from LDS recipe are not affected by productivity
+  Changes:
+    - Space Age & Muluna: Can process rough diamonds earlier in tech tree
+---------------------------------------------------------------------------------------------------
 Version: 2.0.14
 Date: 2025-04-08
   Changes:
