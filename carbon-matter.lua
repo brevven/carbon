@@ -10,7 +10,7 @@ data:extend(
     icons =
     {
       {
-        icon = util.k2assets().."/technologies/matter-coal.png",
+        icon = util.k2assets().."/technologies/backgrounds/matter.png",
         icon_size = 256,
       },
       {
@@ -22,7 +22,7 @@ data:extend(
     effects = {},
     prerequisites = {"kr-matter-processing"},
     unit =
-  	{
+    {
       count = 350,
       ingredients =
       {
