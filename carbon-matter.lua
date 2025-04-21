@@ -31,7 +31,8 @@ data:extend(
         {"kr-matter-tech-card", 1}
       },
       time = 45
-    }
+    },
+    effects =  {}
   },
 })
 

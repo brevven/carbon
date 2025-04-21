@@ -130,7 +130,7 @@ function util.k2assets()
   if mods["Krastorio2Assets"] then
     return "__Krastorio2Assets__"
   end
-  return "__Krastorio2__/graphics"
+  return "__Krastorio2__/"
 end
 
 -- check if a table contains a sought value
@@ -684,7 +684,7 @@ function util.se_matter(params)
                 {"se-astronomic-science-pack-4", 1},
                 {"se-energy-science-pack-4", 1},
                 {"se-material-science-pack-4", 1},
-                {"matter-tech-card", 1},
+                {"kr-matter-tech-card", 1},
                 {"se-deep-space-science-pack-1", 1},
               }
               

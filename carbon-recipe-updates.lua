@@ -196,7 +196,7 @@ util.add_ingredient("nuclear-reactor", "graphite", 500)
 util.add_ingredient("satellite", "graphene", 100)
 
 -- K2
-util.add_ingredient("empty-dt-fuel", "graphite", 1)
+util.add_ingredient("kr-empty-dt-fuel-cell", "graphite", 1)
 util.add_ingredient("kr-steel-pump", "graphite", 2)
 
 util.add_ingredient("kr-electrolysis-plant", "graphite", 10)
@@ -204,15 +204,15 @@ util.add_ingredient("kr-fusion-reactor", "graphite", 350)
 util.add_ingredient("kr-antimatter-reactor", "graphite", 350)
 util.add_ingredient("kr-electric-mining-drill-mk3", "diamond", 5)
 util.add_ingredient("kr-quarry-drill", "diamond", 20)
-util.add_ingredient("advanced-exoskeleton-equipment", "diamond", 10)
+util.add_ingredient("kr-advanced-exoskeleton-equipment", "diamond", 10)
 
-util.add_ingredient("improved-pollution-filter", "graphene", 1)
-util.add_ingredient("lithium-sulfur-battery", "graphene", 1)
-util.add_ingredient("matter-research-data", "graphene", 5)
+util.add_ingredient("kr-pollution-filter", "graphene", 1)
+util.add_ingredient("kr-lithium-sulfur-battery", "graphene", 1)
+util.add_ingredient("kr-matter-research-data", "graphene", 5)
 util.add_ingredient("kr-advanced-solar-panel", "graphene", 5)
-util.add_ingredient("imersite-solar-panel-equipment", "graphene", 5)
+util.add_ingredient("kr-big-superior-solar-panel-equipment", "graphene", 5)
 util.add_ingredient("kr-advanced-chemical-plant", "graphene", 20)
-util.add_ingredient("empty-antimatter-fuel-cell", "graphene", 10)
+util.add_ingredient("kr-empty-antimatter-fuel-cell", "graphene", 10)
 
 util.add_prerequisite("kr-lithium-sulfur-battery", "graphene")
 util.set_tech_recipe("kr-lithium-sulfur-battery", 
