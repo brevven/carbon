@@ -35,10 +35,14 @@ for i, ingredient in pairs(util.me.crucible_ingredients) do
   end
 end
 for i, furnace in pairs(util.me.furnaces) do
+  if furnace == "foundry" and mods.bzfoundry then
+    goto continue
+  end
   util.add_ingredient(furnace, "crucible", 1)
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
     util.remove_ingredient(furnace, ingredient)
   end
+  ::continue::
 end
 
 -- space age

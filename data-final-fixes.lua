@@ -113,7 +113,11 @@ end
 -- furnace recipe rework, remove crucible ingredients one more time
 for i, furnace in pairs(util.me.furnaces) do
   for j, ingredient in pairs(util.me.crucible_ingredients)  do
+    if furnace == "foundry" and mods.bzfoundry then
+      goto continue
+    end
     util.remove_ingredient(furnace, ingredient)
+    ::continue::
   end
 end
 util.remove_ingredient("electric-furnace", "cuw") -- support new tungsten
