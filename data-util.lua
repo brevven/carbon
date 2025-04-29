@@ -130,7 +130,7 @@ function util.k2assets()
   if mods["Krastorio2Assets"] then
     return "__Krastorio2Assets__"
   end
-  return "__Krastorio2__/"
+  return "__Krastorio2__/graphics"
 end
 
 -- check if a table contains a sought value
