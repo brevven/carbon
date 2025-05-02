@@ -1,4 +1,4 @@
-local util = require("data-util");
+local util = require("__bzcarbon__.data-util");
 
 if util.me.use_fiber() then
 if mods["space-age"] then
@@ -53,6 +53,9 @@ data:extend({
     },
   },
 })
+if mods.Krastorio2 then
+  util.add_ingredient("polyacrylonitrile","kr-ammonia",5)
+end
 if mods["space-age"] then
   util.set_category("polyacrylonitrile", "organic")
   util.remove_ingredient("polyacrylonitrile", "petroleum-gas")
@@ -84,8 +87,8 @@ else
       energy_required = 24,
       ingredients = {
         {type="fluid", name="epoxy", amount = 20},
-        {"plastic-bar", 2},
-        {"polyacrylonitrile", 4},
+        {type="item", name= "plastic-bar", amount=2},
+        {type="item", name= "polyacrylonitrile", amount=4},
       },
       results = {
         {type="item", name= "carbon-fiber", amount=8},
