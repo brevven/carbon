@@ -37,23 +37,23 @@ data:extend({
     },
     results = {
       {type="item", name="graphite", amount=18},
-      {type="fluid", name="dirty-water", amount=25, catalyst_amount=25},
+      {type="fluid", name="kr-dirty-water", amount=25, catalyst_amount=25},
     },
   },
 	{
 		type = "recipe",
-		name = "dirty-water-filtration-graphite",
+		name = "kr-dirty-water-filtration-graphite",
 		category = "fluid-filtration",
 		icons =
 		{
 			{
-				icon = data.raw.fluid["dirty-water"].icon,
-				icon_size = data.raw.fluid["dirty-water"].icon_size
+				icon = data.raw.fluid["kr-dirty-water"].icon,
+				icon_size = data.raw.fluid["kr-dirty-water"].icon_size
 			},
 			{
 				icon = data.raw.item["flake-graphite"].icon,
 				icon_size =	data.raw.item["flake-graphite"].icon_size,
-				scale = 0.20 * (data.raw.fluid["dirty-water"].icon_size/data.raw.item["flake-graphite"].icon_size),
+				scale = 0.20 * 64 / (data.raw.item["flake-graphite"].icon_size or 64),
 				shift = {0, 4}
 			}
 		},
@@ -64,7 +64,7 @@ data:extend({
 		always_show_products = true,
 		ingredients =
 		{
-			{type = "fluid", name = "dirty-water", amount = 100, catalyst_amount = 100},
+			{type = "fluid", name = "kr-dirty-water", amount = 100, catalyst_amount = 100},
 		},
 		results =
 		{
