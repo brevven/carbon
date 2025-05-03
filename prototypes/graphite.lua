@@ -12,6 +12,7 @@ if mods.tenebris then
   data.raw.planet.tenebris.map_gen_settings.autoplace_settings.entity.settings["graphite"] = {}
 end
 
+log("B")
 data:extend({
 	{
     type = "autoplace-control",
@@ -89,3 +90,4 @@ data:extend({
   },
 })
 end
+log("A")

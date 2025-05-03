@@ -1,6 +1,6 @@
 -- Matter recipes for Krastorio2
-if mods["Krastorio2"] then
 local util = require("data-util");
+if util.k2() then
 
 data:extend(
 {
@@ -16,7 +16,7 @@ data:extend(
       {
         icon = "__bzcarbon__/graphics/icons/diamond.png",
         icon_size = 128,
-        scale = 1.4,
+        scale = 0.7,
       }
     },
     effects = {},

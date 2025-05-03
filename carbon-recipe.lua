@@ -8,7 +8,7 @@ end
 if mods["space-age"] then
   graphite_category = "basic-crushing"
 end
-if mods.Krastorio2 then
+if util.k2() then
   graphite_category = "kr-crushing"
 end
 
@@ -40,12 +40,12 @@ data:extend({
     name = "graphite",
     category = graphite_category,
     order = "d[graphite]",
-    icons = (mods["Krastorio2"] and
+    icons = (util.k2() and
         {
           { icon = "__bzcarbon__/graphics/icons/graphite.png", icon_size = 128},
           { icon = "__bzcarbon__/graphics/icons/flake-graphite.png", icon_size = 128, icon_mipmaps = 3, scale=0.25, shift= {-8, -8}},
         } or nil),
-    -- normal = (mods["Krastorio2"] and
+    -- normal = (util.k2() and
     --     {
     --       enabled = false,
     --       energy_required = 5,
@@ -127,7 +127,7 @@ end
 
 
 
-if mods.Krastorio2 then
+if util.k2() then
   util.add_prerequisite("graphite-processing", "kr-crusher")
 else
   -- util.add_prerequisite("graphite-processing", "automation")
@@ -135,7 +135,7 @@ end
 
 
 
-if mods["space-exploration"] and not mods.Krastorio2 then
+if mods["space-exploration"] and not util.k2() then
 data:extend({
   {
     type = "recipe",
@@ -213,12 +213,12 @@ data:extend({
     category = "advanced-crafting",
     subgroup = "raw-material",
     order = "d[diamond]",
-    icons = (mods["Krastorio2"] and
+    icons = (util.k2() and
         {
           { icon = "__bzcarbon__/graphics/icons/diamond.png", icon_size = 128},
           { icon = "__bzcarbon__/graphics/icons/rough-diamond.png", icon_size = 64, scale=0.25, shift= {-8, -8}},
         } or  {{ icon = "__bzcarbon__/graphics/icons/diamond.png", icon_size = 128}}),
-    -- normal = (mods["Krastorio2"] and
+    -- normal = (util.k2() and
     --     {
     --       enabled = false,
     --       energy_required = 20,
@@ -301,7 +301,7 @@ data:extend({
     enabled = false,
     allow_productivity=true,
     energy_required = 5,
-    ingredients = (mods["space-age"] or mods.Krastorio2) and {
+    ingredients = (mods["space-age"] or util.k2()) and {
       {type="item", name="graphite", amount=1},
       {type="fluid", name=ammonia, amount=5},
       {type="fluid", name="water", amount=10},
@@ -381,7 +381,7 @@ data:extend({
     enabled = false,
     allow_productivity=true,
     energy_required = 1,
-    ingredients = mods.Krastorio2 and
+    ingredients = util.k2() and
     {
       {type="item", name="graphite", amount=2},
       {type="fluid", name="kr-nitrogen", amount=2},
@@ -451,7 +451,7 @@ data:extend({
       {type="item", name="nanotubes", amount=1},
       {type="item", name="iron-plate", amount=1, probability=0.95, ignored_by_stats=1, ignored_by_productivity=1},
       {type="fluid", name="sulfuric-acid", amount=9, ignored_by_stats=9, ignored_by_productivity=9},
-      mods.Krastorio3 and {type="fluid", name="dirty-water", amount=1, ignored_by_stats=1, ignored_by_productivity=1} or nil,
+      util.k2() and {type="fluid", name="kr-dirty-water", amount=1, ignored_by_stats=1, ignored_by_productivity=1} or nil,
     },
   },
   {
@@ -470,7 +470,7 @@ data:extend({
     {
       count = 1000,
       ingredients = 
-      (mods.Krastorio2 and not mods["space-exploration"] and
+      (util.k2() and not mods["space-exploration"] and
       {
             {"production-science-pack", 1},
             {"utility-science-pack", 1},

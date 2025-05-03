@@ -1,6 +1,6 @@
 local util = require("data-util");
 
-if mods.Krastorio2 then
+if util.k2() then
 
 -- HCL graphite processing
 if util.me.use_flake_graphite() then

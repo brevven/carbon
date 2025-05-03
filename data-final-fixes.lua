@@ -119,7 +119,7 @@ end
 util.remove_ingredient("electric-furnace", "cuw") -- support new tungsten
 
 -- Vanilla burner phase tweaks -- green circuits after electronics
-if not mods.Krastorio2 and not mods["aai-industry"] and not mods.bzaluminum then
+if not util.k2() and not mods["aai-industry"] and not mods.bzaluminum then
   util.replace_ingredient("electric-mining-drill", "electronic-circuit", "copper-cable", 6)
 
   -- Most of this can go post 2.0

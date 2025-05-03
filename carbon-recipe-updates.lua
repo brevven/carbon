@@ -21,7 +21,7 @@ end
 
 util.add_prerequisite("electronics", "graphite-processing")
 
-if mods.Krastorio2 then
+if util.k2() then
   util.add_prerequisite("graphite-processing", "automation-science-pack")
   util.add_prerequisite("graphite-processing", "basic-fluid-handling")
 end
@@ -71,7 +71,7 @@ if util.me.use_fullerenes() then
   util.add_prerequisite("graphene", "fullerenes")
   util.add_prerequisite("military-3", "fullerenes")
   util.replace_some_ingredient("poison-capsule", "coal", 9, "fullerenes", 90)
-  if not mods.Krastorio2 then
+  if not util.k2() then
     util.replace_some_ingredient("slowdown-capsule", "coal", 4, "fullerenes", 40)
   end
   util.add_ingredient("capture-bot-rocket", "fullerenes", 10)
@@ -170,7 +170,7 @@ if util.me.reuse() then
   end
 end
 
-if mods.Krastorio2 then
+if util.k2() then
   util.replace_some_ingredient("steel-plate", "iron-plate", 2, "graphite", 4)
   util.add_ingredient("tungsten-carbide", "graphite", 4)
   util.replace_some_ingredient("kr-s-c-steel-beam", "iron-plate", 4, "graphite", 8)
@@ -180,7 +180,9 @@ elseif mods.bzfoundry and util.me.foundry_enable() then
   util.replace_some_ingredient("tungsten-carbide", "tungsten-plate", 1, "graphite", 1)
 end
 
-if not mods.Krastorio2 then
+util.add_ingredient("kr-energy-control-unit", "activated-carbon", 3)
+
+if not util.k2() then
   util.multiply_recipe("lubricant", 2)
 end
 util.replace_some_ingredient("lubricant", "heavy-oil", 10, "graphite", 1)

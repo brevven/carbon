@@ -12,7 +12,7 @@ require("compatibility/orewashing")
 local util = require("data-util");
 
 if util.me.use_flake_graphite() then
-  if mods.Krastorio2 then
+  if util.k2() then
     require("tech-triggers")  -- For K2 this has to be in data updates as K2 unsafely access the tech research unit
   end
 end

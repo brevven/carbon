@@ -1,6 +1,6 @@
 local util = require("data-util")
 local cutil = require("carbon-util")
-if mods.Krastorio2 then
+if util.k2() then
   if util.me.use_fullerenes() then
     -- Add extra nanotube recipes.
     -- This could be moved to data-updates in future if necessary
