@@ -574,6 +574,12 @@ data:extend({
 },
 })
 
+if util.me.get_setting("aps-planet") == "vulcanus" then
+  util.add_unlock("foundry", "crucible")
+  util.remove_recipe_effect("advanced-material-processing-2", "crucible")
+end
+
+
 -- Space exploration subgroups
 if mods["space-exploration"] and string.sub(mods["space-exploration"], 1, 3) == "0.6" then
   data:extend({
