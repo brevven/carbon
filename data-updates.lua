@@ -10,6 +10,13 @@ require("compatibility/orewashing")
 -- require("omni")
 
 local util = require("data-util");
+
+if util.me.use_flake_graphite() then
+  if mods.Krastorio2 then
+    require("tech-triggers")  -- For K2 this has to be in data updates as K2 unsafely access the tech research unit
+  end
+end
+
 util.add_gleba_rock("flake-graphite")
 util.add_gleba_rock("rough-diamond", 2, 3)
 

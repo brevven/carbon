@@ -32,18 +32,18 @@ data:extend({
 		},
     ingredients = {
       {type="item", name="flake-graphite", amount=10},
-      {type="fluid", name="water", amount=25, catalyst_amount=25},
-      {type="fluid", name="hydrogen-chloride", amount=25},
+      {type="fluid", name="water", amount=25, ignored_by_stats=25, ignored_by_productivity=25},
+      {type="fluid", name="kr-hydrogen-chloride", amount=25},
     },
     results = {
       {type="item", name="graphite", amount=18},
-      {type="fluid", name="kr-dirty-water", amount=25, catalyst_amount=25},
+      {type="fluid", name="kr-dirty-water", amount=25, ignored_by_stats=25, ignored_by_productivity=25},
     },
   },
 	{
 		type = "recipe",
-		name = "kr-dirty-water-filtration-graphite",
-		category = "fluid-filtration",
+		name = "dirty-water-filtration-graphite",
+		category = "kr-fluid-filtration",
 		icons =
 		{
 			{
@@ -133,18 +133,18 @@ data:extend({
           { icon = util.k2assets().."/icons/fluids/heavy-water.png", icon_size = 64, icon_mipmaps = 3,},
           { icon = "__bzcarbon__/graphics/icons/graphene.png", icon_size = 128,  scale=0.25, shift= {-8, -8}},
         },
-    category = "electrolysis",
+    category = "kr-electrolysis",
     subgroup = "fluid-recipes",
     order = "y06[heavy-water]",
     enabled = false,
     energy_required = 60,
     ingredients = {
-      {type="item", name="graphene", amount=1, catalyst_amount=1},
+      {type="item", name="graphene", amount=1, ignored_by_stats=1, ignored_by_productivity=1},
       {type="fluid", name="water", amount=500},
     },
     results = {
-      {type="item", name="graphene", amount=1, probability=.8, catalyst_amount=1},
-      {type="fluid", name="heavy-water", amount=40},
+      {type="item", name="graphene", amount=1, probability=.8, ignored_by_stats=1, ignored_by_productivity=1},
+      {type="fluid", name="kr-heavy-water", amount=40},
     },
   }
 })

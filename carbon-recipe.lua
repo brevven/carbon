@@ -9,7 +9,7 @@ if mods["space-age"] then
   graphite_category = "basic-crushing"
 end
 if mods.Krastorio2 then
-  graphite_category = "crushing"
+  graphite_category = "kr-crushing"
 end
 
 data:extend({
@@ -277,6 +277,7 @@ data:extend({
     order = "b-b"
   },
 })
+local ammonia = mods.Krastorio2 and "kr-ammonia" or "ammonia"
 data:extend({
 -- graphene
   {
@@ -302,7 +303,8 @@ data:extend({
     energy_required = 5,
     ingredients = (mods["space-age"] or mods.Krastorio2) and {
       {type="item", name="graphite", amount=1},
-      {type="fluid", name="ammonia", amount=5},
+      {type="fluid", name=ammonia, amount=5},
+      {type="fluid", name="water", amount=10},
       {type="fluid", name="sulfuric-acid", amount=5},
     } or {
       {type="item", name="graphite", amount=1},
@@ -382,7 +384,7 @@ data:extend({
     ingredients = mods.Krastorio2 and
     {
       {type="item", name="graphite", amount=2},
-      {type="fluid", name="nitrogen", amount=2},
+      {type="fluid", name="kr-nitrogen", amount=2},
     } or
     {
       {type="item", name="graphite", amount=2},
@@ -473,8 +475,8 @@ data:extend({
             {"production-science-pack", 1},
             {"utility-science-pack", 1},
             {"space-science-pack", 1},
-            {"matter-tech-card", 1},
-            {"advanced-tech-card", 1},
+            {"kr-matter-tech-card", 1},
+            {"kr-advanced-tech-card", 1},
       }) or
       {
             {"automation-science-pack", 1},
