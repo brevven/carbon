@@ -304,7 +304,6 @@ data:extend({
     ingredients = (mods["space-age"] or util.k2()) and {
       {type="item", name="graphite", amount=1},
       {type="fluid", name=ammonia, amount=5},
-      {type="fluid", name="water", amount=10},
       {type="fluid", name="sulfuric-acid", amount=5},
     } or {
       {type="item", name="graphite", amount=1},
