@@ -35,5 +35,8 @@ util.redo_recycling()
 util.add_shiftite_recipe("graphite", {"alpha"}, 1)
 util.add_shiftite_recipe("diamond", {"beta", "epsilon"}, 1)
 
+-- Needed to avoid issues on Cerys
+util.add_minable_result("simple-entity", "cerys-ruin-colossal", {type="item", name="electric-furnace", amount_min=1, amount_max=1})
+
 -- Must be last
 util.create_list()

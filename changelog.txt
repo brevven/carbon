@@ -1,7 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.20
 Date: 2025-06-15
+  Fixes:
     - Fix load error in certain mod loadouts, especially with K2SO
+    - Address possible soft lock on Cerys by adding a small amount of furnaces to huge ruins
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.19
 Date: 2025-05-07
